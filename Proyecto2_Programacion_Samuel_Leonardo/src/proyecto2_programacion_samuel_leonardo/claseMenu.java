@@ -9,5 +9,9 @@ package proyecto2_programacion_samuel_leonardo;
  * @author hnleo
  */
 public class claseMenu {
+    public static void main(String[] args){
+        System.out.println("HOLA");
+    
+    }
     
 }
