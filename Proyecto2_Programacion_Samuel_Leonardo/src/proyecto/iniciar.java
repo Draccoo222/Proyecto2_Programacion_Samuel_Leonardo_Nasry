@@ -4,19 +4,30 @@
  */
 package proyecto;
 
+import java.awt.BorderLayout;
+
 /**
  *
  * @author hnleo
  */
 public class iniciar extends javax.swing.JFrame {
-
+     private fondo fondo1;
     /**
      * Creates new form iniciar
      */
     public iniciar() {
         initComponents();
+        this.setLocationRelativeTo(null);
+        cargarFondo();
     }
-
+    
+    
+   private void cargarFondo(){
+        fondo1 = new fondo("/images/fondoInicio.png");
+        fondo1.setSize(panelFondo.getWidth(), panelFondo.getHeight());
+        panelFondo.setLayout(new BorderLayout());
+        panelFondo.add(fondo1, BorderLayout.CENTER);
+   }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -26,23 +37,44 @@ public class iniciar extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        panelFondo = new javax.swing.JPanel();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(800, 500));
         setMinimumSize(new java.awt.Dimension(800, 500));
-        setPreferredSize(new java.awt.Dimension(800, 500));
+
+        panelFondo.setMaximumSize(new java.awt.Dimension(800, 500));
+        panelFondo.setMinimumSize(new java.awt.Dimension(800, 500));
+        panelFondo.setPreferredSize(new java.awt.Dimension(800, 500));
+
+        javax.swing.GroupLayout panelFondoLayout = new javax.swing.GroupLayout(panelFondo);
+        panelFondo.setLayout(panelFondoLayout);
+        panelFondoLayout.setHorizontalGroup(
+            panelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 800, Short.MAX_VALUE)
+        );
+        panelFondoLayout.setVerticalGroup(
+            panelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 500, Short.MAX_VALUE)
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 800, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(panelFondo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 500, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(panelFondo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     /**
@@ -81,5 +113,6 @@ public class iniciar extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel panelFondo;
     // End of variables declaration//GEN-END:variables
 }
