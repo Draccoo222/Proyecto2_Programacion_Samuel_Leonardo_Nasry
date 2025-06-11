@@ -154,7 +154,7 @@ public class crearUsuario extends javax.swing.JFrame {
 
     private void salirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salirActionPerformed
         // TODO add your handling code here:
-        menuprueba a = new menuprueba();
+        menuPrincipal1 a = new menuPrincipal1();
         a.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_salirActionPerformed

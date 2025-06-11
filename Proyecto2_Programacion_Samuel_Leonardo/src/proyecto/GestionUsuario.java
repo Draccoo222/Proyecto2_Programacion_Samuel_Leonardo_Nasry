@@ -27,12 +27,7 @@ public class GestionUsuario {
         }
         return false;
     }
-    
-    private GestionUsuario(){
-    
-    
-    }
-    
+   
     public static GestionUsuario getInstancia(){
         if (instancia == null) {
             instancia = new GestionUsuario();
