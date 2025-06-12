@@ -23,7 +23,7 @@ public class iniciar extends javax.swing.JFrame {
     
     
    private void cargarFondo(){
-        fondo1 = new fondo("/images/fondoInicio.png");
+        fondo1 = new fondo("/images/fondoInicio_2.png");
         fondo1.setSize(panelFondo.getWidth(), panelFondo.getHeight());
         panelFondo.setLayout(new BorderLayout());
         panelFondo.add(fondo1, BorderLayout.CENTER);
@@ -38,6 +38,7 @@ public class iniciar extends javax.swing.JFrame {
     private void initComponents() {
 
         panelFondo = new javax.swing.JPanel();
+        botonIniciar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(800, 500));
@@ -47,15 +48,30 @@ public class iniciar extends javax.swing.JFrame {
         panelFondo.setMinimumSize(new java.awt.Dimension(800, 500));
         panelFondo.setPreferredSize(new java.awt.Dimension(800, 500));
 
+        botonIniciar.setBorderPainted(false);
+        botonIniciar.setContentAreaFilled(false);
+        botonIniciar.setFocusPainted(false);
+        botonIniciar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonIniciarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panelFondoLayout = new javax.swing.GroupLayout(panelFondo);
         panelFondo.setLayout(panelFondoLayout);
         panelFondoLayout.setHorizontalGroup(
             panelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 800, Short.MAX_VALUE)
+            .addGroup(panelFondoLayout.createSequentialGroup()
+                .addGap(315, 315, 315)
+                .addComponent(botonIniciar, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(315, Short.MAX_VALUE))
         );
         panelFondoLayout.setVerticalGroup(
             panelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 500, Short.MAX_VALUE)
+            .addGroup(panelFondoLayout.createSequentialGroup()
+                .addGap(219, 219, 219)
+                .addComponent(botonIniciar, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(223, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -76,6 +92,11 @@ public class iniciar extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void botonIniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonIniciarActionPerformed
+        menuPrincipal1 menu = new menuPrincipal1();
+        menu.setVisible(true);
+    }//GEN-LAST:event_botonIniciarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -113,6 +134,7 @@ public class iniciar extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton botonIniciar;
     private javax.swing.JPanel panelFondo;
     // End of variables declaration//GEN-END:variables
 }
