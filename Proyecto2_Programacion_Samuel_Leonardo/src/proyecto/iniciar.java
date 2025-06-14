@@ -96,6 +96,7 @@ public class iniciar extends javax.swing.JFrame {
     private void botonIniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonIniciarActionPerformed
         menuPrincipal1 menu = new menuPrincipal1();
         menu.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_botonIniciarActionPerformed
 
     /**

@@ -4,13 +4,15 @@
  */
 package proyecto;
 
+import java.awt.BorderLayout;
+
 /**
  *
  * @author unwir
  */
 public class crearUsuario extends javax.swing.JFrame {
     private GestionUsuario gestion;
-    
+    fondo fondo2;
     
     /**
      * Creates new form crearUsuario
@@ -18,8 +20,16 @@ public class crearUsuario extends javax.swing.JFrame {
     public crearUsuario() {
         initComponents();
         gestion = GestionUsuario.getInstancia();
+        cargarFondo();
         
     }
+    
+      private void cargarFondo(){
+        fondo2 = new fondo("/images/fondo2.png");
+        fondo2.setSize(panelFondin.getWidth(), panelFondin.getHeight());
+        panelFondin.setLayout(new BorderLayout());
+        panelFondin.add(fondo2, BorderLayout.CENTER);
+   }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -30,14 +40,18 @@ public class crearUsuario extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        panelFondin = new javax.swing.JPanel();
         nombreU = new javax.swing.JTextField();
         contra = new javax.swing.JTextField();
-        crearUsuario = new javax.swing.JButton();
         salir = new javax.swing.JButton();
+        crearUsuario = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        setPreferredSize(new java.awt.Dimension(800, 500));
+
+        panelFondin.setPreferredSize(new java.awt.Dimension(800, 500));
 
         nombreU.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         nombreU.setText("Nombre de Usuario");
@@ -54,6 +68,16 @@ public class crearUsuario extends javax.swing.JFrame {
             }
         });
 
+        salir.setBackground(new java.awt.Color(255, 102, 102));
+        salir.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        salir.setForeground(new java.awt.Color(0, 0, 0));
+        salir.setText("Salir");
+        salir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                salirActionPerformed(evt);
+            }
+        });
+
         crearUsuario.setBackground(new java.awt.Color(255, 102, 102));
         crearUsuario.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         crearUsuario.setForeground(new java.awt.Color(0, 0, 0));
@@ -67,52 +91,61 @@ public class crearUsuario extends javax.swing.JFrame {
             }
         });
 
-        salir.setBackground(new java.awt.Color(102, 204, 255));
-        salir.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        salir.setForeground(new java.awt.Color(0, 0, 0));
-        salir.setText("Salir");
-        salir.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                salirActionPerformed(evt);
-            }
-        });
-
-        jLabel1.setFont(new java.awt.Font("Impact", 0, 24)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Impact", 0, 36)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("CREACION DE USUARIO");
+
+        javax.swing.GroupLayout panelFondinLayout = new javax.swing.GroupLayout(panelFondin);
+        panelFondin.setLayout(panelFondinLayout);
+        panelFondinLayout.setHorizontalGroup(
+            panelFondinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelFondinLayout.createSequentialGroup()
+                .addContainerGap(256, Short.MAX_VALUE)
+                .addGroup(panelFondinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelFondinLayout.createSequentialGroup()
+                        .addGroup(panelFondinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(nombreU, javax.swing.GroupLayout.PREFERRED_SIZE, 336, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(panelFondinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(contra, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 336, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 336, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(208, 208, 208))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelFondinLayout.createSequentialGroup()
+                        .addGroup(panelFondinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(salir, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(crearUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(319, 319, 319))))
+        );
+        panelFondinLayout.setVerticalGroup(
+            panelFondinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelFondinLayout.createSequentialGroup()
+                .addGap(28, 28, 28)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 80, Short.MAX_VALUE)
+                .addComponent(nombreU, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(61, 61, 61)
+                .addComponent(contra, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(59, 59, 59)
+                .addComponent(crearUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30)
+                .addComponent(salir, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(55, 55, 55))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(141, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(salir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(crearUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(137, 137, 137))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(53, 53, 53)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(nombreU, javax.swing.GroupLayout.DEFAULT_SIZE, 298, Short.MAX_VALUE)
-                    .addComponent(contra)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(panelFondin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(46, 46, 46)
-                .addComponent(nombreU, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(31, 31, 31)
-                .addComponent(contra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(crearUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(salir, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(31, Short.MAX_VALUE))
+                .addComponent(panelFondin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -199,6 +232,7 @@ public class crearUsuario extends javax.swing.JFrame {
     private javax.swing.JButton crearUsuario;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JTextField nombreU;
+    private javax.swing.JPanel panelFondin;
     private javax.swing.JButton salir;
     // End of variables declaration//GEN-END:variables
 }

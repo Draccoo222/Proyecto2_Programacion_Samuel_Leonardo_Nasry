@@ -4,6 +4,7 @@
  */
 package proyecto;
 
+import java.awt.BorderLayout;
 import java.awt.Component;
 
 /**
@@ -12,17 +13,23 @@ import java.awt.Component;
  */
 public class menuPrincipal1 extends javax.swing.JFrame {
 
-    fondo fondito = new fondo("/images/fondo1.jpg");
+    fondo fondito;
     
     /**
      * Creates new form menuprueba
      */
     public menuPrincipal1() {
         initComponents();
-       // fondito.setSize(900, 500);
-        this.setContentPane(fondito);
-  
-        backGround.setOpaque(false);
+        this.setLocationRelativeTo(null);
+        cargarFondo();
+    }
+    
+    private void cargarFondo(){
+        fondito = new fondo("/images/fondo1.jpg");
+        fondito.setSize(backGround.getWidth(), backGround.getHeight());
+        backGround.setLayout(new BorderLayout());
+        backGround.add(fondito, BorderLayout.CENTER);
+        
     }
 
     /**
@@ -35,32 +42,48 @@ public class menuPrincipal1 extends javax.swing.JFrame {
     private void initComponents() {
 
         backGround = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        register = new javax.swing.JButton();
+        Login = new javax.swing.JButton();
+        salir = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         backGround.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jButton1.setText("jButton1");
-        backGround.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 370, 180, 60));
-
-        jButton2.setText("jButton2");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        register.setBackground(new java.awt.Color(255, 102, 102));
+        register.setFont(new java.awt.Font("Impact", 0, 18)); // NOI18N
+        register.setForeground(new java.awt.Color(0, 0, 0));
+        register.setText("Registrarse");
+        register.setActionCommand("registrarse");
+        register.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                registerActionPerformed(evt);
             }
         });
-        backGround.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 380, 180, 60));
+        backGround.add(register, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 410, 180, 60));
 
-        jButton3.setText("jButton3");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        Login.setBackground(new java.awt.Color(51, 204, 255));
+        Login.setFont(new java.awt.Font("Impact", 0, 18)); // NOI18N
+        Login.setForeground(new java.awt.Color(0, 0, 0));
+        Login.setText("Login");
+        Login.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                LoginActionPerformed(evt);
             }
         });
-        backGround.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 373, 180, 60));
+        backGround.add(Login, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 410, 180, 60));
+
+        salir.setBackground(new java.awt.Color(255, 204, 51));
+        salir.setFont(new java.awt.Font("Impact", 0, 18)); // NOI18N
+        salir.setForeground(new java.awt.Color(0, 0, 0));
+        salir.setText("Salir");
+        salir.setActionCommand("salir");
+        salir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                salirActionPerformed(evt);
+            }
+        });
+        backGround.add(salir, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 410, 180, 60));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -80,13 +103,24 @@ public class menuPrincipal1 extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void salirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salirActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_salirActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void LoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+        IniciarSesion iniciar = new IniciarSesion();
+        iniciar.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_LoginActionPerformed
+
+    private void registerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerActionPerformed
+        // TODO add your handling code here:
+        crearUsuario registro = new crearUsuario();
+        registro.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_registerActionPerformed
 
     /**
      * @param args the command line arguments
@@ -126,9 +160,9 @@ public class menuPrincipal1 extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Login;
     private javax.swing.JPanel backGround;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton register;
+    private javax.swing.JButton salir;
     // End of variables declaration//GEN-END:variables
 }
