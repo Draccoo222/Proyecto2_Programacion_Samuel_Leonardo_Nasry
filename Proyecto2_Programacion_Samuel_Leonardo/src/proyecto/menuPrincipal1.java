@@ -211,8 +211,7 @@ public class menuPrincipal1 extends javax.swing.JFrame {
         menuPrincipal1 pr = new menuPrincipal1();
         pr.setVisible(true);
         this.dispose();
-        
-       
+            
     }//GEN-LAST:event_cerrarSesionActionPerformed
 
     /**

@@ -44,10 +44,8 @@ public class IniciarSesion extends javax.swing.JFrame {
         nomUsuario = new javax.swing.JTextField();
         passWord = new javax.swing.JPasswordField();
         iniciarSesion = new javax.swing.JButton();
-        jToggleButton1 = new javax.swing.JToggleButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(800, 500));
 
         panelFondin.setPreferredSize(new java.awt.Dimension(800, 500));
 
@@ -80,16 +78,6 @@ public class IniciarSesion extends javax.swing.JFrame {
             }
         });
 
-        jToggleButton1.setBackground(new java.awt.Color(153, 204, 255));
-        jToggleButton1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jToggleButton1.setForeground(new java.awt.Color(0, 0, 0));
-        jToggleButton1.setText("Salir");
-        jToggleButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jToggleButton1ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout panelFondinLayout = new javax.swing.GroupLayout(panelFondin);
         panelFondin.setLayout(panelFondinLayout);
         panelFondinLayout.setHorizontalGroup(
@@ -106,9 +94,7 @@ public class IniciarSesion extends javax.swing.JFrame {
                 .addContainerGap(293, Short.MAX_VALUE))
             .addGroup(panelFondinLayout.createSequentialGroup()
                 .addGap(337, 337, 337)
-                .addGroup(panelFondinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(iniciarSesion, javax.swing.GroupLayout.DEFAULT_SIZE, 122, Short.MAX_VALUE)
-                    .addComponent(jToggleButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(iniciarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelFondinLayout.setVerticalGroup(
@@ -122,9 +108,7 @@ public class IniciarSesion extends javax.swing.JFrame {
                 .addComponent(passWord, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(62, 62, 62)
                 .addComponent(iniciarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(43, 43, 43)
-                .addComponent(jToggleButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(70, Short.MAX_VALUE))
+                .addContainerGap(146, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -157,6 +141,9 @@ public class IniciarSesion extends javax.swing.JFrame {
                 gestion.loginJugador(nomU, passW);
                 javax.swing.JOptionPane.showMessageDialog(null, "Inicio de Sesion exitosa!");
                 System.out.println("Usuario Actual: " + gestion.getJugadorActual());
+                menuPrincipal1 a = new menuPrincipal1();
+                a.setVisible(true);
+                this.dispose();
            } 
     
     }//GEN-LAST:event_iniciarSesionActionPerformed
@@ -164,13 +151,6 @@ public class IniciarSesion extends javax.swing.JFrame {
     private void passWordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passWordActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_passWordActionPerformed
-
-    private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
-        // TODO add your handling code here:
-        menuPrincipal1 a = new menuPrincipal1();
-        a.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_jToggleButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -211,7 +191,6 @@ public class IniciarSesion extends javax.swing.JFrame {
     private proyecto.crearUsuario crearUsuario1;
     private javax.swing.JButton iniciarSesion;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JToggleButton jToggleButton1;
     private javax.swing.JTextField nomUsuario;
     private javax.swing.JPanel panelFondin;
     private javax.swing.JPasswordField passWord;
