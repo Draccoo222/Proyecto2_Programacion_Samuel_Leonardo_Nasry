@@ -166,6 +166,7 @@ public class crearUsuario extends javax.swing.JFrame {
             return;
         }
         
+        if(passWord.length() >= 5 ){
         if (gestion.agregarUsuario(nombre, passWord)) {
             gestion.agregarUsuario(nombre, passWord);
             javax.swing.JOptionPane.showMessageDialog(null, "USER AGREGADO CON EXITO");
@@ -173,7 +174,11 @@ public class crearUsuario extends javax.swing.JFrame {
             contra.setText("Contraseña");
         } else {
             javax.swing.JOptionPane.showMessageDialog(null, "ERROR, PORFAVOR USUARIO YA EXISTE");
+         }
+        }else{
+            javax.swing.JOptionPane.showMessageDialog(null, "ERROR, INTRODUZCA UNA CONTRASEÑA CON 5 CARACTERES MINIMO");
         }
+                
         
     }//GEN-LAST:event_crearUsuarioActionPerformed
 
