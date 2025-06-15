@@ -75,69 +75,26 @@ public class menuPrincipal1 extends javax.swing.JFrame {
     private void initComponents() {
 
         backGround = new javax.swing.JPanel();
-        menuParte2 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        cerrarSesion = new javax.swing.JButton();
         register = new javax.swing.JButton();
         Login = new javax.swing.JButton();
         salir = new javax.swing.JButton();
+        menuParte2 = new javax.swing.JPanel();
+        strategoButton = new javax.swing.JButton();
+        cerrarSesion = new javax.swing.JButton();
+        configButton = new javax.swing.JButton();
+        perfilButton = new javax.swing.JButton();
+        universoButton = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
 
         backGround.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jButton1.setText("jButton1");
-
-        jButton2.setText("jButton2");
-
-        jButton3.setText("jButton3");
-
-        cerrarSesion.setText("cerrarSesion");
-        cerrarSesion.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cerrarSesionActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout menuParte2Layout = new javax.swing.GroupLayout(menuParte2);
-        menuParte2.setLayout(menuParte2Layout);
-        menuParte2Layout.setHorizontalGroup(
-            menuParte2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(menuParte2Layout.createSequentialGroup()
-                .addGap(98, 98, 98)
-                .addComponent(jButton1)
-                .addGap(206, 206, 206)
-                .addComponent(jButton2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 190, Short.MAX_VALUE)
-                .addComponent(jButton3)
-                .addGap(81, 81, 81))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, menuParte2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(cerrarSesion)
-                .addGap(51, 51, 51))
-        );
-        menuParte2Layout.setVerticalGroup(
-            menuParte2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, menuParte2Layout.createSequentialGroup()
-                .addGap(36, 36, 36)
-                .addComponent(cerrarSesion)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 372, Short.MAX_VALUE)
-                .addGroup(menuParte2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3))
-                .addGap(46, 46, 46))
-        );
-
-        backGround.add(menuParte2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 500));
-
-        register.setBackground(new java.awt.Color(255, 102, 102));
-        register.setFont(new java.awt.Font("Impact", 0, 18)); // NOI18N
-        register.setForeground(new java.awt.Color(0, 0, 0));
-        register.setText("Registrarse");
+        register.setBackground(new java.awt.Color(255, 0, 51));
+        register.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
+        register.setForeground(new java.awt.Color(255, 255, 255));
+        register.setText("REGISTRAR");
         register.setActionCommand("registrarse");
+        register.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255), 3));
         register.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 registerActionPerformed(evt);
@@ -145,28 +102,106 @@ public class menuPrincipal1 extends javax.swing.JFrame {
         });
         backGround.add(register, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 410, 180, 60));
 
-        Login.setBackground(new java.awt.Color(51, 204, 255));
-        Login.setFont(new java.awt.Font("Impact", 0, 18)); // NOI18N
-        Login.setForeground(new java.awt.Color(0, 0, 0));
-        Login.setText("Login");
+        Login.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
+        Login.setText("INICIAR SESION");
+        Login.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255), 3));
         Login.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 LoginActionPerformed(evt);
             }
         });
-        backGround.add(Login, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 410, 180, 60));
+        backGround.add(Login, new org.netbeans.lib.awtextra.AbsoluteConstraints(287, 410, 220, 60));
 
-        salir.setBackground(new java.awt.Color(255, 204, 51));
-        salir.setFont(new java.awt.Font("Impact", 0, 18)); // NOI18N
-        salir.setForeground(new java.awt.Color(0, 0, 0));
-        salir.setText("Salir");
+        salir.setBackground(new java.awt.Color(255, 0, 51));
+        salir.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
+        salir.setForeground(new java.awt.Color(255, 255, 255));
+        salir.setText("SALIR");
         salir.setActionCommand("salir");
+        salir.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255), 3));
         salir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 salirActionPerformed(evt);
             }
         });
         backGround.add(salir, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 410, 180, 60));
+
+        strategoButton.setBackground(new java.awt.Color(255, 0, 51));
+        strategoButton.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
+        strategoButton.setForeground(new java.awt.Color(255, 255, 255));
+        strategoButton.setText("STRATEGO");
+        strategoButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255), 3));
+
+        cerrarSesion.setBackground(new java.awt.Color(255, 0, 51));
+        cerrarSesion.setFont(new java.awt.Font("Arial Black", 0, 18)); // NOI18N
+        cerrarSesion.setForeground(new java.awt.Color(255, 255, 255));
+        cerrarSesion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/cerrar-sesion.png"))); // NOI18N
+        cerrarSesion.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255), 3));
+        cerrarSesion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cerrarSesionActionPerformed(evt);
+            }
+        });
+
+        configButton.setBackground(new java.awt.Color(255, 0, 51));
+        configButton.setFont(new java.awt.Font("Arial Black", 1, 14)); // NOI18N
+        configButton.setForeground(new java.awt.Color(255, 255, 255));
+        configButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/engranaje.png"))); // NOI18N
+        configButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255), 3));
+
+        perfilButton.setBackground(new java.awt.Color(255, 0, 51));
+        perfilButton.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
+        perfilButton.setForeground(new java.awt.Color(255, 255, 255));
+        perfilButton.setText("MI PERFIL");
+        perfilButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255), 3));
+
+        universoButton.setBackground(new java.awt.Color(255, 0, 51));
+        universoButton.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
+        universoButton.setForeground(new java.awt.Color(255, 255, 255));
+        universoButton.setText("UNIVERSO MARVEL");
+        universoButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255), 3));
+
+        javax.swing.GroupLayout menuParte2Layout = new javax.swing.GroupLayout(menuParte2);
+        menuParte2.setLayout(menuParte2Layout);
+        menuParte2Layout.setHorizontalGroup(
+            menuParte2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, menuParte2Layout.createSequentialGroup()
+                .addContainerGap(282, Short.MAX_VALUE)
+                .addGroup(menuParte2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, menuParte2Layout.createSequentialGroup()
+                        .addComponent(universoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(272, 272, 272))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, menuParte2Layout.createSequentialGroup()
+                        .addComponent(cerrarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())))
+            .addGroup(menuParte2Layout.createSequentialGroup()
+                .addGroup(menuParte2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(menuParte2Layout.createSequentialGroup()
+                        .addGap(323, 323, 323)
+                        .addGroup(menuParte2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(perfilButton, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(strategoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(menuParte2Layout.createSequentialGroup()
+                        .addGap(17, 17, 17)
+                        .addComponent(configButton, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        menuParte2Layout.setVerticalGroup(
+            menuParte2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, menuParte2Layout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addComponent(configButton, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(167, 167, 167)
+                .addComponent(strategoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(perfilButton, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(universoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
+                .addComponent(cerrarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
+        backGround.add(menuParte2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 500));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -255,11 +290,12 @@ public class menuPrincipal1 extends javax.swing.JFrame {
     private javax.swing.JButton Login;
     private javax.swing.JPanel backGround;
     private javax.swing.JButton cerrarSesion;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton configButton;
     private javax.swing.JPanel menuParte2;
+    private javax.swing.JButton perfilButton;
     private javax.swing.JButton register;
     private javax.swing.JButton salir;
+    private javax.swing.JButton strategoButton;
+    private javax.swing.JButton universoButton;
     // End of variables declaration//GEN-END:variables
 }
