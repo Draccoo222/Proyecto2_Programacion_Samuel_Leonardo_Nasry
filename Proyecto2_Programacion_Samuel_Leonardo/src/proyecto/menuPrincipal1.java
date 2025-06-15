@@ -6,13 +6,12 @@ package proyecto;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
-
 /**
  *
  * @author unwir
  */
 public class menuPrincipal1 extends javax.swing.JFrame {
-
+    GestionUsuario gestion;
     fondo fondito;
     
     /**
@@ -20,17 +19,51 @@ public class menuPrincipal1 extends javax.swing.JFrame {
      */
     public menuPrincipal1() {
         initComponents();
+        gestion = GestionUsuario.getInstancia();
         this.setLocationRelativeTo(null);
-        cargarFondo();
+        cargarComponentes();
     }
     
-    private void cargarFondo(){
-        fondito = new fondo("/images/fondo1.jpg");
-        fondito.setSize(backGround.getWidth(), backGround.getHeight());
-        backGround.setLayout(new BorderLayout());
-        backGround.add(fondito, BorderLayout.CENTER);
-        
+    private void cargarComponentes() {
+        if (gestion.verificarLogeo()) {
+            menuParte2.setVisible(true);
+            cargarFondo(2);
+            for (Component comp : backGround.getComponents()) {
+                Component[] comps = {comp};
+                if (comp != menuParte2 && comps != menuParte2.getComponents()) {
+                    comp.setVisible(false);
+                }
+            }
+        } else {
+            menuParte2.setVisible(false);
+            cargarFondo(1);
+            for (Component comp : menuParte2.getComponents()) {
+                Component[] comps = {comp};
+                if (comp != backGround && comps != backGround.getComponents()) {
+                    comp.setVisible(false);
+                }
+            }
+        }
     }
+    
+    private void cargarFondo(int opc){
+        switch(opc){
+            case 1:
+                fondito = new fondo("/images/fondo1.jpg");
+                fondito.setSize(backGround.getWidth(), backGround.getHeight());
+                backGround.setLayout(new BorderLayout());
+                backGround.add(fondito, BorderLayout.CENTER);
+                break;
+            case 2:
+                fondito = new fondo("/images/fondo1.jpg");
+                fondito.setSize(menuParte2.getWidth(), menuParte2.getHeight());
+                menuParte2.setLayout(new BorderLayout());
+                menuParte2.add(fondito, BorderLayout.CENTER);
+                break;
+        }
+    }
+    
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -42,6 +75,11 @@ public class menuPrincipal1 extends javax.swing.JFrame {
     private void initComponents() {
 
         backGround = new javax.swing.JPanel();
+        menuParte2 = new javax.swing.JPanel();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        cerrarSesion = new javax.swing.JButton();
         register = new javax.swing.JButton();
         Login = new javax.swing.JButton();
         salir = new javax.swing.JButton();
@@ -49,6 +87,51 @@ public class menuPrincipal1 extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         backGround.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jButton1.setText("jButton1");
+
+        jButton2.setText("jButton2");
+
+        jButton3.setText("jButton3");
+
+        cerrarSesion.setText("cerrarSesion");
+        cerrarSesion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cerrarSesionActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout menuParte2Layout = new javax.swing.GroupLayout(menuParte2);
+        menuParte2.setLayout(menuParte2Layout);
+        menuParte2Layout.setHorizontalGroup(
+            menuParte2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(menuParte2Layout.createSequentialGroup()
+                .addGap(98, 98, 98)
+                .addComponent(jButton1)
+                .addGap(206, 206, 206)
+                .addComponent(jButton2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 190, Short.MAX_VALUE)
+                .addComponent(jButton3)
+                .addGap(81, 81, 81))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, menuParte2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(cerrarSesion)
+                .addGap(51, 51, 51))
+        );
+        menuParte2Layout.setVerticalGroup(
+            menuParte2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, menuParte2Layout.createSequentialGroup()
+                .addGap(36, 36, 36)
+                .addComponent(cerrarSesion)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 372, Short.MAX_VALUE)
+                .addGroup(menuParte2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1)
+                    .addComponent(jButton2)
+                    .addComponent(jButton3))
+                .addGap(46, 46, 46))
+        );
+
+        backGround.add(menuParte2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 500));
 
         register.setBackground(new java.awt.Color(255, 102, 102));
         register.setFont(new java.awt.Font("Impact", 0, 18)); // NOI18N
@@ -122,6 +205,16 @@ public class menuPrincipal1 extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_registerActionPerformed
 
+    private void cerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cerrarSesionActionPerformed
+        // TODO add your handling code here:
+        gestion.cerrarSesion();
+        menuPrincipal1 pr = new menuPrincipal1();
+        pr.setVisible(true);
+        this.dispose();
+        
+       
+    }//GEN-LAST:event_cerrarSesionActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -162,6 +255,11 @@ public class menuPrincipal1 extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Login;
     private javax.swing.JPanel backGround;
+    private javax.swing.JButton cerrarSesion;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JPanel menuParte2;
     private javax.swing.JButton register;
     private javax.swing.JButton salir;
     // End of variables declaration//GEN-END:variables

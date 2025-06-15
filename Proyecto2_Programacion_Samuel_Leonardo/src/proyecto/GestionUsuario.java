@@ -11,7 +11,7 @@ package proyecto;
 public class GestionUsuario {
     private static GestionUsuario instancia;
     private  Usuarios jugadores[] = new Usuarios[30];
-    private Usuarios jugadorActual;
+    private Usuarios jugadorActual = null;
     
     public Boolean loginJugador(String nomU, String passW) {
         if (jugadorActual != buscarUsuario(nomU)) {
@@ -26,6 +26,17 @@ public class GestionUsuario {
             return false;
         }
         return false;
+    }
+    
+    public boolean verificarLogeo(){
+        if(jugadorActual != null){
+            return true;
+        }
+        return false;
+    }
+    
+    public void cerrarSesion(){
+        jugadorActual = null;
     }
    
     public static GestionUsuario getInstancia(){
@@ -62,6 +73,16 @@ public class GestionUsuario {
         }
         return false;
     }
+
+    @Override
+    public String toString() {
+       String usuarios = "";
+       for(Usuarios j: jugadores)
+           usuarios += j.getName();
+       return usuarios;
+    }
+    
+    
     
     
     
