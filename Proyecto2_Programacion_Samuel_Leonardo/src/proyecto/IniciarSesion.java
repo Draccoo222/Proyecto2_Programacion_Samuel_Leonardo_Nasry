@@ -46,6 +46,7 @@ public class IniciarSesion extends javax.swing.JFrame {
         iniciarSesion = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        salir = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setResizable(false);
@@ -77,7 +78,7 @@ public class IniciarSesion extends javax.swing.JFrame {
         iniciarSesion.setBackground(new java.awt.Color(255, 0, 51));
         iniciarSesion.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
         iniciarSesion.setForeground(new java.awt.Color(255, 255, 255));
-        iniciarSesion.setText("INICIAR SESION");
+        iniciarSesion.setText("INICIAR");
         iniciarSesion.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255), 3));
         iniciarSesion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -93,6 +94,17 @@ public class IniciarSesion extends javax.swing.JFrame {
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("CONTRASEÑA:");
 
+        salir.setBackground(new java.awt.Color(255, 0, 51));
+        salir.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
+        salir.setForeground(new java.awt.Color(255, 255, 255));
+        salir.setText("SALIR");
+        salir.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255), 3));
+        salir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                salirActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panelFondinLayout = new javax.swing.GroupLayout(panelFondin);
         panelFondin.setLayout(panelFondinLayout);
         panelFondinLayout.setHorizontalGroup(
@@ -101,8 +113,10 @@ public class IniciarSesion extends javax.swing.JFrame {
                 .addGap(0, 189, Short.MAX_VALUE)
                 .addGroup(panelFondinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelFondinLayout.createSequentialGroup()
-                        .addComponent(iniciarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(275, 275, 275))
+                        .addComponent(iniciarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(salir, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(231, 231, 231))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelFondinLayout.createSequentialGroup()
                         .addGroup(panelFondinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 372, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -130,7 +144,9 @@ public class IniciarSesion extends javax.swing.JFrame {
                     .addComponent(passWord, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
                 .addGap(72, 72, 72)
-                .addComponent(iniciarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(panelFondinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(iniciarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(salir, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(129, Short.MAX_VALUE))
         );
 
@@ -174,6 +190,13 @@ public class IniciarSesion extends javax.swing.JFrame {
     private void passWordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passWordActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_passWordActionPerformed
+
+    private void salirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salirActionPerformed
+        // TODO add your handling code here:
+        menuPrincipal1 a = new menuPrincipal1();
+        a.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_salirActionPerformed
 
     /**
      * @param args the command line arguments
@@ -219,5 +242,6 @@ public class IniciarSesion extends javax.swing.JFrame {
     private javax.swing.JTextField nomUsuario;
     private javax.swing.JPanel panelFondin;
     private javax.swing.JPasswordField passWord;
+    private javax.swing.JButton salir;
     // End of variables declaration//GEN-END:variables
 }

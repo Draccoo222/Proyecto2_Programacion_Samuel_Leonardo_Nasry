@@ -6,14 +6,17 @@ package proyecto;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
+import javax.swing.*;
+
 /**
  *
  * @author unwir
  */
 public class menuPrincipal1 extends javax.swing.JFrame {
+
     GestionUsuario gestion;
     fondo fondito;
-    
+
     /**
      * Creates new form menuprueba
      */
@@ -23,7 +26,7 @@ public class menuPrincipal1 extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         cargarComponentes();
     }
-    
+
     private void cargarComponentes() {
         if (gestion.verificarLogeo()) {
             menuParte2.setVisible(true);
@@ -45,9 +48,9 @@ public class menuPrincipal1 extends javax.swing.JFrame {
             }
         }
     }
-    
-    private void cargarFondo(int opc){
-        switch(opc){
+
+    private void cargarFondo(int opc) {
+        switch (opc) {
             case 1:
                 fondito = new fondo("/images/fondo1.jpg");
                 fondito.setSize(backGround.getWidth(), backGround.getHeight());
@@ -62,8 +65,6 @@ public class menuPrincipal1 extends javax.swing.JFrame {
                 break;
         }
     }
-    
-
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -242,11 +243,15 @@ public class menuPrincipal1 extends javax.swing.JFrame {
 
     private void cerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cerrarSesionActionPerformed
         // TODO add your handling code here:
-        gestion.cerrarSesion();
-        menuPrincipal1 pr = new menuPrincipal1();
-        pr.setVisible(true);
-        this.dispose();
-            
+        int op = JOptionPane.showConfirmDialog(null, "¿Desea cerrar sesión?", "Confirmación", JOptionPane.YES_NO_OPTION);
+        if (op == JOptionPane.YES_OPTION) {
+            gestion.cerrarSesion();
+            menuPrincipal1 pr = new menuPrincipal1();
+            pr.setVisible(true);
+            this.dispose();
+        } else if (op == JOptionPane.NO_OPTION) {
+
+        }
     }//GEN-LAST:event_cerrarSesionActionPerformed
 
     /**
@@ -276,7 +281,7 @@ public class menuPrincipal1 extends javax.swing.JFrame {
         }
         //</editor-fold>
         //</editor-fold>
-        
+
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
