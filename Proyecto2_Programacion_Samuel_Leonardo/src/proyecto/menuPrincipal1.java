@@ -154,6 +154,11 @@ public class menuPrincipal1 extends javax.swing.JFrame {
         perfilButton.setForeground(new java.awt.Color(255, 255, 255));
         perfilButton.setText("MI PERFIL");
         perfilButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255), 3));
+        perfilButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                perfilButtonActionPerformed(evt);
+            }
+        });
 
         universoButton.setBackground(new java.awt.Color(255, 0, 51));
         universoButton.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
@@ -253,6 +258,13 @@ public class menuPrincipal1 extends javax.swing.JFrame {
 
         }
     }//GEN-LAST:event_cerrarSesionActionPerformed
+
+    private void perfilButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_perfilButtonActionPerformed
+        // TODO add your handling code here:
+        miPerfil p = new miPerfil();
+        p.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_perfilButtonActionPerformed
 
     /**
      * @param args the command line arguments
