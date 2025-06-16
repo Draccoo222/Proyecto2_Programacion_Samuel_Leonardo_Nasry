@@ -6,15 +6,17 @@ package proyecto;
 
 /**
  *
- * @author hnleo
+ * @author unwir
  */
-public class MiPerfil extends javax.swing.JFrame {
-
+public class miPerfil extends javax.swing.JFrame {
+    GestionUsuario gestion;
     /**
-     * Creates new form MiPerfil
+     * Creates new form miPerfil
      */
-    public MiPerfil() {
+    public miPerfil() {
         initComponents();
+        gestion = GestionUsuario.getInstancia();
+        System.out.println(gestion.toString());
     }
 
     /**
@@ -26,151 +28,67 @@ public class MiPerfil extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        panelPadre = new javax.swing.JPanel();
-        puntosLabel = new javax.swing.JLabel();
-        nombreLabel = new javax.swing.JLabel();
-        cambiarPass = new javax.swing.JButton();
         eliminarCuenta = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        logArea = new java.awt.TextField();
-        jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(800, 500));
-        setMinimumSize(new java.awt.Dimension(800, 500));
-        setPreferredSize(new java.awt.Dimension(800, 500));
-        setResizable(false);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        panelPadre.setMaximumSize(new java.awt.Dimension(800, 500));
-        panelPadre.setMinimumSize(new java.awt.Dimension(800, 500));
-        panelPadre.setOpaque(false);
-        panelPadre.setPreferredSize(new java.awt.Dimension(800, 500));
-
-        puntosLabel.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
-        puntosLabel.setText("Puntos:");
-
-        nombreLabel.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
-        nombreLabel.setText("Nombre");
-
-        cambiarPass.setBackground(new java.awt.Color(255, 0, 51));
-        cambiarPass.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
-        cambiarPass.setForeground(new java.awt.Color(255, 255, 255));
-        cambiarPass.setText("CAMBIAR CONTRASEÑA");
-        cambiarPass.setAlignmentY(0.0F);
-        cambiarPass.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255), 3));
-        cambiarPass.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        cambiarPass.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        cambiarPass.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cambiarPassActionPerformed(evt);
-            }
-        });
-
-        eliminarCuenta.setBackground(new java.awt.Color(255, 0, 51));
-        eliminarCuenta.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
-        eliminarCuenta.setForeground(new java.awt.Color(255, 255, 255));
-        eliminarCuenta.setText("ELIMINAR MI CUENTA");
-        eliminarCuenta.setAlignmentY(0.0F);
-        eliminarCuenta.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255), 3));
-        eliminarCuenta.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        eliminarCuenta.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        eliminarCuenta.setText("Eliminar");
         eliminarCuenta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 eliminarCuentaActionPerformed(evt);
             }
         });
 
-        jScrollPane1.setViewportView(logArea);
-
-        javax.swing.GroupLayout panelPadreLayout = new javax.swing.GroupLayout(panelPadre);
-        panelPadre.setLayout(panelPadreLayout);
-        panelPadreLayout.setHorizontalGroup(
-            panelPadreLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelPadreLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(nombreLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(142, 142, 142))
-            .addGroup(panelPadreLayout.createSequentialGroup()
-                .addGap(82, 82, 82)
-                .addGroup(panelPadreLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(cambiarPass, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(eliminarCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(panelPadreLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelPadreLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(83, 83, 83))
-                    .addGroup(panelPadreLayout.createSequentialGroup()
-                        .addGap(149, 149, 149)
-                        .addComponent(puntosLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(142, Short.MAX_VALUE))))
-        );
-        panelPadreLayout.setVerticalGroup(
-            panelPadreLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelPadreLayout.createSequentialGroup()
-                .addGap(109, 109, 109)
-                .addComponent(nombreLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(panelPadreLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelPadreLayout.createSequentialGroup()
-                        .addGap(55, 55, 55)
-                        .addComponent(puntosLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelPadreLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
-                        .addComponent(cambiarPass, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(68, 68, 68)
-                        .addComponent(eliminarCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(149, 149, 149))))
-        );
-
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/fondoMiPerfil.png"))); // NOI18N
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
+        jButton1.setText("jButton1");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelPadre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap()))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap(481, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(eliminarCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(72, 72, 72))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jButton1)
+                        .addGap(86, 86, 86))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelPadre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap()))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(185, 185, 185)
+                .addComponent(eliminarCuenta)
+                .addGap(55, 55, 55)
+                .addComponent(jButton1)
+                .addContainerGap(246, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void cambiarPassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cambiarPassActionPerformed
-        
-
-    }//GEN-LAST:event_cambiarPassActionPerformed
-
     private void eliminarCuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarCuentaActionPerformed
         // TODO add your handling code here:
+        gestion.eliminarUsuario(gestion.getJugadorActual());
+        System.out.println(gestion.toString());
+        javax.swing.JOptionPane.showMessageDialog(null, "USUARIO ELIMINADO CON EXITO!");
+        menuPrincipal1 menu = new menuPrincipal1();
+        menu.setVisible(true);
+        this.dispose();
+        
     }//GEN-LAST:event_eliminarCuentaActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+       
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -189,33 +107,26 @@ public class MiPerfil extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MiPerfil.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(miPerfil.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MiPerfil.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(miPerfil.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MiPerfil.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(miPerfil.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MiPerfil.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(miPerfil.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MiPerfil().setVisible(true);
+                new miPerfil().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton cambiarPass;
     private javax.swing.JButton eliminarCuenta;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane1;
-    private java.awt.TextField logArea;
-    private javax.swing.JLabel nombreLabel;
-    private javax.swing.JPanel panelPadre;
-    private javax.swing.JLabel puntosLabel;
+    private javax.swing.JButton jButton1;
     // End of variables declaration//GEN-END:variables
 }
