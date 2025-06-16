@@ -20,6 +20,7 @@ public class MiPerfil extends javax.swing.JFrame {
     public MiPerfil() {
         initComponents();
         gestion = GestionUsuario.getInstancia();
+        nombreLabel.setText(gestion.getJugadorActual());
         System.out.println(gestion.toString());
     }
 
@@ -39,6 +40,7 @@ public class MiPerfil extends javax.swing.JFrame {
         eliminarCuenta = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         logArea = new java.awt.TextField();
+        regresarButton = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
 
@@ -87,14 +89,24 @@ public class MiPerfil extends javax.swing.JFrame {
 
         jScrollPane1.setViewportView(logArea);
 
+        regresarButton.setBackground(new java.awt.Color(255, 0, 51));
+        regresarButton.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
+        regresarButton.setForeground(new java.awt.Color(255, 255, 255));
+        regresarButton.setText("Regresar");
+        regresarButton.setAlignmentY(0.0F);
+        regresarButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255), 3));
+        regresarButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        regresarButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        regresarButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                regresarButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panelPadreLayout = new javax.swing.GroupLayout(panelPadre);
         panelPadre.setLayout(panelPadreLayout);
         panelPadreLayout.setHorizontalGroup(
             panelPadreLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelPadreLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(nombreLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(142, 142, 142))
             .addGroup(panelPadreLayout.createSequentialGroup()
                 .addGap(82, 82, 82)
                 .addGroup(panelPadreLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -109,25 +121,34 @@ public class MiPerfil extends javax.swing.JFrame {
                         .addGap(149, 149, 149)
                         .addComponent(puntosLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(142, Short.MAX_VALUE))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelPadreLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(panelPadreLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelPadreLayout.createSequentialGroup()
+                        .addComponent(nombreLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(131, 131, 131))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelPadreLayout.createSequentialGroup()
+                        .addComponent(regresarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(14, 14, 14))))
         );
         panelPadreLayout.setVerticalGroup(
             panelPadreLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelPadreLayout.createSequentialGroup()
-                .addGap(109, 109, 109)
+                .addGap(112, 112, 112)
                 .addComponent(nombreLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(panelPadreLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelPadreLayout.createSequentialGroup()
-                        .addGap(55, 55, 55)
-                        .addComponent(puntosLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelPadreLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
-                        .addComponent(cambiarPass, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(68, 68, 68)
-                        .addComponent(eliminarCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(149, 149, 149))))
+                .addGap(52, 52, 52)
+                .addComponent(puntosLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(regresarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelPadreLayout.createSequentialGroup()
+                .addContainerGap(199, Short.MAX_VALUE)
+                .addComponent(cambiarPass, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(68, 68, 68)
+                .addComponent(eliminarCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(149, 149, 149))
         );
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/fondoMiPerfil.png"))); // NOI18N
@@ -190,6 +211,12 @@ public class MiPerfil extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_eliminarCuentaActionPerformed
 
+    private void regresarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_regresarButtonActionPerformed
+      menuPrincipal1 menu = new menuPrincipal1();
+      menu.setVisible(true);
+      this.dispose();
+    }//GEN-LAST:event_regresarButtonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -236,5 +263,6 @@ public class MiPerfil extends javax.swing.JFrame {
     private javax.swing.JLabel nombreLabel;
     private javax.swing.JPanel panelPadre;
     private javax.swing.JLabel puntosLabel;
+    private javax.swing.JButton regresarButton;
     // End of variables declaration//GEN-END:variables
 }
