@@ -87,6 +87,8 @@ public class menuPrincipal1 extends javax.swing.JFrame {
         universoButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        setMaximumSize(new java.awt.Dimension(800, 500));
+        setMinimumSize(new java.awt.Dimension(800, 500));
 
         backGround.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 

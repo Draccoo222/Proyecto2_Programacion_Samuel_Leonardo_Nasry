@@ -49,6 +49,8 @@ public class IniciarSesion extends javax.swing.JFrame {
         salir = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        setMaximumSize(new java.awt.Dimension(800, 500));
+        setMinimumSize(new java.awt.Dimension(800, 500));
         setResizable(false);
 
         panelFondin.setMaximumSize(new java.awt.Dimension(800, 500));
