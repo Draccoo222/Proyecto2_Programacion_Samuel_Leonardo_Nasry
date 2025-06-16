@@ -17,6 +17,9 @@ public class Usuarios{
         this.passW = passW;
     }
     
+    public boolean verificarContra(String passsW){
+        return this.passW.equals(passsW);
+    }
     
     public String getName(){
         return nomU;

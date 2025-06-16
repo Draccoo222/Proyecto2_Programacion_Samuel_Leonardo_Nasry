@@ -27,6 +27,14 @@ public class GestionUsuario {
         }
         return false;
     }
+
+    public boolean verificarLaPassWord(String passW){
+        if(jugadorActual.verificarContra(passW)){
+           return true;
+        }
+        return  false;  
+    }
+    
     
     public boolean verificarLogeo(){
         if(jugadorActual != null){

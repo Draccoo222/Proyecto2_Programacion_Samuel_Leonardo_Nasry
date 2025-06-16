@@ -1,5 +1,7 @@
 package proyecto;
 
+import javax.swing.JOptionPane;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
@@ -11,12 +13,14 @@ package proyecto;
  * @author hnleo
  */
 public class MiPerfil extends javax.swing.JFrame {
-
+    GestionUsuario gestion;
     /**
      * Creates new form MiPerfil
      */
     public MiPerfil() {
         initComponents();
+        gestion = GestionUsuario.getInstancia();
+        System.out.println(gestion.toString());
     }
 
     /**
@@ -170,6 +174,19 @@ public class MiPerfil extends javax.swing.JFrame {
 
     private void eliminarCuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarCuentaActionPerformed
         // TODO add your handling code here:
+        String inputPass = JOptionPane.showInputDialog("Introduzca su contraseña para confirmar");
+        if(gestion.verificarLaPassWord(inputPass)){
+            gestion.eliminarUsuario(gestion.getJugadorActual());
+            System.out.println(gestion.toString());
+            javax.swing.JOptionPane.showMessageDialog(null, "USUARIO ELIMINADO CON EXITO!");
+            menuPrincipal1 menu = new menuPrincipal1();
+            menu.setVisible(true);
+            this.dispose();
+            System.out.println(gestion.toString());
+        }else{
+             javax.swing.JOptionPane.showMessageDialog(null, "ERROR, Contraseña incorrecta");
+        
+        }
     }//GEN-LAST:event_eliminarCuentaActionPerformed
 
     /**

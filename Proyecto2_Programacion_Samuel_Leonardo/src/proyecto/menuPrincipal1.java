@@ -263,7 +263,7 @@ public class menuPrincipal1 extends javax.swing.JFrame {
 
     private void perfilButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_perfilButtonActionPerformed
         // TODO add your handling code here:
-        miPerfil p = new miPerfil();
+        MiPerfil p = new MiPerfil();
         p.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_perfilButtonActionPerformed
