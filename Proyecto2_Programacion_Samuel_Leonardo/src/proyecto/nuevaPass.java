@@ -150,7 +150,7 @@ public class nuevaPass extends javax.swing.JFrame {
         if(nuevaContraseña.getPassword() == confirmarContraseña.getPassword()){
             char[] contraseña = confirmarContraseña.getPassword();
             String conContraseña = new String(contraseña);
-            
+           
         }
     }//GEN-LAST:event_cambiarPassActionPerformed
 

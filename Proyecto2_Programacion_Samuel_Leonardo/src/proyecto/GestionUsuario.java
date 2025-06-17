@@ -57,7 +57,7 @@ public class GestionUsuario {
    
     public void cambiarPassword(String nomU, String password){
         Usuarios eU = buscarUsuario(nomU);
-        
+        eU.setPassW(password);
     }
     public String getJugadorActual(){
         return jugadorActual.getName();
