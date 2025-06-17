@@ -192,6 +192,8 @@ public class Tablero extends JPanel {
     public void seleccionCasilla(int fila, int columna, JButton boton) {
         System.out.println("Casilla Seleccionada: [" + fila + "][" + columna + "]");
     }
+    
+   
 
     @Override
     protected void paintComponent(Graphics g) {
