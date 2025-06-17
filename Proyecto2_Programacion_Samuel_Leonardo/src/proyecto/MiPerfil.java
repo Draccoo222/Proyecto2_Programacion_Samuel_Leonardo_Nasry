@@ -6,14 +6,14 @@ import javax.swing.JOptionPane;
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-
-
 /**
  *
  * @author hnleo
  */
 public class MiPerfil extends javax.swing.JFrame {
+
     GestionUsuario gestion;
+
     /**
      * Creates new form MiPerfil
      */
@@ -190,14 +190,21 @@ public class MiPerfil extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cambiarPassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cambiarPassActionPerformed
-        
 
+        String inputPass = JOptionPane.showInputDialog("Introduzca su contraseña actual");
+        if (gestion.verificarLaPassWord(inputPass)) {
+              nuevaPass nueva = new nuevaPass();
+              nueva.setVisible(true);
+        } else {
+            javax.swing.JOptionPane.showMessageDialog(null, "Contraseña incorrecta.");
+
+        }
     }//GEN-LAST:event_cambiarPassActionPerformed
 
     private void eliminarCuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarCuentaActionPerformed
         // TODO add your handling code here:
         String inputPass = JOptionPane.showInputDialog("Introduzca su contraseña para confirmar");
-        if(gestion.verificarLaPassWord(inputPass)){
+        if (gestion.verificarLaPassWord(inputPass)) {
             gestion.eliminarUsuario(gestion.getJugadorActual());
             System.out.println(gestion.toString());
             javax.swing.JOptionPane.showMessageDialog(null, "USUARIO ELIMINADO CON EXITO!");
@@ -205,16 +212,16 @@ public class MiPerfil extends javax.swing.JFrame {
             menu.setVisible(true);
             this.dispose();
             System.out.println(gestion.toString());
-        }else{
-             javax.swing.JOptionPane.showMessageDialog(null, "ERROR, Contraseña incorrecta");
-        
+        } else {
+            javax.swing.JOptionPane.showMessageDialog(null, "ERROR, Contraseña incorrecta");
+
         }
     }//GEN-LAST:event_eliminarCuentaActionPerformed
 
     private void regresarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_regresarButtonActionPerformed
-      menuPrincipal1 menu = new menuPrincipal1();
-      menu.setVisible(true);
-      this.dispose();
+        menuPrincipal1 menu = new menuPrincipal1();
+        menu.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_regresarButtonActionPerformed
 
     /**
