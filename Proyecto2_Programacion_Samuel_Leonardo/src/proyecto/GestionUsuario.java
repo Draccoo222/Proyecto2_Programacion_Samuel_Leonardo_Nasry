@@ -11,6 +11,7 @@ package proyecto;
 public class GestionUsuario {
     private static GestionUsuario instancia;
     private  Usuarios jugadores[] = new Usuarios[5];
+    private int cantidadUsuarios = 0;
     private Usuarios jugadorActual = null;
     
     public Boolean loginJugador(String nomU, String passW) {
@@ -93,26 +94,22 @@ public class GestionUsuario {
         return false;
     }
     
-    public void eliminarUsuario(String nomU){
-        Usuarios eU = buscarUsuario(nomU);
-        Usuarios eU2 = jugadores[jugadores.length - 1];
-        for (int i = 0; i < jugadores.length; i++) {
-            if(jugadores[i] == eU && eU2!= null ){
-                jugadores[i] = eU2;
-                jugadores[jugadores.length - 1] = null;  
-                break;
-            }else if(jugadores[i] == eU && eU2 == null ){
-                jugadores[i] = null;
-                for (int j = 0; j < jugadores.length - 1; j++) {
-                     jugadores[i] = jugadores[i + 1];
+   public void eliminarUsuario(String nomU) {
+        for (int i = 0; i < cantidadUsuarios; i++) {
+            if (jugadores[i].getName().equals(nomU)) {
+                // Desplazar todos los elementos una posición a la izquierda
+                for (int j = i; j < cantidadUsuarios - 1; j++) {
+                    jugadores[j] = jugadores[j + 1];
                 }
                 jugadores[jugadores.length - 1] = null;  
+                jugadores[cantidadUsuarios - 1] = null; // Limpia el último espacio
+                cantidadUsuarios--;
+                System.out.println("Usuario eliminado correctamente.");
                 break;
             }
             
         }
         cerrarSesion();
-
     }
 
     @Override
