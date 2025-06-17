@@ -13,9 +13,7 @@ public class GestionUsuario {
     private  Usuarios jugadores[] = new Usuarios[5];
     private int cantidadUsuarios = 0;
     private Usuarios jugadorActual = null;
-    
-    
-    
+    private Usuarios jugador2 = null;
     
     public Boolean loginJugador(String nomU, String passW) {
         if (jugadorActual != buscarUsuario(nomU)) {
@@ -40,15 +38,25 @@ public class GestionUsuario {
     }
     
     
+    
+    public boolean verificarCantidad(){
+        return cantidadUsuarios >= 2;
+    }
+    
     public boolean verificarLogeo(){
-        if(jugadorActual != null){
-            return true;
-        }
-        return false;
+        return jugadorActual != null;
     }
     
     public void cerrarSesion(){
         jugadorActual = null;
+    }
+    
+    public boolean buscarJugador2(String nomU){
+        return buscarUsuario(nomU) != null && buscarUsuario(nomU) != jugadorActual;
+    }
+    
+    public void setJugador2(String nomU){
+        jugador2 = buscarUsuario(nomU);
     }
    
     public static GestionUsuario getInstancia(){
@@ -70,6 +78,7 @@ public class GestionUsuario {
         }
       
     }
+    
     public String getJugadorActual(){
         return jugadorActual.getName();
     }
@@ -89,6 +98,7 @@ public class GestionUsuario {
             for (int i = 0; i < jugadores.length; i++){
                if(jugadores[i] == null){
                     jugadores[i] = new Usuarios(nomU, passW);
+                    cantidadUsuarios++;
                     return true;
                }
             }

@@ -274,8 +274,13 @@ public class menuPrincipal1 extends javax.swing.JFrame {
     }//GEN-LAST:event_perfilButtonActionPerformed
 
     private void strategoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_strategoButtonActionPerformed
-       seleccionPlayer selec = new seleccionPlayer();
-       selec.setVisible(true);
+       if(gestion.verificarCantidad()){
+            seleccionPlayer selec = new seleccionPlayer();
+            selec.setVisible(true);
+            this.dispose();
+       }else{
+           JOptionPane.showMessageDialog(null, "ERROR, NO HAY SUFICIENTES USUARIOS REGISTRADOS");
+       }
     }//GEN-LAST:event_strategoButtonActionPerformed
 
     /**

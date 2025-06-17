@@ -4,6 +4,8 @@
  */
 package proyecto;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author hnleo
@@ -55,6 +57,11 @@ public class seleccionPlayer extends javax.swing.JFrame {
         jLabel2.setText("Player 2:");
 
         player2Text.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        player2Text.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                player2TextActionPerformed(evt);
+            }
+        });
 
         regresarButton.setBackground(new java.awt.Color(255, 0, 51));
         regresarButton.setFont(new java.awt.Font("Arial Black", 1, 12)); // NOI18N
@@ -157,9 +164,18 @@ public class seleccionPlayer extends javax.swing.JFrame {
     }//GEN-LAST:event_regresarButtonActionPerformed
 
     private void iniciarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_iniciarButtonActionPerformed
-      
-
+        String nomJug2 = player2Text.getText();
+        if(gestion.buscarJugador2(nomJug2)){
+            gestion.setJugador2(nomJug2);
+            JOptionPane.showMessageDialog(null, "TODO LISTO PARA JUGAR!!!!!!!");
+        }else{
+            JOptionPane.showMessageDialog(null, "ERROR, Jugador no existe o ya es jugador 1");
+        }
     }//GEN-LAST:event_iniciarButtonActionPerformed
+
+    private void player2TextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_player2TextActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_player2TextActionPerformed
 
     /**
      * @param args the command line arguments
