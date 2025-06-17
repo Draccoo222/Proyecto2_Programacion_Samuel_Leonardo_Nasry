@@ -101,7 +101,6 @@ public class GestionUsuario {
                 for (int j = i; j < cantidadUsuarios - 1; j++) {
                     jugadores[j] = jugadores[j + 1];
                 }
-                jugadores[jugadores.length - 1] = null;  
                 jugadores[cantidadUsuarios - 1] = null; // Limpia el último espacio
                 cantidadUsuarios--;
                 System.out.println("Usuario eliminado correctamente.");
