@@ -24,7 +24,7 @@ public class Tablero extends JPanel {
     private int columna;
     public boolean casillasProhibidasHeroes[][];
     public boolean casillasProhibidasVillanos[][];
-    
+    private jugabilidadTablero logicaMovimiento;
     // Arrays de personajes
     private Fichas[] personajesHeroes;
     private Fichas[] personajesVillanos;
@@ -47,6 +47,7 @@ public class Tablero extends JPanel {
         
         // Asignar personajes al tablero
         asignarPersonajesAlTablero();
+        logicaMovimiento = new jugabilidadTablero(casilla);
     }
     
     private void cargarPersonajes() {
