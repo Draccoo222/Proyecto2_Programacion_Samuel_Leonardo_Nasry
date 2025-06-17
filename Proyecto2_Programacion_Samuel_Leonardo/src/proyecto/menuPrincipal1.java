@@ -133,6 +133,11 @@ public class menuPrincipal1 extends javax.swing.JFrame {
         strategoButton.setForeground(new java.awt.Color(255, 255, 255));
         strategoButton.setText("STRATEGO");
         strategoButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255), 3));
+        strategoButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                strategoButtonActionPerformed(evt);
+            }
+        });
 
         cerrarSesion.setBackground(new java.awt.Color(255, 0, 51));
         cerrarSesion.setFont(new java.awt.Font("Arial Black", 0, 18)); // NOI18N
@@ -267,6 +272,11 @@ public class menuPrincipal1 extends javax.swing.JFrame {
         p.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_perfilButtonActionPerformed
+
+    private void strategoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_strategoButtonActionPerformed
+       seleccionPlayer selec = new seleccionPlayer();
+       selec.setVisible(true);
+    }//GEN-LAST:event_strategoButtonActionPerformed
 
     /**
      * @param args the command line arguments
