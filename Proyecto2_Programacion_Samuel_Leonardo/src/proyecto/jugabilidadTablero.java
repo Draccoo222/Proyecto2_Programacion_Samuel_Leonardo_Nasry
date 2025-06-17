@@ -51,6 +51,8 @@ public class jugabilidadTablero {
         } else {
             JButton segundo = botonSelecc;
             cambioDeBoton(primerBotonSelecc, segundo);
+            primerBotonSelecc = null;
+            esperarSegundoClic = false;
             System.out.println("Boton Cambiado");
 
         }
@@ -60,6 +62,7 @@ public class jugabilidadTablero {
         Icon temp = boton1.getIcon();
         boton1.setIcon(boton2.getIcon());
         boton2.setIcon(temp);
+        
     }
 
 }
