@@ -27,10 +27,11 @@ public class Usuarios{
     public String getPass(){
         return passW;
     }
-    public String setPass(String pass){
-        passW = pass;
-        return passW;
+
+    public void setPassW(String passW) {
+        this.passW = passW;
     }
+   
     
  
 }
