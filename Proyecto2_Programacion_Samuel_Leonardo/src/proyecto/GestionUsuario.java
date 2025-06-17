@@ -14,6 +14,9 @@ public class GestionUsuario {
     private int cantidadUsuarios = 0;
     private Usuarios jugadorActual = null;
     
+    
+    
+    
     public Boolean loginJugador(String nomU, String passW) {
         if (jugadorActual != buscarUsuario(nomU)) {
             for (int i = 0; i < jugadores.length; i++) {

@@ -11,15 +11,22 @@ package proyecto;
 public class Usuarios{
     private String passW; // Contraseña
     private String nomU;
+    private int puntaje;
 
     public Usuarios(String nomU, String passW){
         this.nomU = nomU;
         this.passW = passW;
+        puntaje = 0;
     }
     
     public boolean verificarContra(String passsW){
         return this.passW.equals(passsW);
     }
+    
+    public void sumarPuntaje(){
+        puntaje+= 3;
+    }
+    
     
     public String getName(){
         return nomU;
