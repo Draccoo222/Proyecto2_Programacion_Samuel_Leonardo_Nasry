@@ -9,7 +9,9 @@ package proyecto;
  * @author hnleo
  */
 public class nuevaPass extends javax.swing.JFrame {
+
     GestionUsuario gestion;
+
     /**
      * Creates new form nuevaPass
      */
@@ -146,12 +148,18 @@ public class nuevaPass extends javax.swing.JFrame {
     }//GEN-LAST:event_regresarButtonActionPerformed
 
     private void cambiarPassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cambiarPassActionPerformed
-       
-        if(nuevaContraseña.getPassword() == confirmarContraseña.getPassword()){
-            char[] contraseña = confirmarContraseña.getPassword();
-            String conContraseña = new String(contraseña);
-           
+        char[] contraseña1 = confirmarContraseña.getPassword();
+        char[] contraseña2 = nuevaContraseña.getPassword();
+        String contraseña1Str = new String(contraseña1);
+        String contraseña2Str = new String(contraseña2);
+        if (contraseña1Str.equals(contraseña2Str)) {
+
+            gestion.cambiarPassword(gestion.getJugadorActual(), contraseña2Str);
+            javax.swing.JOptionPane.showMessageDialog(null, "Contraseña actualizada correctamente.");
+        } else {
+            javax.swing.JOptionPane.showMessageDialog(null, "Error, contraseña no coinciden.");
         }
+
     }//GEN-LAST:event_cambiarPassActionPerformed
 
     /**
