@@ -39,8 +39,8 @@ public class GestionUsuario {
     
     
     
-    public boolean verificarCantidad(){
-        return cantidadUsuarios >= 2;
+    public int getCantidad(){
+        return cantidadUsuarios;
     }
     
     public boolean verificarLogeo(){
