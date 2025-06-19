@@ -27,13 +27,19 @@ public class jugabilidadTablero {
     private void manejarClics() {
         for (int i = 0; i < tablero.length; i++) {
             for (int j = 0; j < tablero[i].length; j++) {
+               
+                
                 casillas casilla = tablero[i][j];
+                if(casilla != tablero[4][2] && casilla != tablero[4][3] && casilla != tablero[5][2] && casilla != tablero[5][3] && casilla != tablero[4][6] && casilla != tablero[4][7] && casilla != tablero[5][6] && casilla != tablero[5][7]){
                 casilla.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         manejarClicCasilla((casillas) e.getSource());
                     }
-                });
+                });}
+                else{
+                    System.out.println("Casilla bloqueada");
+                }
             }
         }
     }
