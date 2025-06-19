@@ -167,9 +167,9 @@ public class seleccionPlayer extends javax.swing.JFrame {
         String nomJug2 = player2Text.getText();
         if(gestion.buscarJugador2(nomJug2)){
             gestion.setJugador2(nomJug2);
-            JOptionPane.showMessageDialog(null, "TODO LISTO PARA JUGAR!!!!!!!");
+            JOptionPane.showMessageDialog(null, "Iniciando Partida..");
         }else{
-            JOptionPane.showMessageDialog(null, "ERROR, Jugador no existe o ya es jugador 1");
+            JOptionPane.showMessageDialog(null, "Error, Jugador no existe o ya es jugador 1");
         }
     }//GEN-LAST:event_iniciarButtonActionPerformed
 
