@@ -35,7 +35,7 @@ public class Tablero extends JPanel {
         this.columna = columna;
         
         // Configurar el layout como GridLayout para organizar los botones en cuadrícula
-        this.setLayout(new GridLayout(fila, columna, 2, 2)); // 2px de separación entre botones
+        this.setLayout(new GridLayout(fila, columna)); 
         
         // Inicializar el array de casillas
         casilla = new casillas[fila][columna];
@@ -58,13 +58,8 @@ public class Tablero extends JPanel {
     private void inicializarCasillas(){
         for (int i = 0; i < fila; i++) {
             for (int j = 0; j < columna; j++) {
-                // Crear casilla con los parámetros correctos (fila i, columna j)
                 casillas c = new casillas(i, j);
-                
-                // Guardar referencia en el array
                 casilla[i][j] = c;
-                
-                // Agregar al panel
                 this.add(c);
             }
         }
