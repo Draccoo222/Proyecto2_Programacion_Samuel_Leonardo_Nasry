@@ -20,13 +20,34 @@ public class TableroPantallaStratego extends javax.swing.JFrame {
 
     public TableroPantallaStratego() {
         initComponents();
+        preguntarBando();
         setLocationRelativeTo(null);
 
         cargarJuego();
        
 
     }
+    private void preguntarBando(){
+         Object[] opciones = { "Heroes", "Villanos" };
 
+        // Mostrar el diálogo
+        int seleccion = JOptionPane.showOptionDialog(
+            null,
+            "¿Qué bando deseas elegir?",
+            "Selección",
+            JOptionPane.DEFAULT_OPTION,
+            JOptionPane.QUESTION_MESSAGE,
+            null,
+            opciones,
+            opciones[0]  // Opción predeterminada
+        );
+        
+        if(seleccion == 0){
+            Tablero.bando = true;
+        }else if(seleccion == 1){
+            Tablero.bando = false;
+        }
+    }
     private void cargarTablero() {
         iniciar = new Tablero(10, 10, "/images/tablero.png");
         iniciar.setSize(panelTablero.getWidth(), panelTablero.getHeight());

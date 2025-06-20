@@ -22,6 +22,7 @@ public class Tablero extends JPanel {
     JButton botones[][];
     private int fila;
     private int columna;
+    public static boolean bando;
     public boolean casillasProhibidasHeroes[][];
     public boolean casillasProhibidasVillanos[][];
     private jugabilidadTablero logicaMovimiento;
@@ -49,6 +50,15 @@ public class Tablero extends JPanel {
         asignarPersonajesAlTablero();
         logicaMovimiento = new jugabilidadTablero(casilla);
     }
+    
+    public void setBando(boolean bando){
+        this.bando = bando;
+    }
+    public void cambiarBando(){
+        bando = !bando;
+    
+    }
+    
     
     private void cargarPersonajes() {
         personajesHeroes = casillas.personajesHeroes();
