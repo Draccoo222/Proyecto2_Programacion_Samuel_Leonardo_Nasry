@@ -12,6 +12,7 @@ public class GestionUsuario {
     private static GestionUsuario instancia;
     private  Usuarios jugadores[] = new Usuarios[5];
     private int cantidadUsuarios = 0;
+    private int cantidadHistorica = 0;
     private Usuarios jugadorActual = null;
     private Usuarios jugador2 = null;
     
@@ -30,13 +31,21 @@ public class GestionUsuario {
         return false;
     }
 
+    public int getCantidadUsuarios() {
+        return cantidadUsuarios;
+    }
+
+    public int getCantidadHistorica() {
+        return cantidadHistorica;
+    }
+    
+
     public boolean verificarLaPassWord(String passW){
         if(jugadorActual.verificarContra(passW)){
            return true;
         }
         return  false;  
     }
-    
     
     
     public int getCantidad(){
@@ -79,6 +88,20 @@ public class GestionUsuario {
       
     }
     
+    public String[][] obtenerDatos(){
+        String[][] datos = new String[jugadores.length][2];
+        for (int i = 0; i < jugadores.length; i++) {
+            if(jugadores[i] != null){
+                datos[i][0] = jugadores[i].getName();
+                datos[i][1] = String.valueOf(jugadores[i].getPuntaje());
+            }else{
+                datos[i][0] = "";
+                datos[i][1] = "";
+            }
+        }
+        return datos;
+    }
+    
     public String getJugadorActual(){
         return jugadorActual.getName();
     }
@@ -91,6 +114,12 @@ public class GestionUsuario {
         }
         return null;
     }
+
+    public Usuarios[] getJugadores() {
+        return jugadores;
+    }
+    
+    
     
     
     public boolean agregarUsuario(String nomU, String passW){
@@ -99,6 +128,7 @@ public class GestionUsuario {
                if(jugadores[i] == null){
                     jugadores[i] = new Usuarios(nomU, passW);
                     cantidadUsuarios++;
+                    cantidadHistorica++;
                     return true;
                }
             }

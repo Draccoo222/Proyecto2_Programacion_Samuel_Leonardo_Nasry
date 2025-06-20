@@ -12,19 +12,39 @@ public class Usuarios{
     private String passW; // Contraseña
     private String nomU;
     private int puntaje;
-
+    private int partidasHeroe;
+    private int partidasVillano;
+    
+    
     public Usuarios(String nomU, String passW){
         this.nomU = nomU;
         this.passW = passW;
         puntaje = 0;
+        partidasHeroe = 0;
+        partidasVillano = 0;
     }
+    
     
     public boolean verificarContra(String passsW){
         return this.passW.equals(passsW);
     }
+
+    public int getPuntaje() {
+        return puntaje;
+    }
+    
+    
     
     public void sumarPuntaje(){
         puntaje+= 3;
+    }
+    
+    public void sumPartidasHeroe(){
+        partidasHeroe+= 1;
+    }
+     
+    public void sumPartidasVillano(){
+        partidasVillano+= 1;
     }
     
     

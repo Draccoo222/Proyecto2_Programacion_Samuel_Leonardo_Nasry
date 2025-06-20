@@ -155,6 +155,11 @@ public class menuPrincipal1 extends javax.swing.JFrame {
         configButton.setForeground(new java.awt.Color(255, 255, 255));
         configButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/engranaje.png"))); // NOI18N
         configButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255), 3));
+        configButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                configButtonActionPerformed(evt);
+            }
+        });
 
         perfilButton.setBackground(new java.awt.Color(255, 0, 51));
         perfilButton.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
@@ -172,6 +177,11 @@ public class menuPrincipal1 extends javax.swing.JFrame {
         universoButton.setForeground(new java.awt.Color(255, 255, 255));
         universoButton.setText("UNIVERSO MARVEL");
         universoButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255), 3));
+        universoButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                universoButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout menuParte2Layout = new javax.swing.GroupLayout(menuParte2);
         menuParte2.setLayout(menuParte2Layout);
@@ -282,6 +292,18 @@ public class menuPrincipal1 extends javax.swing.JFrame {
            JOptionPane.showMessageDialog(null, "ERROR, NO HAY SUFICIENTES USUARIOS REGISTRADOS");
        }
     }//GEN-LAST:event_strategoButtonActionPerformed
+
+    private void universoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_universoButtonActionPerformed
+        // TODO add your handling code here:
+        universoMenu mU = new universoMenu();
+        mU.setVisible(true);
+        this.dispose();    
+    }//GEN-LAST:event_universoButtonActionPerformed
+
+    private void configButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_configButtonActionPerformed
+        // TODO add your handling code here:
+       
+    }//GEN-LAST:event_configButtonActionPerformed
 
     /**
      * @param args the command line arguments

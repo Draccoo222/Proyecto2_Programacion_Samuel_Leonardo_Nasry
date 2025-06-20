@@ -266,6 +266,9 @@
                   </Border>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="configButtonActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="perfilButton">
               <Properties>
@@ -311,6 +314,9 @@
                   </Border>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="universoButtonActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
