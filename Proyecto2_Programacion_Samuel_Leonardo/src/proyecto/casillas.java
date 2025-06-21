@@ -22,7 +22,8 @@ public class casillas extends JButton {
     private Image imagenFondoCompleta;
     private int filaTablero, columnaTablero, totalFilas, totalColumnas;
     private boolean personajeRevelado = false;
-    
+    private boolean isMouseClicked;
+
     public casillas(int fila, int columna) {
         this.fila = fila;
         this.columna = columna;
@@ -42,28 +43,28 @@ public class casillas extends JButton {
         this.setOpaque(false);
         this.setContentAreaFilled(false);
         this.setBorderPainted(true);
-        this.setBorder(BorderFactory.createLineBorder(Color.GRAY, 1));
+        this.setBorder(BorderFactory.createLineBorder(Color.GRAY, 0));
         this.setFocusPainted(false);
         this.setPreferredSize(new Dimension(80, 80));
         this.setMinimumSize(new Dimension(60, 60));
-
-        // Efecto hover
+        isMouseClicked = false;
         this.addMouseListener(new MouseAdapter() {
             @Override
-            public void mouseEntered(MouseEvent e) {
-                if (!tienePersonaje) {
-                    setContentAreaFilled(true);
-                    setBackground(new Color(255, 255, 255, 80));
+            public void mouseClicked(MouseEvent e) {
+                if (!isMouseClicked) {
+                    if (tienePersonaje) {
+                        setBorder(BorderFactory.createLineBorder(Color.GREEN, 3));
+                        isMouseClicked = true;
+                    }
                 } else {
-                    setContentAreaFilled(true);
-                    setBackground(new Color(255, 255, 0, 100)); // Amarillo si tiene personaje
+                    if (tienePersonaje) {
+                        setBorder(BorderFactory.createLineBorder(Color.GRAY, 0));
+                        isMouseClicked = false;
+                    }
+
                 }
             }
 
-            @Override
-            public void mouseExited(MouseEvent e) {
-                setContentAreaFilled(false);
-            }
         });
     }
 
@@ -88,20 +89,15 @@ public class casillas extends JButton {
             if (Tablero.bando && personaje.isEsHeroe()) {
                 this.setIcon(personaje.getIconoPersonaje());
 
-            }if(Tablero.bando && !personaje.isEsHeroe()){
-                ocultarPersonaje();
-            } if(!Tablero.bando && !personaje.isEsHeroe()){
-                this.setIcon(personaje.getIconoPersonaje());
-            }if(!Tablero.bando && personaje.isEsHeroe()){
-                 ocultarPersonaje();
             }
-
-
-            // Cambiar el borde según el equipo
-            if (personaje.isEsHeroe()) {
-                this.setBorder(BorderFactory.createLineBorder(Color.BLUE, 2));
-            } else {
-                this.setBorder(BorderFactory.createLineBorder(Color.RED, 2));
+            if (Tablero.bando && !personaje.isEsHeroe()) {
+                ocultarPersonaje();
+            }
+            if (!Tablero.bando && !personaje.isEsHeroe()) {
+                this.setIcon(personaje.getIconoPersonaje());
+            }
+            if (!Tablero.bando && personaje.isEsHeroe()) {
+                ocultarPersonaje();
             }
         }
     }
@@ -122,25 +118,24 @@ public class casillas extends JButton {
             this.setIcon(personaje.getIconoPersonaje());
         }
     }
-    
-    public void ocultarPersonaje(){
-        if(tienePersonaje()){
+
+    public void ocultarPersonaje() {
+        if (tienePersonaje()) {
             personajeRevelado = false;
-            if(personaje.isEsHeroe()){
+            if (personaje.isEsHeroe()) {
                 this.setIcon(personaje.getImageOculta());
-                
-            }else{
+
+            } else {
                 this.setIcon(personaje.getImageOculta());
             }
             this.repaint();
         }
     }
-    
-    public boolean isPersonajeRevelado(){
+
+    public boolean isPersonajeRevelado() {
         return personajeRevelado;
     }
 
-    
     // Método para mostrar atributos en consola
     private void mostrarAtributosPersonaje() {
         System.out.println("=== INFORMACIÓN DEL PERSONAJE ===");
@@ -172,20 +167,19 @@ public class casillas extends JButton {
     }
 
     // Método para verificar si puede mover a otra casilla
-    public boolean puedeMoverA(casillas otraCasilla) {
-        if (!this.tienePersonaje || !this.personaje.isPuedeMover()) {
-            return false;
-        }
-
-        // Verificar si la casilla destino está vacía o tiene un enemigo
-        if (!otraCasilla.tienePersonaje()) {
-            return true; // Casilla vacía
-        }
-
-        // Si tiene personaje, verificar si es enemigo
-        return this.personaje.isEsHeroe() != otraCasilla.getPersonaje().isEsHeroe();
-    }
-
+//    public boolean puedeMoverA(casillas otraCasilla) {
+//        if (!this.tienePersonaje || !this.personaje.isPuedeMover()) {
+//            return false;
+//        }
+//
+//        // Verificar si la casilla destino está vacía o tiene un enemigo
+//        if (!otraCasilla.tienePersonaje()) {
+//            return true; // Casilla vacía
+//        }
+//
+//        // Si tiene personaje, verificar si es enemigo
+//        return this.personaje.isEsHeroe() != otraCasilla.getPersonaje().isEsHeroe();
+//    }
     // Métodos estáticos para crear arrays de personajes (mantener los existentes)
     public static Fichas[] personajesHeroes() {
         Fichas personajes[] = new Fichas[40];
@@ -303,41 +297,40 @@ public class casillas extends JButton {
         return personajes;
     }
 
-    public void setImagenFondoTablero(Image imagenCompleta, int fila, int col, int totalF, int totalC) {
-        this.imagenFondoCompleta = imagenCompleta;
-        this.filaTablero = fila;
-        this.columnaTablero = col;
-        this.totalFilas = totalF;
-        this.totalColumnas = totalC;
-        repaint();
-    }
-
-    @Override
-    protected void paintComponent(Graphics g) {
-        if (imagenFondoCompleta != null) {
-            // Calcular qué porción de la imagen corresponde a esta casilla
-            int anchoImagen = imagenFondoCompleta.getWidth(this);
-            int altoImagen = imagenFondoCompleta.getHeight(this);
-
-            if (anchoImagen > 0 && altoImagen > 0) {
-                // Calcular el tamaño de cada "pedazo" de imagen
-                int anchoPorcion = anchoImagen / totalColumnas;
-                int altoPorcion = altoImagen / totalFilas;
-
-                // Calcular las coordenadas de origen en la imagen original
-                int xOrigen = columnaTablero * anchoPorcion;
-                int yOrigen = filaTablero * altoPorcion;
-
-                // Dibujar solo la porción que corresponde a esta casilla
-                g.drawImage(imagenFondoCompleta,
-                        0, 0, getWidth(), getHeight(), // destino
-                        xOrigen, yOrigen,
-                        xOrigen + anchoPorcion, yOrigen + altoPorcion, // origen
-                        this);
-            }
-        }
-
-        // Luego pintar el contenido normal de la casilla
-        super.paintComponent(g);
-    }
+//    public void setImagenFondoTablero(Image imagenCompleta, int fila, int col, int totalF, int totalC) {
+//        this.imagenFondoCompleta = imagenCompleta;
+//        this.filaTablero = fila;
+//        this.columnaTablero = col;
+//        this.totalFilas = totalF;
+//        this.totalColumnas = totalC;
+//        repaint();
+//    }
+//    @Override
+//    protected void paintComponent(Graphics g) {
+//        if (imagenFondoCompleta != null) {
+//            // Calcular qué porción de la imagen corresponde a esta casilla
+//            int anchoImagen = imagenFondoCompleta.getWidth(this);
+//            int altoImagen = imagenFondoCompleta.getHeight(this);
+//
+//            if (anchoImagen > 0 && altoImagen > 0) {
+//                // Calcular el tamaño de cada "pedazo" de imagen
+//                int anchoPorcion = anchoImagen / totalColumnas;
+//                int altoPorcion = altoImagen / totalFilas;
+//
+//                // Calcular las coordenadas de origen en la imagen original
+//                int xOrigen = columnaTablero * anchoPorcion;
+//                int yOrigen = filaTablero * altoPorcion;
+//
+//                // Dibujar solo la porción que corresponde a esta casilla
+//                g.drawImage(imagenFondoCompleta,
+//                        0, 0, getWidth(), getHeight(), // destino
+//                        xOrigen, yOrigen,
+//                        xOrigen + anchoPorcion, yOrigen + altoPorcion, // origen
+//                        this);
+//            }
+//        }
+//
+//        // Luego pintar el contenido normal de la casilla
+//        super.paintComponent(g);
+//    }
 }

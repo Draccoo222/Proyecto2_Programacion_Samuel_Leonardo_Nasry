@@ -56,6 +56,9 @@ public class jugabilidadTablero {
                 primeraCasillaSelecc = casillaSelecc;
                 esperarSegundoClic = true;
                 System.out.println("Personaje: "+personaje.getNombrePersonaje());
+                
+                // Mostrar casillas disponibles para mover
+                mostrarMovimientosDisponibles(casillaSelecc);
             } else {
                 System.out.println("Casilla vacia");
             }
@@ -66,7 +69,7 @@ public class jugabilidadTablero {
             // Verificar si es un movimiento válido
             if (esMovimientoValido(primeraCasillaSelecc, segundaCasilla)) {
                 moverPersonaje(primeraCasillaSelecc, segundaCasilla);
-               tableroJug.turnoDespues();
+                tableroJug.turnoDespues();
             } else {
                 System.out.println("Movimiento invalido");
             }
@@ -90,19 +93,140 @@ public class jugabilidadTablero {
             return false;
         }
 
-        // Si la casilla destino tiene personaje, verificar si es del equipo contrario
+        // Verificar si el movimiento es ortogonal y de una sola casilla
+        if (!esMovimientoOrtogonalUnico(origen, destino)) {
+            System.out.println("Movimiento no ortogonal o más de una casilla");
+            return false;
+        }
+
+        // Si la casilla destino tiene personaje del mismo equipo, no se puede mover
         if (destino.tienePersonaje()) {
             boolean mismoEquipo = origen.getPersonaje().isEsHeroe() == destino.getPersonaje().isEsHeroe();
             if (mismoEquipo) {
-                System.out.println("No puedes atacar a tu propio equipo");
+                System.out.println("No puedes mover a una casilla ocupada por tu propio equipo");
                 return false;
             } else {
-
+                // Es un enemigo, se puede atacar
                 return true;
             }
         }
 
-        return true; // Movimiento a casilla vacía
+        return true; // Movimiento a casilla vacía y válido
+    }
+
+    /*
+      Verifica si el movimiento es ortogonal (vertical u horizontal) y de una sola casilla
+     */
+    private boolean esMovimientoOrtogonalUnico(casillas origen, casillas destino) {
+        int diferenciaFila = Math.abs(destino.getFila() - origen.getFila());
+        int diferenciaColumna = Math.abs(destino.getColumna() - origen.getColumna());
+        
+        // Movimiento ortogonal de una casilla: 
+        // - Una diferencia debe ser 1 y la otra 0
+        return (diferenciaFila == 1 && diferenciaColumna == 0) || 
+               (diferenciaFila == 0 && diferenciaColumna == 1);
+    }
+
+    /*
+      Obtiene las casillas adyacentes ortogonalmente a una casilla dada
+     */
+    private casillas[] obtenerCasillasAdyacentes(casillas casilla) {
+        int fila = casilla.getFila();
+        int columna = casilla.getColumna();
+        
+        // Array para almacenar las casillas adyacentes (máximo 4)
+        casillas[] adyacentes = new casillas[4];
+        int contador = 0;
+        
+        // Arriba
+        if (fila > 0) {
+            adyacentes[contador++] = tablero[fila - 1][columna];
+        }
+        
+        // Abajo
+        if (fila < tablero.length - 1) {
+            adyacentes[contador++] = tablero[fila + 1][columna];
+        }
+        
+        // Izquierda
+        if (columna > 0) {
+            adyacentes[contador++] = tablero[fila][columna - 1];
+        }
+        
+        // Derecha
+        if (columna < tablero[0].length - 1) {
+            adyacentes[contador++] = tablero[fila][columna + 1];
+        }
+        
+        // Crear array del tamaño exacto
+        casillas[] resultado = new casillas[contador];
+        System.arraycopy(adyacentes, 0, resultado, 0, contador);
+        
+        return resultado;
+    }
+
+    /*
+      Muestra en consola los movimientos disponibles para un personaje
+     */
+    private void mostrarMovimientosDisponibles(casillas casilla) {
+        if (!casilla.tienePersonaje()) return;
+        
+        System.out.println("=== MOVIMIENTOS DISPONIBLES ===");
+        System.out.println("Personaje: " + casilla.getPersonaje().getNombrePersonaje());
+        System.out.println("Posición actual: [" + casilla.getFila() + "][" + casilla.getColumna() + "]");
+        
+        casillas[] adyacentes = obtenerCasillasAdyacentes(casilla);
+        int movimientosDisponibles = 0;
+        
+        for (casillas destino : adyacentes) {
+            if (destino != null && esMovimientoValido(casilla, destino)) {
+                movimientosDisponibles++;
+                String estado = destino.tienePersonaje() ? 
+                    "ATACAR (" + destino.getPersonaje().getNombrePersonaje() + ")" : "MOVER";
+                System.out.println("- [" + destino.getFila() + "][" + destino.getColumna() + "] - " + estado);
+            }
+        }
+        
+        if (movimientosDisponibles == 0) {
+            System.out.println("- No hay movimientos disponibles");
+        }
+        
+        System.out.println("===============================");
+    }
+
+    /*
+      Verifica si un personaje tiene movimientos disponibles
+     */
+    public boolean tieneMovimientosDisponibles(casillas casilla) {
+        if (!casilla.tienePersonaje()) return false;
+        
+        casillas[] adyacentes = obtenerCasillasAdyacentes(casilla);
+        
+        for (casillas destino : adyacentes) {
+            if (destino != null && esMovimientoValido(casilla, destino)) {
+                return true;
+            }
+        }
+        
+        return false;
+    }
+
+    /*
+     Cuenta el número de movimientos disponibles para un personaje
+     */
+    public int contarMovimientosDisponibles(casillas casilla) {
+        if (!casilla.tienePersonaje()) return 0;
+        
+        casillas[] adyacentes = obtenerCasillasAdyacentes(casilla);
+        int contador = 0;
+        
+        for (casillas destino : adyacentes) {
+            if (destino != null && esMovimientoValido(casilla, destino)) {
+                contador++;
+            }
+        }
+        
+        return contador;
     }
 
     private void moverPersonaje(casillas origen, casillas destino) {
@@ -117,7 +241,7 @@ public class jugabilidadTablero {
             resolverCombate(origen, destino, personajeAMover, personajeDefensor);
         } else {
             // Movimiento simple a casilla vacía
-          System.out.println("Moviendo " + personajeAMover.getNombrePersonaje() + 
+            System.out.println("Moviendo " + personajeAMover.getNombrePersonaje() + 
                              " de [" + origen.getFila() + "][" + origen.getColumna() + "] a [" + 
                              destino.getFila() + "][" + destino.getColumna() + "]");
             // Mover el personaje
@@ -131,28 +255,37 @@ public class jugabilidadTablero {
         int rangoAtacante = atacante.getRango();
         int rangoDefensor = defensor.getRango();
 
+        System.out.println("=== COMBATE ===");
+        System.out.println("Atacante: " + atacante.getNombrePersonaje() + " (Rango " + rangoAtacante + ")");
+        System.out.println("Defensor: " + defensor.getNombrePersonaje() + " (Rango " + rangoDefensor + ")");
+
         // Casos especiales
-        if (rangoAtacante == 0 && rangoDefensor == 10) {
-            // Nova Blast/Pumpkin Bomb puede derrotar al rango 10
+        if (rangoAtacante == 1 && rangoDefensor == 10) {
+            //Personaje rango 1 puede ganar a rango 10
+            System.out.println("Rango 1, derrota Rango 10");
             casillaDefensor.asignarPersonaje(atacante);
             casillaAtacante.quitarPersonaje();
-        } else if (rangoAtacante == 10 && rangoDefensor == 0) {
-            // Rango 10 es derrotado por Nova Blast/Pumpkin Bomb
-            // El defensor se queda en su lugar, el atacante es eliminado
+        } else if (rangoAtacante == 10 && rangoDefensor == 1) {
+            System.out.println("¡Rango 10 es derrotado por Nova Blast/Pumpkin Bomb!");
+            casillaDefensor.asignarPersonaje(atacante);
             casillaAtacante.quitarPersonaje();
+           
         } else if (rangoAtacante > rangoDefensor) {
             // Atacante gana (rango mayor)
+            System.out.println("¡" + atacante.getNombrePersonaje() + " gana el combate!");
             casillaDefensor.asignarPersonaje(atacante);
             casillaAtacante.quitarPersonaje();
         } else if (rangoAtacante < rangoDefensor) {
             // Defensor gana (rango mayor)
-            // El defensor se queda en su lugar, el atacante es eliminado
+            System.out.println("¡" + defensor.getNombrePersonaje() + " defiende exitosamente!");
             casillaAtacante.quitarPersonaje();
         } else {
             // Empate - ambos son eliminados
+            System.out.println("¡Empate! Ambos personajes son eliminados.");
             casillaAtacante.quitarPersonaje();
             casillaDefensor.quitarPersonaje();
         }
+        System.out.println("===============");
     }
 
     // Método para cancelar selección actual
@@ -171,5 +304,4 @@ public class jugabilidadTablero {
             System.out.println("Ningún personaje seleccionado");
         }
     }
-
 }

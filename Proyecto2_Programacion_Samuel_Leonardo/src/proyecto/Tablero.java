@@ -135,40 +135,7 @@ public class Tablero extends JPanel {
         }
     }
 
-    // Método para revelar todos los personajes (para testing)
-    public void revelarTodosLosPersonajes() {
-        for (int i = 0; i < fila; i++) {
-            for (int j = 0; j < columna; j++) {
-                if (casilla[i][j].tienePersonaje()) {
-                    casilla[i][j].revelarPersonaje();
-                }
-            }
-        }
-    }
-
-    // Método para revelar solo los héroes
-    public void revelarHeroes() {
-        for (int i = 0; i < fila; i++) {
-            for (int j = 0; j < columna; j++) {
-                if (casilla[i][j].tienePersonaje()
-                        && casilla[i][j].getPersonaje().isEsHeroe()) {
-                    casilla[i][j].revelarPersonaje();
-                }
-            }
-        }
-    }
-
-    // Método para revelar solo los villanos
-    public void revelarVillanos() {
-        for (int i = 0; i < fila; i++) {
-            for (int j = 0; j < columna; j++) {
-                if (casilla[i][j].tienePersonaje()
-                        && !casilla[i][j].getPersonaje().isEsHeroe()) {
-                    casilla[i][j].revelarPersonaje();
-                }
-            }
-        }
-    }
+ 
     public void revelarFichasBandoActual() {
     for (int i = 0; i < fila; i++) {
         for (int j = 0; j < columna; j++) {
