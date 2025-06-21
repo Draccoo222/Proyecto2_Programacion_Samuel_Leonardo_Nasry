@@ -252,7 +252,7 @@ public class casillas extends JButton {
         //Cartas Especiales | Pumpkin Bomb y Planeta Tierra Capturada
         personajes[id++] = new Fichas("Planet-Earth", false, -1, false, "/images/villanos/Planet-Earth.png");
         for (int i = 0; i < 6; i++) {
-            personajes[id++] = new Fichas("Pumpkin Bomb", false, 0, false, "/images/villanos/PumpkinBombo.png");
+            personajes[id++] = new Fichas("Pumpkin Bomb", false, 0, false, "/images/villanos/PumpkinBomb.png");
         }
 
         //Conjunto de Personajes Divididos en Rangos 10-1
