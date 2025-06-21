@@ -299,11 +299,17 @@ public class jugabilidadTablero {
             casillaDefensor.asignarPersonaje(atacante);
             casillaAtacante.quitarPersonaje();
         } else if (rangoAtacante == 10 && rangoDefensor == 1) {
-            System.out.println("¡Rango 10 es derrotado por Nova Blast/Pumpkin Bomb!");
+            System.out.println("¡Rango 10 gana");
             casillaDefensor.asignarPersonaje(atacante);
             casillaAtacante.quitarPersonaje();
 
-        } else if (rangoAtacante > rangoDefensor) {
+        } else if(rangoAtacante == 3 && rangoDefensor == 0){
+            casillaDefensor.asignarPersonaje(atacante);
+            casillaAtacante.quitarPersonaje();
+        } else if(rangoAtacante<3 && rangoAtacante>3 && rangoDefensor ==0){
+            casillaAtacante.quitarPersonaje();
+        }
+        else if (rangoAtacante > rangoDefensor) {
             // Atacante gana (rango mayor)
             System.out.println("¡" + atacante.getNombrePersonaje() + " gana el combate!");
             casillaDefensor.asignarPersonaje(atacante);
@@ -312,7 +318,8 @@ public class jugabilidadTablero {
             // Defensor gana (rango mayor)
             System.out.println("¡" + defensor.getNombrePersonaje() + " defiende exitosamente!");
             casillaAtacante.quitarPersonaje();
-        } else {
+        }
+        else {
             // Empate - ambos son eliminados
             System.out.println("¡Empate! Ambos personajes son eliminados.");
             casillaAtacante.quitarPersonaje();
