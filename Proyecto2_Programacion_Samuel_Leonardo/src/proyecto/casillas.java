@@ -6,8 +6,9 @@ package proyecto;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.BasicStroke;
 
 /**
  *
@@ -22,7 +23,9 @@ public class casillas extends JButton {
     private Image imagenFondoCompleta;
     private int filaTablero, columnaTablero, totalFilas, totalColumnas;
     private boolean personajeRevelado = false;
-    private boolean isMouseClicked;
+    private boolean isMouseClicked, movimientoDisponible = false;
+    private boolean casillaSelecc = false;
+   private Icon iconoActual = null;
 
     public casillas(int fila, int columna) {
         this.fila = fila;
@@ -47,25 +50,7 @@ public class casillas extends JButton {
         this.setFocusPainted(false);
         this.setPreferredSize(new Dimension(80, 80));
         this.setMinimumSize(new Dimension(60, 60));
-        isMouseClicked = false;
-        this.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                if (!isMouseClicked) {
-                    if (tienePersonaje) {
-                        setBorder(BorderFactory.createLineBorder(Color.GREEN, 3));
-                        isMouseClicked = true;
-                    }
-                } else {
-                    if (tienePersonaje) {
-                        setBorder(BorderFactory.createLineBorder(Color.GRAY, 0));
-                        isMouseClicked = false;
-                    }
 
-                }
-            }
-
-        });
     }
 
     private void agregarListenerClick() {
@@ -101,14 +86,85 @@ public class casillas extends JButton {
             }
         }
     }
+    
+    public void marcarSeleccion(){
+        casillaSelecc = true;
+        this.setBorder(BorderFactory.createLineBorder(Color.GREEN, 3));
+        this.repaint();
+    }
+    
+    public void desmarcarSeleccion(){
+        casillaSelecc = false;
+        if(!movimientoDisponible){
+            this.setBorder(BorderFactory.createLineBorder(Color.GRAY, 0));
+            
+        }
+        this.repaint();
+    }
+    //Metodos para marcas casillas disponibles que tienen los personajes para mover
+    public void marcarCasillasDisponibles() {
+        movimientoDisponible = true;
+//        if(this.getIcon()!=null){
+//            iconoActual = this.getIcon();
+//        }
+//        this.setIcon(null);
+//        this.setBorder(BorderFactory.createLineBorder(Color.RED, 2));
+//        this.setOpaque(true);
+//        this.setContentAreaFilled(true);
+//        this.setBackground(new Color(255, 0, 0, 50));
+        this.repaint();
+    }
+
+    public void desmarcarCasillasDisponibles() {
+        movimientoDisponible = false;
+//        
+//        if(iconoActual != null){
+//            this.setIcon(iconoActual);
+//            iconoActual = null;
+//        }
+//        this.setOpaque(false);
+//        this.setContentAreaFilled(false);
+        if (casillaSelecc && tienePersonaje) {
+            this.setBorder(BorderFactory.createLineBorder(Color.GREEN, 3));
+
+        } else {
+            this.setBorder(BorderFactory.createLineBorder(Color.GRAY, 0));
+        }
+        
+        this.repaint();
+    }
+
+    //Get para obtener el booleano
+    public boolean esMovimientoDisponible() {
+        return movimientoDisponible;
+    }
+    public boolean estaSelecc(){
+        return casillaSelecc;
+    }
+
+    //Metodo para desmarcar las casillas en la tabla
+    public static void limpiarCasillas(casillas[][] tablero) {
+        for (int i = 0; i < tablero.length; i++) {
+            for (int j = 0; j < tablero.length; j++) {
+                if (tablero[i][j].esMovimientoDisponible()) {
+                    tablero[i][j].desmarcarCasillasDisponibles();
+                }
+                if(tablero[i][j].estaSelecc()){
+                    tablero[i][j].desmarcarSeleccion();
+                }
+            }
+        }
+    }
 
     // Método para quitar el personaje de la casilla
     public void quitarPersonaje() {
         this.personaje = null;
         this.tienePersonaje = false;
         this.setIcon(null);
-        this.setBorder(BorderFactory.createLineBorder(Color.GRAY, 1));
-    }
+        if(!casillaSelecc && !movimientoDisponible){
+        this.setBorder(BorderFactory.createLineBorder(Color.GRAY, 0));
+        }
+        }
 
     // Método para revelar el personaje (mostrar su imagen real)
     public void revelarPersonaje() {
@@ -166,21 +222,6 @@ public class casillas extends JButton {
         return tienePersonaje;
     }
 
-    // Método para verificar si puede mover a otra casilla
-//    public boolean puedeMoverA(casillas otraCasilla) {
-//        if (!this.tienePersonaje || !this.personaje.isPuedeMover()) {
-//            return false;
-//        }
-//
-//        // Verificar si la casilla destino está vacía o tiene un enemigo
-//        if (!otraCasilla.tienePersonaje()) {
-//            return true; // Casilla vacía
-//        }
-//
-//        // Si tiene personaje, verificar si es enemigo
-//        return this.personaje.isEsHeroe() != otraCasilla.getPersonaje().isEsHeroe();
-//    }
-    // Métodos estáticos para crear arrays de personajes (mantener los existentes)
     public static Fichas[] personajesHeroes() {
         Fichas personajes[] = new Fichas[40];
         int id = 0;
@@ -296,41 +337,20 @@ public class casillas extends JButton {
 
         return personajes;
     }
-
-//    public void setImagenFondoTablero(Image imagenCompleta, int fila, int col, int totalF, int totalC) {
-//        this.imagenFondoCompleta = imagenCompleta;
-//        this.filaTablero = fila;
-//        this.columnaTablero = col;
-//        this.totalFilas = totalF;
-//        this.totalColumnas = totalC;
-//        repaint();
-//    }
-//    @Override
-//    protected void paintComponent(Graphics g) {
-//        if (imagenFondoCompleta != null) {
-//            // Calcular qué porción de la imagen corresponde a esta casilla
-//            int anchoImagen = imagenFondoCompleta.getWidth(this);
-//            int altoImagen = imagenFondoCompleta.getHeight(this);
-//
-//            if (anchoImagen > 0 && altoImagen > 0) {
-//                // Calcular el tamaño de cada "pedazo" de imagen
-//                int anchoPorcion = anchoImagen / totalColumnas;
-//                int altoPorcion = altoImagen / totalFilas;
-//
-//                // Calcular las coordenadas de origen en la imagen original
-//                int xOrigen = columnaTablero * anchoPorcion;
-//                int yOrigen = filaTablero * altoPorcion;
-//
-//                // Dibujar solo la porción que corresponde a esta casilla
-//                g.drawImage(imagenFondoCompleta,
-//                        0, 0, getWidth(), getHeight(), // destino
-//                        xOrigen, yOrigen,
-//                        xOrigen + anchoPorcion, yOrigen + altoPorcion, // origen
-//                        this);
-//            }
-//        }
-//
-//        // Luego pintar el contenido normal de la casilla
-//        super.paintComponent(g);
-//    }
+@Override
+protected void paintComponent(Graphics g) {
+    // Si estamos marcando casilla disponible, pintar solo el fondo rojo
+   super.paintComponent(g);
+    if (movimientoDisponible) {
+        g.setColor(new Color(255, 0, 0, 100));
+        g.fillRect(0, 0, getWidth(), getHeight());
+  
+        g.setColor(Color.RED);
+        Graphics2D g2d = (Graphics2D) g;
+        g2d.setStroke(new BasicStroke(2));
+        g2d.drawRect(1, 1, getWidth()-2, getHeight()-2);
+      
+    }
+   
+}
 }

@@ -88,7 +88,6 @@ public class Tablero extends JPanel {
             villanosTemp[i] = personajesVillanos[i];
         }
 
-        // Mezclar arrays usando algoritmo de Fisher-Yates
         mezclarArray(heroesTemp);
         mezclarArray(villanosTemp);
 
