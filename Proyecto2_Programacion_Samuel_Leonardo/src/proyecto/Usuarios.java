@@ -14,6 +14,7 @@ public class Usuarios{
     private int puntaje;
     private int partidasHeroe;
     private int partidasVillano;
+  
     
     
     public Usuarios(String nomU, String passW){
@@ -22,6 +23,7 @@ public class Usuarios{
         puntaje = 0;
         partidasHeroe = 0;
         partidasVillano = 0;
+       
     }
     
     

@@ -17,52 +17,131 @@ public class TableroPantallaStratego extends javax.swing.JFrame {
      * Creates new form TableroPantallla
      */
     private Tablero iniciar;
+    private String jugador1, jugador2;
+    private boolean jugador1Bando; //Si es true, el jugador 1 es heroe y el 2 es villano, si no, lo contrario.
+    private GestionUsuario gestion;
 
     public TableroPantallaStratego() {
         initComponents();
+        gestion = GestionUsuario.getInstancia();
+        verificarJugadores();
+        jugador1 = gestion.getJugadorActual();
+        jugador2 = gestion.getJugador2Nombre();
         preguntarBando();
         setLocationRelativeTo(null);
-
         cargarJuego();
+
        
 
     }
-    private void preguntarBando(){
-         Object[] opciones = { "Heroes", "Villanos" };
+
+    private void verificarJugadores() {
+        if (!gestion.verificarJugadores()) {
+            JOptionPane.showMessageDialog(null, "Error, Faltan jugadores.");
+            this.dispose();
+        }
+    }
+
+    private void preguntarBando() {
+        Object[] opciones = {"Heroes", "Villanos"};
 
         // Mostrar el diálogo
         int seleccion = JOptionPane.showOptionDialog(
-            null,
-            "¿Qué bando deseas elegir?",
-            "Selección",
-            JOptionPane.DEFAULT_OPTION,
-            JOptionPane.QUESTION_MESSAGE,
-            null,
-            opciones,
-            opciones[0]  // Opción predeterminada
+                null,
+                "¿Qué bando deseas elegir?",
+                "Selección",
+                JOptionPane.DEFAULT_OPTION,
+                JOptionPane.QUESTION_MESSAGE,
+                null,
+                opciones,
+                opciones[0] // Opción predeterminada
         );
-        
-        if(seleccion == 0){
+
+        if (seleccion == 0) {
             Tablero.bando = true;
-        }else if(seleccion == 1){
-            Tablero.bando = false;
+            jugador1Bando = true;
+            JOptionPane.showMessageDialog(null, jugador1 + " es Heroes\n" + jugador2 + " es Villanos");
+        } else if (seleccion == 1) {
+            jugador1Bando = false;
+            Tablero.bando = true;
+            JOptionPane.showMessageDialog(null, jugador1 + " es Villanos\n" + jugador2 + " es Heroes");
+
+        } else {
+            jugador1Bando = true;
+            Tablero.bando = true;
+            JOptionPane.showMessageDialog(null, "Selección por defecto.");
         }
     }
+
+    public void cambioDeTurno() {
+    // DESPUÉS obtener la información del nuevo turno
+    String jugadorActivo = getTurnoActual();
+    String bandoActivo = bandoTurnoActual();
+     
+    if(iniciar != null){
+        iniciar.actualizarVisibilidadPorTurno();
+    }
+    // Mostrar el diálogo con la información correcta
+    JOptionPane.showMessageDialog(null, 
+        "Turno de: " + jugadorActivo + " (" + bandoActivo + ")", 
+        "Cambio de Turno", 
+        JOptionPane.INFORMATION_MESSAGE);
+    }
+
+    public String getTurnoActual() {
+        if (Tablero.bando) {
+            if (jugador1Bando) {
+                return jugador1;
+            } else {
+                return jugador2;
+            }
+        } else {
+            if (jugador1Bando) {
+                return jugador2;
+            } else {
+                return jugador1;
+            }
+        }
+    }
+
+    private String bandoTurnoActual() {
+        if (Tablero.bando) {
+            return "Heroes";
+        } else {
+            return "Villanos";
+        }
+    }
+
+    public String getJugador1() {
+        return jugador1;
+    }
+
+    public String getJugador2() {
+        return jugador2;
+    }
+
+    public boolean esJugador1Bando() {
+        return jugador1Bando;
+    }
+
     private void cargarTablero() {
-        iniciar = new Tablero(10, 10, "/images/tablero.png");
+        iniciar = new Tablero(10, 10, "/images/tablero.png", this);
         iniciar.setSize(panelTablero.getWidth(), panelTablero.getHeight());
         iniciar.setPreferredSize(panelTablero.getSize());
         iniciar.setBounds(0, 0, panelTablero.getWidth(), panelTablero.getHeight());
         panelTablero.setLayout(new BorderLayout());
         panelTablero.add(iniciar);
-        
+
         panelTablero.repaint();
         panelTablero.revalidate();
     }
-   
-    private void cargarJuego(){
+
+    private void cargarJuego() {
         cargarTablero();
-        
+        if (iniciar != null) {
+        iniciar.actualizarVisibilidadPorTurno();
+    }
+
     }
 
     /**
@@ -77,6 +156,9 @@ public class TableroPantallaStratego extends javax.swing.JFrame {
         panelEliminaciones = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         areaEliminados = new javax.swing.JTextArea();
+        jPanel1 = new javax.swing.JPanel();
+        turnoLabel = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         panelTablero = new javax.swing.JPanel();
         panelVillanos = new javax.swing.JPanel();
@@ -104,9 +186,41 @@ public class TableroPantallaStratego extends javax.swing.JFrame {
         panelEliminaciones.add(jScrollPane1);
         jScrollPane1.setBounds(20, 70, 160, 640);
 
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setMaximumSize(new java.awt.Dimension(160, 50));
+
+        turnoLabel.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel5.setText("Turno:");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(8, Short.MAX_VALUE)
+                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(turnoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(19, 19, 19))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(turnoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5))
+                .addContainerGap(16, Short.MAX_VALUE))
+        );
+
+        panelEliminaciones.add(jPanel1);
+        jPanel1.setBounds(20, 730, 160, 50);
+
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/eliminaciones.png"))); // NOI18N
         panelEliminaciones.add(jLabel1);
-        jLabel1.setBounds(0, 0, 0, 0);
+        jLabel1.setBounds(0, 0, 200, 800);
 
         getContentPane().add(panelEliminaciones, java.awt.BorderLayout.LINE_END);
 
@@ -219,10 +333,13 @@ public class TableroPantallaStratego extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel panelEliminaciones;
     private javax.swing.JPanel panelHeroes;
     private javax.swing.JPanel panelTablero;
     private javax.swing.JPanel panelVillanos;
+    private javax.swing.JLabel turnoLabel;
     // End of variables declaration//GEN-END:variables
 }

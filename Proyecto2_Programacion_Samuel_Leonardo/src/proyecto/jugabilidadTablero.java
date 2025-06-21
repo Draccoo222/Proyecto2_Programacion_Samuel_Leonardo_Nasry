@@ -18,9 +18,11 @@ public class jugabilidadTablero {
     private boolean esperarSegundoClic = false;
 
     private casillas[][] tablero;
+    private Tablero tableroJug;
 
-    public jugabilidadTablero(casillas[][] tablero) {
+    public jugabilidadTablero(casillas[][] tablero, Tablero tableroJug) {
         this.tablero = tablero;
+        this.tableroJug = tableroJug;
         manejarClics();
     }
 
@@ -46,11 +48,16 @@ public class jugabilidadTablero {
         if (!esperarSegundoClic) {
             // Primer clic
             if (casillaSelecc.tienePersonaje()) {
+                Fichas personaje = casillaSelecc.getPersonaje();
+                if(!tableroJug.isTurno(personaje.isEsHeroe())){
+                    JOptionPane.showMessageDialog(null, "Turno incorrecto.");
+                    return;
+                }
                 primeraCasillaSelecc = casillaSelecc;
                 esperarSegundoClic = true;
-
+                System.out.println("Personaje: "+personaje.getNombrePersonaje());
             } else {
-
+                System.out.println("Casilla vacia");
             }
         } else {
             // Segundo clic
@@ -59,9 +66,9 @@ public class jugabilidadTablero {
             // Verificar si es un movimiento válido
             if (esMovimientoValido(primeraCasillaSelecc, segundaCasilla)) {
                 moverPersonaje(primeraCasillaSelecc, segundaCasilla);
-
+               tableroJug.turnoDespues();
             } else {
-
+                System.out.println("Movimiento invalido");
             }
 
             // Resetear selección
@@ -110,7 +117,9 @@ public class jugabilidadTablero {
             resolverCombate(origen, destino, personajeAMover, personajeDefensor);
         } else {
             // Movimiento simple a casilla vacía
-
+          System.out.println("Moviendo " + personajeAMover.getNombrePersonaje() + 
+                             " de [" + origen.getFila() + "][" + origen.getColumna() + "] a [" + 
+                             destino.getFila() + "][" + destino.getColumna() + "]");
             // Mover el personaje
             destino.asignarPersonaje(personajeAMover);
             origen.quitarPersonaje();

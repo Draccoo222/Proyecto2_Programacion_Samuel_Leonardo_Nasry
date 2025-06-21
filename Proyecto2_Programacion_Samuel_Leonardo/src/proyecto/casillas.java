@@ -21,7 +21,8 @@ public class casillas extends JButton {
     private boolean tienePersonaje; // Para saber si la casilla tiene personaje
     private Image imagenFondoCompleta;
     private int filaTablero, columnaTablero, totalFilas, totalColumnas;
-
+    private boolean personajeRevelado = false;
+    
     public casillas(int fila, int columna) {
         this.fila = fila;
         this.columna = columna;
@@ -88,18 +89,13 @@ public class casillas extends JButton {
                 this.setIcon(personaje.getIconoPersonaje());
 
             }if(Tablero.bando && !personaje.isEsHeroe()){
-                this.setIcon(personaje.getImageOculta());
+                ocultarPersonaje();
             } if(!Tablero.bando && !personaje.isEsHeroe()){
                 this.setIcon(personaje.getIconoPersonaje());
             }if(!Tablero.bando && personaje.isEsHeroe()){
-                this.setIcon(personaje.getImageOculta());
+                 ocultarPersonaje();
             }
-            
-//            if(!Tablero.bando && !personaje.isEsHeroe()){
-//                this.setIcon(personaje.getIconoPersonaje());
-//            }else{
-//                this.setIcon(personaje.getImageOculta());
-//            }
+
 
             // Cambiar el borde según el equipo
             if (personaje.isEsHeroe()) {
@@ -121,11 +117,30 @@ public class casillas extends JButton {
     // Método para revelar el personaje (mostrar su imagen real)
     public void revelarPersonaje() {
         if (tienePersonaje && personaje != null) {
+            personajeRevelado = true;
             personaje.revelarPersonaje();
             this.setIcon(personaje.getIconoPersonaje());
         }
     }
+    
+    public void ocultarPersonaje(){
+        if(tienePersonaje()){
+            personajeRevelado = false;
+            if(personaje.isEsHeroe()){
+                this.setIcon(personaje.getImageOculta());
+                
+            }else{
+                this.setIcon(personaje.getImageOculta());
+            }
+            this.repaint();
+        }
+    }
+    
+    public boolean isPersonajeRevelado(){
+        return personajeRevelado;
+    }
 
+    
     // Método para mostrar atributos en consola
     private void mostrarAtributosPersonaje() {
         System.out.println("=== INFORMACIÓN DEL PERSONAJE ===");

@@ -35,11 +35,11 @@ public class seleccionPlayer extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        player2Text = new javax.swing.JPasswordField();
         regresarButton = new javax.swing.JButton();
         iniciarButton = new javax.swing.JButton();
         nombre1Label = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
+        player2Text = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -55,13 +55,6 @@ public class seleccionPlayer extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Arial Black", 1, 14)); // NOI18N
         jLabel2.setText("Player 2:");
-
-        player2Text.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        player2Text.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                player2TextActionPerformed(evt);
-            }
-        });
 
         regresarButton.setBackground(new java.awt.Color(255, 0, 51));
         regresarButton.setFont(new java.awt.Font("Arial Black", 1, 12)); // NOI18N
@@ -113,9 +106,9 @@ public class seleccionPlayer extends javax.swing.JFrame {
                         .addComponent(nombre1Label)
                         .addGap(33, 33, 33)
                         .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(player2Text, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(14, 14, 14))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(player2Text, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(28, 28, 28))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -136,10 +129,10 @@ public class seleccionPlayer extends javax.swing.JFrame {
                     .addComponent(jLabel1)
                     .addComponent(nombre1Label)
                     .addComponent(jLabel2)
-                    .addComponent(player2Text, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(player2Text, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(iniciarButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
                 .addComponent(regresarButton)
                 .addContainerGap())
         );
@@ -164,18 +157,23 @@ public class seleccionPlayer extends javax.swing.JFrame {
     }//GEN-LAST:event_regresarButtonActionPerformed
 
     private void iniciarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_iniciarButtonActionPerformed
-        String nomJug2 = player2Text.getText();
+ String nomJug2 = player2Text.getText().trim();
+        if(nomJug2.isEmpty()){
+            JOptionPane.showMessageDialog(null,"Error, Ingresa un segundo jugador.");
+            return;
+        }
+        //Validar que el jugador 2 no es el mismo que jugador 1 y que existe.
         if(gestion.buscarJugador2(nomJug2)){
             gestion.setJugador2(nomJug2);
             JOptionPane.showMessageDialog(null, "Iniciando Partida..");
+            this.dispose();
+            TableroPantallaStratego tablero = new TableroPantallaStratego();
+            tablero.setVisible(true);
         }else{
             JOptionPane.showMessageDialog(null, "Error, Jugador no existe o ya es jugador 1");
-        }
+         
+        }       
     }//GEN-LAST:event_iniciarButtonActionPerformed
-
-    private void player2TextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_player2TextActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_player2TextActionPerformed
 
     /**
      * @param args the command line arguments
@@ -220,7 +218,7 @@ public class seleccionPlayer extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel nombre1Label;
-    private javax.swing.JPasswordField player2Text;
+    private javax.swing.JTextField player2Text;
     private javax.swing.JButton regresarButton;
     // End of variables declaration//GEN-END:variables
 }
