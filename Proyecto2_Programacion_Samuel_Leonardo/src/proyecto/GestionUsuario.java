@@ -117,6 +117,10 @@ public class GestionUsuario {
         }
         return datos;
     }
+    
+    public Usuarios getJugador1(){
+        return jugadorActual;
+    }
 
     public String getJugadorActual() {
         return jugadorActual.getName();

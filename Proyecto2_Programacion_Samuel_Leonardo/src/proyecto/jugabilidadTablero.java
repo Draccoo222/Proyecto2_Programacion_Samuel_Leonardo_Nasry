@@ -16,6 +16,8 @@ public class jugabilidadTablero {
 
     private casillas primeraCasillaSelecc = null;
     private boolean esperarSegundoClic = false;
+    
+    private int ganador = -1; // -0 empate  (1- ganador jugador 1) (2- ganador jugador 2)
 
     private casillas[][] tablero;
     private Tablero tableroJug;
@@ -298,36 +300,62 @@ public class jugabilidadTablero {
             System.out.println("Rango 1, derrota Rango 10");
             casillaDefensor.asignarPersonaje(atacante);
             casillaAtacante.quitarPersonaje();
+            Tablero.restarNumFichas(1);
         } else if (rangoAtacante == 10 && rangoDefensor == 1) {
             System.out.println("¡Rango 10 gana");
             casillaDefensor.asignarPersonaje(atacante);
             casillaAtacante.quitarPersonaje();
-
+             Tablero.restarNumFichas(1);
+             
         } else if(rangoAtacante == 3 && rangoDefensor == 0){
             casillaDefensor.asignarPersonaje(atacante);
             casillaAtacante.quitarPersonaje();
         } else if(rangoAtacante<3 && rangoAtacante>3 && rangoDefensor ==0){
             casillaAtacante.quitarPersonaje();
+             Tablero.restarNumFichas(1);
         }
         else if (rangoAtacante > rangoDefensor) {
             // Atacante gana (rango mayor)
             System.out.println("¡" + atacante.getNombrePersonaje() + " gana el combate!");
             casillaDefensor.asignarPersonaje(atacante);
-            casillaAtacante.quitarPersonaje();
+             if(rangoDefensor == -1){
+                if(casillaAtacante.getPersonaje().isEsHeroe()){
+                    JOptionPane.showMessageDialog(null, "LOS HEROES HAN GANADO LA PARTIDA");
+                    ganador = 1;
+                     
+                }else{
+                    JOptionPane.showMessageDialog(null, "LOS VILLANOS HAN GANADO LA PARTIDA");
+                    ganador = 2;
+                }
+            }
+              casillaAtacante.quitarPersonaje();
+              Tablero.restarNumFichas(1);
+           
         } else if (rangoAtacante < rangoDefensor) {
             // Defensor gana (rango mayor)
             System.out.println("¡" + defensor.getNombrePersonaje() + " defiende exitosamente!");
             casillaAtacante.quitarPersonaje();
+            Tablero.restarNumFichas(1);
         }
         else {
             // Empate - ambos son eliminados
             System.out.println("¡Empate! Ambos personajes son eliminados.");
             casillaAtacante.quitarPersonaje();
             casillaDefensor.quitarPersonaje();
+            Tablero.restarNumFichas(2);
         }
         System.out.println("===============");
     }
-
+    
+    public void setGanador(int num){
+        ganador = num;
+    }
+    
+    public int getGanador(){
+        return ganador;
+    }
+    
+   
     // Método para cancelar selección actual
     public void cancelarSeleccion() {
         casillas.limpiarCasillas(tablero);

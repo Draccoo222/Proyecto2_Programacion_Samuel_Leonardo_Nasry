@@ -30,9 +30,19 @@ public class TableroPantallaStratego extends javax.swing.JFrame {
         preguntarBando();
         setLocationRelativeTo(null);
         cargarJuego();
+        
+        System.out.println("Num fichas jugables " + iniciar.getNumFichas());
+        String jugadorActivo = getTurnoActual();
+        String bandoActivo = bandoTurnoActual();
+        turnoLabel.setText(jugadorActivo + "(" + bandoActivo + ")");
 
-       
-
+    }
+    
+    
+    private void salir(){
+        this.dispose();
+        menuPrincipal1 me = new menuPrincipal1();
+        me.setVisible(true);
     }
 
     private void verificarJugadores() {
@@ -77,15 +87,44 @@ public class TableroPantallaStratego extends javax.swing.JFrame {
     // DESPUÉS obtener la información del nuevo turno
     String jugadorActivo = getTurnoActual();
     String bandoActivo = bandoTurnoActual();
+    
      
     if(iniciar != null){
         iniciar.actualizarVisibilidadPorTurno();
     }
-    // Mostrar el diálogo con la información correcta
-    JOptionPane.showMessageDialog(null, 
-        "Turno de: " + jugadorActivo + " (" + bandoActivo + ")", 
-        "Cambio de Turno", 
-        JOptionPane.INFORMATION_MESSAGE);
+    
+        if(iniciar.getNumFichas() == 0){
+            iniciar.getJugabilidad().setGanador(0);
+        }
+    
+    
+        switch(iniciar.getJugabilidad().getGanador()){
+            case 1:
+                JOptionPane.showMessageDialog(null, gestion.getJugadorActual() + " ha ganado!");
+                gestion.getJugador1().sumarPuntaje();
+                salir();
+                break;
+            case 2:
+                JOptionPane.showMessageDialog(null, gestion.getJugador2Nombre() + " ha ganado!");
+                gestion.getJugador2().sumarPuntaje();
+                salir();
+                break;
+            case 0:
+                JOptionPane.showMessageDialog(null, "EMPATE");
+                salir();
+                break;
+            default:
+               /* JOptionPane.showMessageDialog(null, 
+                "Turno de: " + jugadorActivo + " (" + bandoActivo + ")", 
+                "Cambio de Turno", 
+                JOptionPane.INFORMATION_MESSAGE);*/
+                turnoLabel.setText(jugadorActivo + "(" + bandoActivo + ")");
+                break;
+        }
+         System.out.println("Num fichas jugables " + iniciar.getNumFichas());
+   
+    
+    
     }
 
     public String getTurnoActual() {
@@ -112,6 +151,11 @@ public class TableroPantallaStratego extends javax.swing.JFrame {
         }
     }
 
+    public String getBandoJugador1(){
+        return jugador1 + bandoTurnoActual();
+    }
+    
+    
     public String getJugador1() {
         return jugador1;
     }
@@ -154,11 +198,11 @@ public class TableroPantallaStratego extends javax.swing.JFrame {
     private void initComponents() {
 
         panelEliminaciones = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        areaEliminados = new javax.swing.JTextArea();
         jPanel1 = new javax.swing.JPanel();
         turnoLabel = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        areaEliminados = new javax.swing.JTextArea();
         jLabel1 = new javax.swing.JLabel();
         panelTablero = new javax.swing.JPanel();
         panelVillanos = new javax.swing.JPanel();
@@ -177,6 +221,44 @@ public class TableroPantallaStratego extends javax.swing.JFrame {
         panelEliminaciones.setPreferredSize(new java.awt.Dimension(200, 440));
         panelEliminaciones.setLayout(null);
 
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setMaximumSize(new java.awt.Dimension(160, 50));
+
+        turnoLabel.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        turnoLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel5.setText("Turno");
+        jLabel5.setToolTipText("");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(27, 27, 27)
+                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(36, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(turnoLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(turnoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(17, Short.MAX_VALUE))
+        );
+
+        panelEliminaciones.add(jPanel1);
+        jPanel1.setBounds(20, 640, 160, 80);
+
         jScrollPane1.setBackground(new java.awt.Color(255, 255, 255));
 
         areaEliminados.setColumns(20);
@@ -184,39 +266,7 @@ public class TableroPantallaStratego extends javax.swing.JFrame {
         jScrollPane1.setViewportView(areaEliminados);
 
         panelEliminaciones.add(jScrollPane1);
-        jScrollPane1.setBounds(20, 70, 160, 640);
-
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel1.setMaximumSize(new java.awt.Dimension(160, 50));
-
-        turnoLabel.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-
-        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel5.setText("Turno:");
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(8, Short.MAX_VALUE)
-                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(turnoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(19, 19, 19))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(turnoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5))
-                .addContainerGap(16, Short.MAX_VALUE))
-        );
-
-        panelEliminaciones.add(jPanel1);
-        jPanel1.setBounds(20, 730, 160, 50);
+        jScrollPane1.setBounds(20, 70, 160, 560);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/eliminaciones.png"))); // NOI18N
         panelEliminaciones.add(jLabel1);

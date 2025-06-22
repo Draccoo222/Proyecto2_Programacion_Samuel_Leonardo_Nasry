@@ -157,7 +157,7 @@ public class seleccionPlayer extends javax.swing.JFrame {
     }//GEN-LAST:event_regresarButtonActionPerformed
 
     private void iniciarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_iniciarButtonActionPerformed
- String nomJug2 = player2Text.getText().trim();
+        String nomJug2 = player2Text.getText().trim();
         if(nomJug2.isEmpty()){
             JOptionPane.showMessageDialog(null,"Error, Ingresa un segundo jugador.");
             return;

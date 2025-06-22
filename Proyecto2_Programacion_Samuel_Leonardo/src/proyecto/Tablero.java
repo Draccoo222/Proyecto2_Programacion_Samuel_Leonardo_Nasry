@@ -17,6 +17,7 @@ public class Tablero extends JPanel {
     Random random = new Random();
     Fichas ficha;
     int numRandom = 0;
+    private static int numFichasJugables;
     private Image imagen;
     casillas casilla[][];
     JButton botones[][];
@@ -36,6 +37,9 @@ public class Tablero extends JPanel {
         this.fila = fila;
         this.columna = columna;
         this.juego = juego;
+        numFichasJugables = 0;
+        
+
         // Configurar el layout como GridLayout para organizar los botones en cuadrícula
         this.setLayout(new GridLayout(fila, columna));
 
@@ -49,7 +53,14 @@ public class Tablero extends JPanel {
 
         // Asignar personajes al tablero
         asignarPersonajesAlTablero();
+        
         logicaMovimiento = new jugabilidadTablero(casilla, this);
+        logicaMovimiento.setGanador(-1);
+       
+    }
+    
+    public jugabilidadTablero getJugabilidad(){
+        return logicaMovimiento;
     }
 
     public void setBando(boolean bando) {
@@ -97,6 +108,9 @@ public class Tablero extends JPanel {
             for (int j = 0; j < columna && indiceHeroe < heroesTemp.length; j++) {
                 casilla[i][j].asignarPersonaje(heroesTemp[indiceHeroe]);
                 indiceHeroe++;
+                if(casilla[i][j].getPersonaje().getRango() > 0){
+                    numFichasJugables++;
+                }
             }
         }
 
@@ -106,8 +120,15 @@ public class Tablero extends JPanel {
             for (int j = 0; j < columna && indiceVillano < villanosTemp.length; j++) {
                 casilla[i][j].asignarPersonaje(villanosTemp[indiceVillano]);
                 indiceVillano++;
+                if(casilla[i][j].getPersonaje().getRango() > 0){
+                    numFichasJugables++;
+                }
             }
         }
+        
+        
+        
+        
 
         // Filas 4 y 5 quedan como zona neutral (sin personajes)
         System.out.println("Personajes asignados al tablero:");
@@ -125,6 +146,14 @@ public class Tablero extends JPanel {
             array[i] = array[j];
             array[j] = temp;
         }
+    }
+    
+    public static int getNumFichas(){
+        return numFichasJugables;
+    }
+    
+    public static void restarNumFichas(int num){
+        numFichasJugables -= num;
     }
 
     // Método para asignar personajes específicos (para testing)
@@ -196,7 +225,8 @@ public class Tablero extends JPanel {
         System.out.println("Casillas vacías: " + casillasVacias);
         System.out.println("========================\n");
     }
-
+    
+    
     public boolean isTurno(boolean esPersonajeHeroe) {
         return (bando && esPersonajeHeroe) || (!bando && !esPersonajeHeroe);
     }
