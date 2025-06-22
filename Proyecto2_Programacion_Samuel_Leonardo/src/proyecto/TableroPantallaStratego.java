@@ -20,6 +20,9 @@ public class TableroPantallaStratego extends javax.swing.JFrame {
     private String jugador1, jugador2;
     private boolean jugador1Bando; //Si es true, el jugador 1 es heroe y el 2 es villano, si no, lo contrario.
     private GestionUsuario gestion;
+    private String heroesElim[] = new String[40];
+    private String villanosElim[] = new String[40];
+    private int contH=0, contV=0;
 
     public TableroPantallaStratego() {
         initComponents();
@@ -122,7 +125,7 @@ public class TableroPantallaStratego extends javax.swing.JFrame {
                 break;
         }
          System.out.println("Num fichas jugables " + iniciar.getNumFichas());
-   
+     refreshTextArea();
     
     
     }
@@ -167,6 +170,44 @@ public class TableroPantallaStratego extends javax.swing.JFrame {
     public boolean esJugador1Bando() {
         return jugador1Bando;
     }
+    
+    public void personajesEliminados(Fichas personajeEliminado){
+        String nombrePersonaje = personajeEliminado.getNombrePersonaje()+" Rango("+personajeEliminado.getRango()+")";
+        
+        if(personajeEliminado.isEsHeroe()){
+            if(contH<heroesElim.length){
+                heroesElim[contH] = nombrePersonaje;
+                contH++;
+            }
+        }else{
+            if(contV<villanosElim.length){
+                villanosElim[contV] = nombrePersonaje;
+                contV++;
+            }
+        }
+        refreshTextArea();
+    }
+    
+    private void refreshTextArea(){
+        StringBuilder cont = new StringBuilder();
+        boolean mostrarFichasEliminadas = Tablero.bando;
+        if(mostrarFichasEliminadas){
+            for (int i = 0; i < contV; i++) {
+                if(villanosElim[i]!=null){
+                    cont.append(villanosElim[i]).append("\n");
+                }
+            }
+        }else{
+            for (int i = 0; i < contH; i++) {
+                if(heroesElim[i]!=null){
+                    cont.append(heroesElim[i]).append("\n");
+                }
+            }
+        }
+        areaEliminados.setText(cont.toString());
+        //Para volver a la primer linea e ir refrescando.
+        areaEliminados.setCaretPosition(0);
+    }
 
     private void cargarTablero() {
         iniciar = new Tablero(10, 10, "/images/tablero.png", this);
@@ -185,7 +226,7 @@ public class TableroPantallaStratego extends javax.swing.JFrame {
         if (iniciar != null) {
         iniciar.actualizarVisibilidadPorTurno();
     }
-
+    refreshTextArea();
     }
 
     /**

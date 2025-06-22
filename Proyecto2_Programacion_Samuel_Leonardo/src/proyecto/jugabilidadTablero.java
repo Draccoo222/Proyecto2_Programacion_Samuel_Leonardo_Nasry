@@ -16,15 +16,16 @@ public class jugabilidadTablero {
 
     private casillas primeraCasillaSelecc = null;
     private boolean esperarSegundoClic = false;
-
+    private TableroPantallaStratego juego;
     private int ganador = -1; // -0 empate  (1- ganador jugador 1) (2- ganador jugador 2)
 
     private casillas[][] tablero;
     private Tablero tableroJug;
 
-    public jugabilidadTablero(casillas[][] tablero, Tablero tableroJug) {
+    public jugabilidadTablero(casillas[][] tablero, Tablero tableroJug, TableroPantallaStratego juego) {
         this.tablero = tablero;
         this.tableroJug = tableroJug;
+        this.juego = juego;
         manejarClics();
     }
 
@@ -380,22 +381,22 @@ public class jugabilidadTablero {
             Fichas atacante, Fichas defensor) {
         int rangoAtacante = atacante.getRango();
         int rangoDefensor = defensor.getRango();
-
         String mensaje;
-
-        // Casos especiales
+       
         if (rangoAtacante == 1 && rangoDefensor == 10) {
             mensaje = atacante.getNombrePersonaje() + " Rango(" + atacante.getRango() + ") vs " + defensor.getNombrePersonaje() + " Rango(" + defensor.getRango() + ")\n"
                     + "Vencedor: " + atacante.getNombrePersonaje() + " Rango(" + atacante.getRango() + ")";
             JOptionPane.showMessageDialog(null, mensaje, "COMBATE", JOptionPane.INFORMATION_MESSAGE);
             casillaDefensor.asignarPersonaje(atacante);
             casillaAtacante.quitarPersonaje();
+            getEliminados(defensor);
             Tablero.restarNumFichas(1);
         } else if (rangoAtacante == 10 && rangoDefensor == 1) {
             mensaje = atacante.getNombrePersonaje() + " Rango(" + atacante.getRango() + ") vs " + defensor.getNombrePersonaje() + " Rango(" + defensor.getRango() + ")\n"
                     + "Vencedor: " + defensor.getNombrePersonaje() + " Rango(" + defensor.getRango() + ")";
             JOptionPane.showMessageDialog(null, mensaje, "COMBATE", JOptionPane.INFORMATION_MESSAGE);
             casillaAtacante.quitarPersonaje();
+            getEliminados(atacante);
             Tablero.restarNumFichas(1);
         } else if (rangoAtacante == 3 && rangoDefensor == 0) {
             mensaje = atacante.getNombrePersonaje() + " Rango(" + atacante.getRango() + ") vs " + defensor.getNombrePersonaje() + " Rango(" + defensor.getRango() + ")\n"
@@ -403,11 +404,14 @@ public class jugabilidadTablero {
             JOptionPane.showMessageDialog(null, mensaje, "COMBATE", JOptionPane.INFORMATION_MESSAGE);
             casillaDefensor.asignarPersonaje(atacante);
             casillaAtacante.quitarPersonaje();
+            getEliminados(defensor);
+            Tablero.restarNumFichas(1);
         } else if (rangoAtacante != 3 && rangoDefensor == 0) {
             mensaje = atacante.getNombrePersonaje() + " Rango(" + atacante.getRango() + ") vs " + defensor.getNombrePersonaje() + "\n"
                     + "Vencedor: " + defensor.getNombrePersonaje();
             JOptionPane.showMessageDialog(null, mensaje, "COMBATE", JOptionPane.INFORMATION_MESSAGE);
             casillaAtacante.quitarPersonaje();
+            getEliminados(atacante);
             Tablero.restarNumFichas(1);
         } else if (rangoAtacante > rangoDefensor) {
             mensaje = atacante.getNombrePersonaje() + " Rango(" + atacante.getRango() + ") vs " + defensor.getNombrePersonaje() + " Rango(" + defensor.getRango() + ")\n"
@@ -424,12 +428,14 @@ public class jugabilidadTablero {
                 }
             }
             casillaAtacante.quitarPersonaje();
+            getEliminados(defensor);
             Tablero.restarNumFichas(1);
         } else if (rangoAtacante < rangoDefensor) {
             mensaje = atacante.getNombrePersonaje() + " Rango(" + atacante.getRango() + ") vs " + defensor.getNombrePersonaje() + " Rango(" + defensor.getRango() + ")\n"
                     + "Vencedor: " + defensor.getNombrePersonaje() + " Rango(" + defensor.getRango() + ")";
             JOptionPane.showMessageDialog(null, mensaje, "COMBATE", JOptionPane.INFORMATION_MESSAGE);
             casillaAtacante.quitarPersonaje();
+            getEliminados(atacante);
             Tablero.restarNumFichas(1);
         } else if (rangoAtacante == rangoDefensor) {
             mensaje = atacante.getNombrePersonaje() + " Rango(" + atacante.getRango() + ") vs " + defensor.getNombrePersonaje() + " Rango(" + defensor.getRango() + ")\n"
@@ -437,11 +443,18 @@ public class jugabilidadTablero {
             JOptionPane.showMessageDialog(null, mensaje, "COMBATE", JOptionPane.INFORMATION_MESSAGE);
             casillaAtacante.quitarPersonaje();
             casillaDefensor.quitarPersonaje();
+            getEliminados(atacante);
+            getEliminados(defensor);
             Tablero.restarNumFichas(2);
         }
-        System.out.println("===============");
+       
     }
-
+    
+    public void getEliminados(Fichas personajeEliminado){
+        if(juego!=null){
+           juego.personajesEliminados(personajeEliminado);
+        }
+    }
     public void setGanador(int num) {
         ganador = num;
     }

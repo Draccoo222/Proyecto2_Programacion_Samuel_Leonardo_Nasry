@@ -53,7 +53,7 @@ public class Tablero extends JPanel {
         // Asignar personajes al tablero
         asignarPersonajesAlTablero();
 
-        logicaMovimiento = new jugabilidadTablero(casilla, this);
+        logicaMovimiento = new jugabilidadTablero(casilla, this, juego);
         logicaMovimiento.setGanador(-1);
 
     }
