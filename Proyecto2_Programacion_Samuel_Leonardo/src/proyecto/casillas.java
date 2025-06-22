@@ -117,13 +117,6 @@ public class casillas extends JButton {
 
     public void desmarcarCasillasDisponibles() {
         movimientoDisponible = false;
-//        
-//        if(iconoActual != null){
-//            this.setIcon(iconoActual);
-//            iconoActual = null;
-//        }
-//        this.setOpaque(false);
-//        this.setContentAreaFilled(false);
         if (casillaSelecc && tienePersonaje) {
             this.setBorder(BorderFactory.createLineBorder(Color.GREEN, 3));
 
@@ -339,7 +332,7 @@ public class casillas extends JButton {
     }
 @Override
 protected void paintComponent(Graphics g) {
-    // Si estamos marcando casilla disponible, pintar solo el fondo rojo
+    // Si estamos marcando casilla disponible, sombrear solo el fondo rojo
    super.paintComponent(g);
     if (movimientoDisponible) {
         g.setColor(new Color(255, 0, 0, 100));
