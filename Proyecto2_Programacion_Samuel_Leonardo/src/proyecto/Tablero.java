@@ -38,7 +38,6 @@ public class Tablero extends JPanel {
         this.columna = columna;
         this.juego = juego;
         numFichasJugables = 0;
-        
 
         // Configurar el layout como GridLayout para organizar los botones en cuadrícula
         this.setLayout(new GridLayout(fila, columna));
@@ -53,13 +52,13 @@ public class Tablero extends JPanel {
 
         // Asignar personajes al tablero
         asignarPersonajesAlTablero();
-        
+
         logicaMovimiento = new jugabilidadTablero(casilla, this);
         logicaMovimiento.setGanador(-1);
-       
+
     }
-    
-    public jugabilidadTablero getJugabilidad(){
+
+    public jugabilidadTablero getJugabilidad() {
         return logicaMovimiento;
     }
 
@@ -99,60 +98,211 @@ public class Tablero extends JPanel {
             villanosTemp[i] = personajesVillanos[i];
         }
 
-        mezclarArray(heroesTemp);
-        mezclarArray(villanosTemp);
+        formacionCondicionada(heroesTemp, 6, 9, true);
+        formacionCondicionada(villanosTemp, 0, 3, false);
 
-        // Asignar héroes a las primeras 4 filas (0-3)
-        int indiceHeroe = 0;
-        for (int i = 6; i < fila && indiceHeroe < heroesTemp.length; i++) {
-            for (int j = 0; j < columna && indiceHeroe < heroesTemp.length; j++) {
-                casilla[i][j].asignarPersonaje(heroesTemp[indiceHeroe]);
-                indiceHeroe++;
-                if(casilla[i][j].getPersonaje().getRango() > 0){
-                    numFichasJugables++;
-                }
-            }
-        }
-
-        // Asignar villanos a las últimas 4 filas (6-9)
-        int indiceVillano = 0;
-        for (int i = 0; i < 4 && indiceVillano < villanosTemp.length; i++) {
-            for (int j = 0; j < columna && indiceVillano < villanosTemp.length; j++) {
-                casilla[i][j].asignarPersonaje(villanosTemp[indiceVillano]);
-                indiceVillano++;
-                if(casilla[i][j].getPersonaje().getRango() > 0){
-                    numFichasJugables++;
-                }
-            }
-        }
         
-        
-        
-        
-
-        // Filas 4 y 5 quedan como zona neutral (sin personajes)
-        System.out.println("Personajes asignados al tablero:");
-        System.out.println("Héroes en filas 0-3, Villanos en filas 6-9");
-        System.out.println("Filas 4-5: Zona neutral");
     }
 
-    // Método para mezclar un array usando algoritmo de Fisher-Yates
-    private void mezclarArray(Fichas[] array) {
-        for (int i = array.length - 1; i > 0; i--) {
+    private void mezclarArray(int posiciones[][], int cant) {
+        for (int i = cant - 1; i > 0; i--) {
             int j = random.nextInt(i + 1);
 
-            // Intercambiar elementos
-            Fichas temp = array[i];
-            array[i] = array[j];
-            array[j] = temp;
+            int fila = posiciones[i][0];
+            int col = posiciones[i][1];
+            posiciones[i][0] = posiciones[j][0];
+            posiciones[i][1] = posiciones[j][1];
+            posiciones[j][0] = fila;
+            posiciones[j][1] = col;
         }
     }
-    
-    public static int getNumFichas(){
+   
+
+    private void formacionCondicionada(Fichas personajes[], int filaIn, int filaFin, boolean isHeroe) {
+        Fichas tierra = null;
+        Fichas bombs[] = new Fichas[6];
+        Fichas piezasRango2[] = new Fichas[8];
+        Fichas restoPersonajes[] = new Fichas[26];
+        int contBombs = 0, contRango2 = 0, contRestantes = 0;
+       for (Fichas fichaa: personajes) {
+        if (fichaa.getRango() == -1) { // Tierra
+            tierra = fichaa;
+        } else if (fichaa.getRango() == 0) { // Bombas
+            bombs[contBombs++] = fichaa;
+        } else if (fichaa.getRango() == 2) { // Rango 2
+            piezasRango2[contRango2++] = fichaa;
+        } else if (fichaa.getRango() > 0) { // Otros personajes jugables
+            restoPersonajes[contRestantes++] = fichaa;
+        }
+    }
+        int filaUlt = isHeroe ? filaFin : filaIn;
+        int colTierra = 1 + random.nextInt(columna - 2);
+        casilla[filaUlt][colTierra].asignarPersonaje(tierra);
+
+        //Despues de haber colocado la tierra, con este metodo se colocarán las bombas
+        contBombs = bombasAlrededorDeTierra(filaUlt, colTierra, bombs, contBombs);
+        bombasRestantes(bombs, contBombs, filaIn, filaFin, isHeroe);
+
+        colocarPiezasRango2(piezasRango2, contRango2, filaIn, filaFin, isHeroe);
+        piezasRestantesC(restoPersonajes, contRestantes, filaIn, filaFin);
+
+        //Conteo de fichas Jugables
+        for (int i = filaIn; i <= filaFin; i++) {
+            for (int j = 0; j < columna; j++) {
+                if (casilla[i][j].tienePersonaje() && casilla[i][j].getPersonaje().getRango() > 0) {
+                    numFichasJugables++;
+                }
+            }
+        }
+    }
+
+    private int bombasAlrededorDeTierra(int filaT, int colT, Fichas bombs[], int contBombs) {
+        int dir[][] = {{-1, 1}, {-1, 0}, {-1, 1}, {0, -1}, {0, 1}, {1, -1}, {1, 0}, {1, 1}};
+
+        int indexBombs = 0;
+        for (int i = 0; i < dir.length && indexBombs < contBombs; i++) {
+            int nFila = filaT + dir[i][0];
+            int nCol = colT + dir[i][1];
+
+            if (nFila >= 0 && nFila < fila && nCol >= 0 && nCol < columna && !casilla[nFila][nCol].tienePersonaje()) {
+                casilla[nFila][nCol].asignarPersonaje(bombs[indexBombs]);
+                indexBombs++;
+            }
+        }
+        for (int i = 0; i < contBombs - indexBombs; i++) {
+            bombs[i] = bombs[i + indexBombs];
+
+        }
+        return contBombs - indexBombs;
+    }
+
+    private void bombasRestantes(Fichas bombs[], int contBombs, int filaIn, int filaFin, boolean isHeroe) {
+        if (contBombs == 0) {
+            return;
+        }
+
+        int fila1, fila2;
+        if (isHeroe) {
+            fila1 = filaFin - 1;
+            fila2 = filaFin;
+        } else { //Para los villanos el inicio del arreglo en el tablero
+            fila1 = filaIn;
+            fila2 = filaIn + 1;
+        }
+
+        int posicionesDisponibles[][] = new int[columna * 2][2];
+        int contPosiciones = 0;
+
+        //Recorrido con validación de que exista un espacio para colocar personaje
+        for (int filas : new int[]{fila1, fila2}) {
+            for (int col = 0; col < columna; col++) {
+                if (!casilla[filas][col].tienePersonaje()) {
+                    posicionesDisponibles[contPosiciones][0] = filas;
+                    posicionesDisponibles[contPosiciones][1] = col;
+                    contPosiciones++;
+                }
+            }
+        }
+
+        //Mezclado en el array (Tablero)
+        mezclarArray(posicionesDisponibles, contPosiciones);
+
+        // Colocar las bombas restantes
+        int bombsColocadas = 0;
+        for (int i = 0; i < contPosiciones && bombsColocadas < contBombs; i++) {
+            int filaPos = posicionesDisponibles[i][0];
+            int colPos = posicionesDisponibles[i][1];
+            casilla[filaPos][colPos].asignarPersonaje(bombs[bombsColocadas]);
+            bombsColocadas++;
+        }
+    }
+
+    private void colocarPiezasRango2(Fichas rango2[], int contRango2, int filaIn, int filaFin, boolean isHeroe) {
+        if (contRango2 == 0) {
+            return;
+        }
+
+        int fila1, fila2;
+        if (isHeroe) {
+            fila1 = filaIn;
+            fila2 = filaIn + 1;
+        } else { //Para los villanos el inicio del arreglo en el tablero
+            fila1 = filaFin - 1;
+            fila2 = filaFin;
+        }
+
+        int posicionesDisponibles[][] = new int[columna * 2][2];
+        int contPosiciones = 0;
+
+        //Recorrido con validación de que exista un espacio para colocar personaje
+        for (int filas : new int[]{fila1, fila2}) {
+            for (int col = 0; col < columna; col++) {
+                if (!casilla[filas][col].tienePersonaje()) {
+                    posicionesDisponibles[contPosiciones][0] = filas;
+                    posicionesDisponibles[contPosiciones][1] = col;
+                    contPosiciones++;
+                }
+            }
+        }
+
+        //Mezclado en el array (Tablero)
+        mezclarArray(posicionesDisponibles, contPosiciones);
+
+        // Colocar las piezas rango 2
+        int rango2Colocadas = 0;
+        for (int i = 0; i < contPosiciones && rango2Colocadas < contRango2; i++) {
+            int filaPos = posicionesDisponibles[i][0];
+            int colPos = posicionesDisponibles[i][1];
+            casilla[filaPos][colPos].asignarPersonaje(rango2[rango2Colocadas]);
+            rango2Colocadas++;
+        }
+    }
+
+    private void piezasRestantesC(Fichas piezasRestantes[], int contRestante, int filaIn, int filaFin) {
+        if (contRestante == 0) {
+            return;
+        }
+
+        int posicionesDisponibles[][] = new int[columna * 4][2];
+        int contPosiciones = 0;
+
+        //Recorrido con validación de que exista un espacio para colocar personaje
+        for (int filas = filaIn; filas <= filaFin; filas++) {
+            for (int col = 0; col < columna; col++) {
+                if (!casilla[filas][col].tienePersonaje()) {
+                    posicionesDisponibles[contPosiciones][0] = filas;
+                    posicionesDisponibles[contPosiciones][1] = col;
+                    contPosiciones++;
+                }
+            }
+        }
+
+        //Mezclado en el array (Tablero)
+        mezclarArray(posicionesDisponibles, contPosiciones);
+        // Colocar las piezas restantes
+        int piezasColocadas = 0;
+        for (int i = 0; i < contPosiciones && piezasColocadas < contRestante; i++) {
+            int filaPos = posicionesDisponibles[i][0];
+            int colPos = posicionesDisponibles[i][1];
+            casilla[filaPos][colPos].asignarPersonaje(piezasRestantes[piezasColocadas]);
+            piezasColocadas++;
+        }
+    }
+
+    private void mezclarPosiciones(Fichas array[], int cant){
+        for(int i = cant -1; i>0;i--){
+            int j = random.nextInt(i+1);
+            Fichas arregloTemporal = array[i];
+            array[i] = array[j];
+            array[j] = arregloTemporal;
+           
+        }
+    }
+    public static int getNumFichas() {
         return numFichasJugables;
     }
-    
-    public static void restarNumFichas(int num){
+
+    public static void restarNumFichas(int num) {
         numFichasJugables -= num;
     }
 
@@ -163,43 +313,43 @@ public class Tablero extends JPanel {
         }
     }
 
- 
     public void revelarFichasBandoActual() {
-    for (int i = 0; i < fila; i++) {
-        for (int j = 0; j < columna; j++) {
-            if (casilla[i][j].tienePersonaje()) {
-                Fichas personaje = casilla[i][j].getPersonaje();
-                // Si es el turno de los héroes y la ficha es héroe, o viceversa
-                if (personaje.isEsHeroe() == Tablero.bando) {
-                    casilla[i][j].revelarPersonaje();
-                } else {
-                    casilla[i][j].ocultarPersonaje();
+        for (int i = 0; i < fila; i++) {
+            for (int j = 0; j < columna; j++) {
+                if (casilla[i][j].tienePersonaje()) {
+                    Fichas personaje = casilla[i][j].getPersonaje();
+                    // Si es el turno de los héroes y la ficha es héroe, o viceversa
+                    if (personaje.isEsHeroe() == Tablero.bando) {
+                        casilla[i][j].revelarPersonaje();
+                    } else {
+                        casilla[i][j].ocultarPersonaje();
+                    }
                 }
             }
         }
+
     }
-   
-}
+
     public void actualizarVisibilidadPorTurno() {
-    for (int i = 0; i < fila; i++) {
-        for (int j = 0; j < columna; j++) {
-            if (casilla[i][j].tienePersonaje()) {
-                Fichas personaje = casilla[i][j].getPersonaje();
-                
-                // Revelar fichas del bando actual, ocultar las del contrario
-                if (personaje.isEsHeroe() == Tablero.bando) {
-                    casilla[i][j].revelarPersonaje();
-                } else {
-                    casilla[i][j].ocultarPersonaje();
+        for (int i = 0; i < fila; i++) {
+            for (int j = 0; j < columna; j++) {
+                if (casilla[i][j].tienePersonaje()) {
+                    Fichas personaje = casilla[i][j].getPersonaje();
+
+                    // Revelar fichas del bando actual, ocultar las del contrario
+                    if (personaje.isEsHeroe() == Tablero.bando) {
+                        casilla[i][j].revelarPersonaje();
+                    } else {
+                        casilla[i][j].ocultarPersonaje();
+                    }
                 }
             }
         }
+
+        // Repintar el tablero para que se vean los cambios
+        this.repaint();
+        this.revalidate();
     }
-    
-    // Repintar el tablero para que se vean los cambios
-    this.repaint();
-    this.revalidate();
-}
 
     // Método para obtener información del tablero
     public void mostrarEstadoTablero() {
@@ -225,23 +375,22 @@ public class Tablero extends JPanel {
         System.out.println("Casillas vacías: " + casillasVacias);
         System.out.println("========================\n");
     }
-    
-    
+
     public boolean isTurno(boolean esPersonajeHeroe) {
         return (bando && esPersonajeHeroe) || (!bando && !esPersonajeHeroe);
     }
 
     public void seleccionCasilla(int fila, int columna, JButton boton) {
-       casillas casillaSelec = getCasilla(fila,columna);
+        casillas casillaSelec = getCasilla(fila, columna);
         System.out.println("Casilla Seleccionada: [" + fila + "][" + columna + "]");
-        if(casillaSelec != null & casillaSelec.tienePersonaje()){
+        if (casillaSelec != null & casillaSelec.tienePersonaje()) {
             Fichas personaje = casillaSelec.getPersonaje();
             boolean sHeroe = personaje.isEsHeroe();
-            if(!isTurno(sHeroe)){
-                JOptionPane.showMessageDialog(null,"No es tu turno.","Turno incorrecto",JOptionPane.WARNING_MESSAGE);
+            if (!isTurno(sHeroe)) {
+                JOptionPane.showMessageDialog(null, "No es tu turno.", "Turno incorrecto", JOptionPane.WARNING_MESSAGE);
             }
-            
-            System.out.println("Personaje válido "+personaje.getNombrePersonaje());
+
+            System.out.println("Personaje válido " + personaje.getNombrePersonaje());
         }
     }
 
