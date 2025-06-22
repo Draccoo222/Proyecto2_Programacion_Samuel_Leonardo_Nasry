@@ -50,6 +50,7 @@ public class iniciar extends javax.swing.JFrame {
 
         botonIniciar.setBorderPainted(false);
         botonIniciar.setContentAreaFilled(false);
+        botonIniciar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         botonIniciar.setFocusPainted(false);
         botonIniciar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
