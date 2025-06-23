@@ -14,7 +14,8 @@ public class Usuarios{
     private int puntaje;
     private int partidasHeroe;
     private int partidasVillano;
-  
+    private String logeo;
+    private int contLogeo;
     
     
     public Usuarios(String nomU, String passW){
@@ -23,6 +24,8 @@ public class Usuarios{
         puntaje = 0;
         partidasHeroe = 0;
         partidasVillano = 0;
+        logeo = "";
+        contLogeo = 0;
     }
     
     
@@ -34,7 +37,15 @@ public class Usuarios{
         return puntaje;
     }
     
-    
+    public void sumarLogeo(String text){
+        contLogeo++;
+        logeo += "\n" + contLogeo + ". " + text;
+    }
+
+    public String getLogeo() {
+        return logeo;
+    }
+   
     
     public void sumarPuntaje(){
         puntaje+= 3;

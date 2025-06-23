@@ -437,11 +437,11 @@ public class jugabilidadTablero {
             casillaDefensor.asignarPersonaje(atacante);
             if (rangoDefensor == -1) {
                 if (casillaAtacante.getPersonaje().isEsHeroe()) {
-                    JOptionPane.showMessageDialog(null, "LOS HEROES HAN GANADO LA PARTIDA");
+
                     victoriasHeroe++;
                     ganador = 1;
                 } else {
-                    JOptionPane.showMessageDialog(null, "LOS VILLANOS HAN GANADO LA PARTIDA");
+                    
                     victoriasVillanos++;
                     ganador = 2;
                 }
