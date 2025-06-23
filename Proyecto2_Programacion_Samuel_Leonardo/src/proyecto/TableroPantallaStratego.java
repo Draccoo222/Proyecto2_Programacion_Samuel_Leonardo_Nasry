@@ -227,6 +227,10 @@ public class TableroPantallaStratego extends javax.swing.JFrame {
         iniciar.actualizarVisibilidadPorTurno();
     }
     refreshTextArea();
+    
+    areaEliminados.setOpaque(false);
+    areaEliminados.setBackground(new Color(0, 0, 0, 0));
+    areaEliminados.setForeground(Color.BLACK);
     }
 
     /**
@@ -241,20 +245,20 @@ public class TableroPantallaStratego extends javax.swing.JFrame {
         panelEliminaciones = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         turnoLabel = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         areaEliminados = new javax.swing.JTextArea();
+        jButton1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         panelTablero = new javax.swing.JPanel();
-        panelVillanos = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        panelHeroes = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMinimumSize(new java.awt.Dimension(1000, 920));
+        setMaximumSize(new java.awt.Dimension(1000, 800));
+        setMinimumSize(new java.awt.Dimension(1000, 800));
+        setUndecorated(true);
         setResizable(false);
-        setSize(new java.awt.Dimension(1000, 920));
+        setSize(new java.awt.Dimension(1000, 800));
 
         panelEliminaciones.setBackground(new java.awt.Color(255, 255, 51));
         panelEliminaciones.setMaximumSize(new java.awt.Dimension(200, 440));
@@ -264,52 +268,58 @@ public class TableroPantallaStratego extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setMaximumSize(new java.awt.Dimension(160, 50));
+        jPanel1.setOpaque(false);
 
-        turnoLabel.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        turnoLabel.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
         turnoLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-
-        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel5.setText("Turno");
-        jLabel5.setToolTipText("");
+        turnoLabel.setText("TURNO");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(27, 27, 27)
-                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(36, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(turnoLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(turnoLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 148, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(15, 15, 15)
                 .addComponent(turnoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
 
         panelEliminaciones.add(jPanel1);
-        jPanel1.setBounds(20, 640, 160, 80);
+        jPanel1.setBounds(20, 540, 160, 50);
 
-        jScrollPane1.setBackground(new java.awt.Color(255, 255, 255));
+        jScrollPane1.setBackground(new java.awt.Color(218, 191, 144));
+        jScrollPane1.setBorder(null);
+        jScrollPane1.setOpaque(false);
 
+        areaEliminados.setBackground(new java.awt.Color(218, 191, 144));
         areaEliminados.setColumns(20);
+        areaEliminados.setFont(new java.awt.Font("Arial Black", 1, 13)); // NOI18N
         areaEliminados.setRows(5);
+        areaEliminados.setBorder(null);
+        areaEliminados.setCaretColor(new java.awt.Color(218, 191, 144));
+        areaEliminados.setDisabledTextColor(new java.awt.Color(218, 191, 144));
+        areaEliminados.setOpaque(false);
         jScrollPane1.setViewportView(areaEliminados);
 
         panelEliminaciones.add(jScrollPane1);
-        jScrollPane1.setBounds(20, 70, 160, 560);
+        jScrollPane1.setBounds(20, 100, 160, 380);
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/eliminaciones.png"))); // NOI18N
+        jButton1.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 24)); // NOI18N
+        jButton1.setText("RENDIRTE");
+        jButton1.setBorderPainted(false);
+        jButton1.setContentAreaFilled(false);
+        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        panelEliminaciones.add(jButton1);
+        jButton1.setBounds(10, 620, 180, 60);
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/ELIMINADOS.png"))); // NOI18N
         panelEliminaciones.add(jLabel1);
         jLabel1.setBounds(0, 0, 200, 800);
 
@@ -333,51 +343,27 @@ public class TableroPantallaStratego extends javax.swing.JFrame {
 
         getContentPane().add(panelTablero, java.awt.BorderLayout.CENTER);
 
-        panelVillanos.setBackground(new java.awt.Color(255, 0, 0));
-        panelVillanos.setMaximumSize(new java.awt.Dimension(1000, 60));
-        panelVillanos.setMinimumSize(new java.awt.Dimension(1000, 60));
-        panelVillanos.setPreferredSize(new java.awt.Dimension(1000, 60));
+        jPanel2.setBackground(new java.awt.Color(255, 255, 51));
+        jPanel2.setMaximumSize(new java.awt.Dimension(100, 800));
+        jPanel2.setMinimumSize(new java.awt.Dimension(100, 800));
+        jPanel2.setPreferredSize(new java.awt.Dimension(120, 800));
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/bannerVillanos.png"))); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/barraDivid.png"))); // NOI18N
 
-        javax.swing.GroupLayout panelVillanosLayout = new javax.swing.GroupLayout(panelVillanos);
-        panelVillanos.setLayout(panelVillanosLayout);
-        panelVillanosLayout.setHorizontalGroup(
-            panelVillanosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
-        panelVillanosLayout.setVerticalGroup(
-            panelVillanosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelVillanosLayout.createSequentialGroup()
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(jLabel2)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        getContentPane().add(panelVillanos, java.awt.BorderLayout.PAGE_START);
-
-        panelHeroes.setBackground(new java.awt.Color(51, 0, 255));
-        panelHeroes.setMaximumSize(new java.awt.Dimension(1000, 60));
-        panelHeroes.setMinimumSize(new java.awt.Dimension(1000, 60));
-        panelHeroes.setPreferredSize(new java.awt.Dimension(1000, 60));
-
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/bannerHeroes.png"))); // NOI18N
-
-        javax.swing.GroupLayout panelHeroesLayout = new javax.swing.GroupLayout(panelHeroes);
-        panelHeroes.setLayout(panelHeroesLayout);
-        panelHeroesLayout.setHorizontalGroup(
-            panelHeroesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelHeroesLayout.createSequentialGroup()
-                .addComponent(jLabel3)
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
-        panelHeroesLayout.setVerticalGroup(
-            panelHeroesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelHeroesLayout.createSequentialGroup()
-                .addComponent(jLabel3)
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
-
-        getContentPane().add(panelHeroes, java.awt.BorderLayout.PAGE_END);
+        getContentPane().add(jPanel2, java.awt.BorderLayout.WEST);
 
         pack();
         setLocationRelativeTo(null);
@@ -421,16 +407,14 @@ public class TableroPantallaStratego extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextArea areaEliminados;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel panelEliminaciones;
-    private javax.swing.JPanel panelHeroes;
     private javax.swing.JPanel panelTablero;
-    private javax.swing.JPanel panelVillanos;
     private javax.swing.JLabel turnoLabel;
     // End of variables declaration//GEN-END:variables
 }
