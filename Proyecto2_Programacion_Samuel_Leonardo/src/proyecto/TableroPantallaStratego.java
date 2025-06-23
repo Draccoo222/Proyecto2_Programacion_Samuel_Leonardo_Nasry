@@ -22,8 +22,11 @@ public class TableroPantallaStratego extends javax.swing.JFrame {
     private GestionUsuario gestion;
     private String heroesElim[] = new String[40];
     private String villanosElim[] = new String[40];
+
     private int contH=0, contV=0;
     private static int partidasTotales;
+  
+
 
     public TableroPantallaStratego() {
         initComponents();
@@ -34,7 +37,7 @@ public class TableroPantallaStratego extends javax.swing.JFrame {
         preguntarBando();
         setLocationRelativeTo(null);
         cargarJuego();
-        
+
         System.out.println("Num fichas jugables " + iniciar.getNumFichas());
         String jugadorActivo = getTurnoActual();
         String bandoActivo = bandoTurnoActual();
@@ -50,13 +53,17 @@ public class TableroPantallaStratego extends javax.swing.JFrame {
         }
 
     }
+
     
     private static int getNumPartidas(){
         return partidasTotales++;
     }
     
     
-    private void salir(){
+   
+
+    private void salir() {
+
         this.dispose();
         menuPrincipal1 me = new menuPrincipal1();
         me.setVisible(true);
@@ -101,47 +108,48 @@ public class TableroPantallaStratego extends javax.swing.JFrame {
     }
 
     public void cambioDeTurno() {
-    // DESPUÉS obtener la información del nuevo turno
-    String jugadorActivo = getTurnoActual();
-    String bandoActivo = bandoTurnoActual();
-    
-     
-    if(iniciar != null){
-        iniciar.actualizarVisibilidadPorTurno();
-    }
-    
-        if(iniciar.getNumFichas() == 0){
+        // DESPUÉS obtener la información del nuevo turno
+        String jugadorActivo = getTurnoActual();
+        String bandoActivo = bandoTurnoActual();
+
+        if (iniciar != null) {
+            iniciar.actualizarVisibilidadPorTurno();
+        }
+
+        if (iniciar.getNumFichas() == 0) {
             iniciar.getJugabilidad().setGanador(0);
         }
-    
-    
-        switch(iniciar.getJugabilidad().getGanador()){
+
+        switch (iniciar.getJugabilidad().getGanador()) {
             case 1:
-                JOptionPane.showMessageDialog(null, gestion.getJugadorActual() + " ha ganado!");
+
                 gestion.getJugador1().sumarPuntaje();
-                salir();
+
                 break;
             case 2:
-                JOptionPane.showMessageDialog(null, gestion.getJugador2Nombre() + " ha ganado!");
+
                 gestion.getJugador2().sumarPuntaje();
-                salir();
+
                 break;
             case 0:
-                JOptionPane.showMessageDialog(null, "EMPATE");
-                salir();
+
                 break;
             default:
-               /* JOptionPane.showMessageDialog(null, 
+                /* JOptionPane.showMessageDialog(null, 
                 "Turno de: " + jugadorActivo + " (" + bandoActivo + ")", 
                 "Cambio de Turno", 
                 JOptionPane.INFORMATION_MESSAGE);*/
                 turnoLabel.setText(jugadorActivo + "(" + bandoActivo + ")");
                 break;
         }
-         System.out.println("Num fichas jugables " + iniciar.getNumFichas());
-         refreshTextArea();
+
+     
     
     
+        System.out.println("Num fichas jugables " + iniciar.getNumFichas());
+        refreshTextArea();
+
+
     }
 
     public String getTurnoActual() {
@@ -168,11 +176,10 @@ public class TableroPantallaStratego extends javax.swing.JFrame {
         }
     }
 
-    public String getBandoJugador1(){
+    public String getBandoJugador1() {
         return jugador1 + bandoTurnoActual();
     }
-    
-    
+
     public String getJugador1() {
         return jugador1;
     }
@@ -184,36 +191,36 @@ public class TableroPantallaStratego extends javax.swing.JFrame {
     public boolean esJugador1Bando() {
         return jugador1Bando;
     }
-    
-    public void personajesEliminados(Fichas personajeEliminado){
-        String nombrePersonaje = personajeEliminado.getNombrePersonaje()+" Rango("+personajeEliminado.getRango()+")";
-        
-        if(personajeEliminado.isEsHeroe()){
-            if(contH<heroesElim.length){
+
+    public void personajesEliminados(Fichas personajeEliminado) {
+        String nombrePersonaje = personajeEliminado.getNombrePersonaje() + " Rango(" + personajeEliminado.getRango() + ")";
+
+        if (personajeEliminado.isEsHeroe()) {
+            if (contH < heroesElim.length) {
                 heroesElim[contH] = nombrePersonaje;
                 contH++;
             }
-        }else{
-            if(contV<villanosElim.length){
+        } else {
+            if (contV < villanosElim.length) {
                 villanosElim[contV] = nombrePersonaje;
                 contV++;
             }
         }
         refreshTextArea();
     }
-    
-    private void refreshTextArea(){
+
+    private void refreshTextArea() {
         StringBuilder cont = new StringBuilder();
         boolean mostrarFichasEliminadas = Tablero.bando;
-        if(mostrarFichasEliminadas){
+        if (mostrarFichasEliminadas) {
             for (int i = 0; i < contV; i++) {
-                if(villanosElim[i]!=null){
+                if (villanosElim[i] != null) {
                     cont.append(villanosElim[i]).append("\n");
                 }
             }
-        }else{
+        } else {
             for (int i = 0; i < contH; i++) {
-                if(heroesElim[i]!=null){
+                if (heroesElim[i] != null) {
                     cont.append(heroesElim[i]).append("\n");
                 }
             }
@@ -238,13 +245,13 @@ public class TableroPantallaStratego extends javax.swing.JFrame {
     private void cargarJuego() {
         cargarTablero();
         if (iniciar != null) {
-        iniciar.actualizarVisibilidadPorTurno();
-    }
-    refreshTextArea();
-    
-    areaEliminados.setOpaque(false);
-    areaEliminados.setBackground(new Color(0, 0, 0, 0));
-    areaEliminados.setForeground(Color.BLACK);
+            iniciar.actualizarVisibilidadPorTurno();
+        }
+        refreshTextArea();
+
+        areaEliminados.setOpaque(false);
+        areaEliminados.setBackground(new Color(0, 0, 0, 0));
+        areaEliminados.setForeground(Color.BLACK);
     }
 
     /**
@@ -261,7 +268,7 @@ public class TableroPantallaStratego extends javax.swing.JFrame {
         turnoLabel = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         areaEliminados = new javax.swing.JTextArea();
-        jButton1 = new javax.swing.JButton();
+        rendirseButton = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         panelTablero = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
@@ -325,13 +332,18 @@ public class TableroPantallaStratego extends javax.swing.JFrame {
         panelEliminaciones.add(jScrollPane1);
         jScrollPane1.setBounds(20, 100, 160, 380);
 
-        jButton1.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 24)); // NOI18N
-        jButton1.setText("RENDIRTE");
-        jButton1.setBorderPainted(false);
-        jButton1.setContentAreaFilled(false);
-        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        panelEliminaciones.add(jButton1);
-        jButton1.setBounds(10, 620, 180, 60);
+        rendirseButton.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 24)); // NOI18N
+        rendirseButton.setText("RENDIRTE");
+        rendirseButton.setBorderPainted(false);
+        rendirseButton.setContentAreaFilled(false);
+        rendirseButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        rendirseButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rendirseButtonActionPerformed(evt);
+            }
+        });
+        panelEliminaciones.add(rendirseButton);
+        rendirseButton.setBounds(10, 620, 180, 60);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/ELIMINADOS.png"))); // NOI18N
         panelEliminaciones.add(jLabel1);
@@ -383,6 +395,48 @@ public class TableroPantallaStratego extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void rendirseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rendirseButtonActionPerformed
+        int confirm = JOptionPane.showConfirmDialog(null, "¿Seguro desea rendirse?", "ADVERTENCIA", JOptionPane.YES_NO_OPTION);
+
+        if (confirm == JOptionPane.YES_OPTION) {
+            String jugadorPerdedor = getTurnoActual();
+            String jugadorGanador;
+            String bandoGanador;
+            String bandoPerdedor;
+
+            if (jugadorPerdedor.equals(jugador1)) {
+                jugadorGanador = jugador2;
+
+                if (jugador1Bando) {
+                    bandoGanador = "Villanos";
+                    bandoPerdedor = "Heroes";
+                } else {
+                    bandoGanador = "Heroes";
+                    bandoPerdedor = "Villanos";
+                }
+            } else {
+                jugadorGanador = jugador1;
+                if (jugador1Bando) {
+                    bandoGanador = "Heroes";
+                    bandoPerdedor = "Villanos";
+                } else {
+                    bandoGanador = "Villanos";
+                    bandoPerdedor = "Heroes";
+                }
+            }
+
+            JOptionPane.showMessageDialog(null, jugadorGanador + " usando los " + bandoGanador + " ha ganado ya que " + jugadorPerdedor + " usando " + bandoPerdedor + " se ha retirado del juego.", "RENDICION", JOptionPane.INFORMATION_MESSAGE);
+
+            if (jugadorGanador.equals(jugador1)) {
+                gestion.getJugador1().sumarPuntaje();
+            } else {
+                gestion.getJugador2().sumarPuntaje();
+            }
+
+            salir();
+        }
+    }//GEN-LAST:event_rendirseButtonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -421,7 +475,6 @@ public class TableroPantallaStratego extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextArea areaEliminados;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
@@ -429,6 +482,7 @@ public class TableroPantallaStratego extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel panelEliminaciones;
     private javax.swing.JPanel panelTablero;
+    private javax.swing.JButton rendirseButton;
     private javax.swing.JLabel turnoLabel;
     // End of variables declaration//GEN-END:variables
 }
