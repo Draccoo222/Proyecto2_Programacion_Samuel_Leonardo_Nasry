@@ -39,7 +39,7 @@ public class ranking extends javax.swing.JFrame {
         jTable1.setSelectionForeground(Color.WHITE);
         jTable1.setFillsViewportHeight(true);
         jTable1.getTableHeader().setBackground(Color.darkGray);
-        jTable1.getTableHeader().setForeground(Color.darkGray);
+        jTable1.getTableHeader().setForeground(Color.WHITE);
         jTable1.setColumnSelectionAllowed(false);
         jTable1.setRowSelectionAllowed(true);
         jTable1.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -81,7 +81,7 @@ public class ranking extends javax.swing.JFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "Nombre", "Puntaje"
+                "Posicion", "Nombre", "Puntaje"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
@@ -153,6 +153,7 @@ public class ranking extends javax.swing.JFrame {
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
         modelo.setRowCount(0); // limpia la tabla
+        int cont = 0;
         
         Usuarios[] usuarios = gestion.getJugadores();
         
@@ -164,7 +165,8 @@ public class ranking extends javax.swing.JFrame {
 
         for (Usuarios u : gestion.getJugadores()) {
             if (u != null) {
-                Object[] fila = {u.getName(), u.getPuntaje()};
+                cont++;
+                Object[] fila = {cont, u.getName(), u.getPuntaje()};
                 modelo.addRow(fila);
             }
         }
