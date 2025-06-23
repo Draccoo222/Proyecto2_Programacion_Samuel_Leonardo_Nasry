@@ -45,7 +45,7 @@ public class iniciar extends javax.swing.JFrame {
             .addGap(0, 100, Short.MAX_VALUE)
         );
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(800, 500));
         setMinimumSize(new java.awt.Dimension(800, 500));
         setPreferredSize(new java.awt.Dimension(800, 500));
@@ -85,7 +85,8 @@ public class iniciar extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void iniciarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_iniciarButtonActionPerformed
-       menuPrincipal1 menu = new menuPrincipal1();
+       this.dispose();
+        menuPrincipal1 menu = new menuPrincipal1();
        menu.setVisible(true);
     }//GEN-LAST:event_iniciarButtonActionPerformed
 

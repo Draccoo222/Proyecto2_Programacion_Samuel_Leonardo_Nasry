@@ -268,7 +268,7 @@ public class TableroPantallaStratego extends javax.swing.JFrame {
         turnoLabel = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         areaEliminados = new javax.swing.JTextArea();
-        rendirseButton = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         panelTablero = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
@@ -332,18 +332,13 @@ public class TableroPantallaStratego extends javax.swing.JFrame {
         panelEliminaciones.add(jScrollPane1);
         jScrollPane1.setBounds(20, 100, 160, 380);
 
-        rendirseButton.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 24)); // NOI18N
-        rendirseButton.setText("RENDIRTE");
-        rendirseButton.setBorderPainted(false);
-        rendirseButton.setContentAreaFilled(false);
-        rendirseButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        rendirseButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rendirseButtonActionPerformed(evt);
-            }
-        });
-        panelEliminaciones.add(rendirseButton);
-        rendirseButton.setBounds(10, 620, 180, 60);
+        jButton1.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 24)); // NOI18N
+        jButton1.setText("RENDIRTE");
+        jButton1.setBorderPainted(false);
+        jButton1.setContentAreaFilled(false);
+        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        panelEliminaciones.add(jButton1);
+        jButton1.setBounds(10, 620, 180, 60);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/ELIMINADOS.png"))); // NOI18N
         panelEliminaciones.add(jLabel1);
@@ -479,6 +474,7 @@ public class TableroPantallaStratego extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextArea areaEliminados;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
@@ -486,7 +482,6 @@ public class TableroPantallaStratego extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel panelEliminaciones;
     private javax.swing.JPanel panelTablero;
-    private javax.swing.JButton rendirseButton;
     private javax.swing.JLabel turnoLabel;
     // End of variables declaration//GEN-END:variables
 }
