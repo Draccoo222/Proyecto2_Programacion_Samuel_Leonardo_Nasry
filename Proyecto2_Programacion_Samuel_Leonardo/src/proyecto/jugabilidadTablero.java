@@ -481,6 +481,17 @@ public class jugabilidadTablero {
         return 0;
     }
     
+    public static void sumVictorias(int bando){
+       switch(bando){
+            case 0: // Heroes
+                victoriasHeroe++;
+                break;
+            case 1: // villanos
+                victoriasVillanos++;
+                break;      
+        }
+    }
+    
     
     private String getGanador(Fichas atacante){
         if(atacante.isEsHeroe() && Tablero.bando){

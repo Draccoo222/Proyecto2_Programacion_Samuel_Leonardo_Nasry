@@ -55,7 +55,7 @@ public class TableroPantallaStratego extends javax.swing.JFrame {
     }
 
     
-    private static int getNumPartidas(){
+    public static int getNumPartidas(){
         return partidasTotales++;
     }
     
@@ -410,18 +410,22 @@ public class TableroPantallaStratego extends javax.swing.JFrame {
                 if (jugador1Bando) {
                     bandoGanador = "Villanos";
                     bandoPerdedor = "Heroes";
+                    jugabilidadTablero.sumVictorias(1);
                 } else {
                     bandoGanador = "Heroes";
                     bandoPerdedor = "Villanos";
+                    jugabilidadTablero.sumVictorias(0);
                 }
             } else {
                 jugadorGanador = jugador1;
                 if (jugador1Bando) {
                     bandoGanador = "Heroes";
                     bandoPerdedor = "Villanos";
+                    jugabilidadTablero.sumVictorias(0);
                 } else {
                     bandoGanador = "Villanos";
                     bandoPerdedor = "Heroes";
+                    jugabilidadTablero.sumVictorias(1);
                 }
             }
 
