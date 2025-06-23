@@ -405,7 +405,6 @@ public class jugabilidadTablero {
             casillaDefensor.asignarPersonaje(atacante);
             casillaAtacante.quitarPersonaje();
             getEliminados(defensor);
-            Tablero.restarNumFichas(1);
         } else if (rangoAtacante != 3 && rangoDefensor == 0) {
             mensaje = atacante.getNombrePersonaje() + " Rango(" + atacante.getRango() + ") vs " + defensor.getNombrePersonaje() + "\n"
                     + "Vencedor: " + defensor.getNombrePersonaje();
