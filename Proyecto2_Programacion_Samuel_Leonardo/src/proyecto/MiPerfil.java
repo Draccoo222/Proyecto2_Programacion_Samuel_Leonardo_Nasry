@@ -24,6 +24,8 @@ public class MiPerfil extends javax.swing.JFrame {
         System.out.println(gestion.toString());
         cargarFondo();
         jLabel4.setText(String.valueOf(gestion.getJugador1().getPuntaje()));
+        jLabel3.setText(String.valueOf(gestion.getJugador1().getPartidasHeroe()));
+        jLabel2.setText(String.valueOf(gestion.getJugador1().getPartidasVillano()));
     }
     
     private void cargarFondo(){
