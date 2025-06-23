@@ -7,6 +7,7 @@ package proyecto;
 import java.awt.*;
 import javax.swing.*;
 import java.time.LocalDateTime;
+
 /**
  *
  * @author hnleo
@@ -23,10 +24,8 @@ public class TableroPantallaStratego extends javax.swing.JFrame {
     private String heroesElim[] = new String[40];
     private String villanosElim[] = new String[40];
 
-    private int contH=0, contV=0;
+    private int contH = 0, contV = 0;
     private static int partidasTotales;
-  
-
 
     public TableroPantallaStratego() {
         initComponents();
@@ -42,27 +41,22 @@ public class TableroPantallaStratego extends javax.swing.JFrame {
         String jugadorActivo = getTurnoActual();
         String bandoActivo = bandoTurnoActual();
         turnoLabel.setText(jugadorActivo + "(" + bandoActivo + ")");
-        if(seleccionDeModo.modoClasico){
-        partidasTotales++;
-        
-        
-        if(jugador1Bando){
-            gestion.getJugador1().sumPartidasHeroe();
-            gestion.getJugador2().sumPartidasVillano();
-        }else{
-            gestion.getJugador1().sumPartidasVillano();
-            gestion.getJugador2().sumPartidasHeroe();
-        }
+        if (seleccionDeModo.modoClasico) {
+            partidasTotales++;
+
+            if (jugador1Bando) {
+                gestion.getJugador1().sumPartidasHeroe();
+                gestion.getJugador2().sumPartidasVillano();
+            } else {
+                gestion.getJugador1().sumPartidasVillano();
+                gestion.getJugador2().sumPartidasHeroe();
+            }
         }
     }
 
-    
-    public static int getNumPartidas(){
+    public static int getNumPartidas() {
         return partidasTotales;
     }
-    
-    
-   
 
     private void salir() {
 
@@ -111,87 +105,84 @@ public class TableroPantallaStratego extends javax.swing.JFrame {
         // DESPUÉS obtener la información del nuevo turno
         String jugadorActivo = getTurnoActual();
         String bandoActivo = bandoTurnoActual();
-        
-       
-    if(seleccionDeModo.modoClasico){
 
-        if (iniciar != null) {
-            iniciar.actualizarVisibilidadPorTurno();
-        }
+        if (seleccionDeModo.modoClasico) {
 
-        if (iniciar.getNumFichas() == 0) {
-            iniciar.getJugabilidad().setGanador(0);
-        }
-        
+            if (iniciar != null) {
+                iniciar.actualizarVisibilidadPorTurno();
+            }
+
+            if (iniciar.getNumFichas() == 0) {
+                iniciar.getJugabilidad().setGanador(0);
+            }
+
             String jugadorPerdedor = getTurnoActual();
             String jugadorGanador;
             String bandoGanador;
             String bandoPerdedor;
 
-                if (jugadorPerdedor.equals(jugador1)) {
-                    jugadorGanador = jugador2;
+            if (jugadorPerdedor.equals(jugador1)) {
+                jugadorGanador = jugador2;
 
-                    if (jugador1Bando) {
-                        bandoGanador = "Villanos";
-                        bandoPerdedor = "Heroes";
-                    } else {
-                        bandoGanador = "Heroes";
-                        bandoPerdedor = "Villanos";
-                    }
+                if (jugador1Bando) {
+                    bandoGanador = "Villanos";
+                    bandoPerdedor = "Heroes";
                 } else {
-                    jugadorGanador = jugador1;
-                    if (jugador1Bando) {
-                        bandoGanador = "Heroes";
-                        bandoPerdedor = "Villanos";
-                    } else {
-                        bandoGanador = "Villanos";
-                        bandoPerdedor = "Heroes";
-                    }
+                    bandoGanador = "Heroes";
+                    bandoPerdedor = "Villanos";
                 }
-                
-               LocalDateTime fecha = LocalDateTime.now();
-                
-               String tierra = (bandoGanador.equals("Heroe")) ? "Salvado la tierra!" : "Capturado la tierra!";
-               String resultado = jugadorGanador + " usando los " + bandoGanador + " ha " + tierra + " Venciendo a "
-                       + jugadorPerdedor + "- " + fecha ;
-               
-               
-               
-               
+            } else {
+                jugadorGanador = jugador1;
+                if (jugador1Bando) {
+                    bandoGanador = "Heroes";
+                    bandoPerdedor = "Villanos";
+                } else {
+                    bandoGanador = "Villanos";
+                    bandoPerdedor = "Heroes";
+                }
+            }
 
-        switch (iniciar.getJugabilidad().getGanador()) {
-            case 1:
-                gestion.getJugador1().sumarPuntaje();
-                JOptionPane.showMessageDialog(null, resultado);
-                gestion.getJugador1().sumarLogeo(resultado);
-                gestion.getJugador2().sumarLogeo(resultado);
+            LocalDateTime fecha = LocalDateTime.now();
+
+            String tierra = (bandoGanador.equals("Heroe")) ? "Salvado la tierra!" : "Capturado la tierra!";
+            String resultado = jugadorGanador + " usando los " + bandoGanador + " ha " + tierra + " Venciendo a "
+                    + jugadorPerdedor + "- " + fecha;
+
+            switch (iniciar.getJugabilidad().getGanador()) {
+                case 1:
+                    gestion.getJugador1().sumarPuntaje();
+                    JOptionPane.showMessageDialog(null, resultado);
+                    gestion.getJugador1().sumarLogeo(resultado);
+                    gestion.getJugador2().sumarLogeo(resultado);
+                    salir();
+                    break;
+                case 2:
+                    gestion.getJugador2().sumarPuntaje();
+                    JOptionPane.showMessageDialog(null, resultado);
+                    gestion.getJugador1().sumarLogeo(resultado);
+                    gestion.getJugador2().sumarLogeo(resultado);
+                   salir();
+                    break;
+                case 0:
+                    break;
+                default:
+                    turnoLabel.setText(jugadorActivo + "(" + bandoActivo + ")");
+                    break;
+            }
+
+            System.out.println("Num fichas jugables " + iniciar.getNumFichas());
+        } else {
+            if(!jugabilidadTablero.finished){
+            JOptionPane.showMessageDialog(null, "Turno de " + bandoActivo);
+            
+            }else{
                 salir();
-                break; 
-            case 2:
-                gestion.getJugador2().sumarPuntaje();
-                JOptionPane.showMessageDialog(null, resultado);
-                gestion.getJugador1().sumarLogeo(resultado);
-                gestion.getJugador2().sumarLogeo(resultado);
-                salir();
-                break;
-            case 0:
-                break;
-            default:
-                turnoLabel.setText(jugadorActivo + "(" + bandoActivo + ")");
-                break;
+                jugabilidadTablero.finished=false;
+            }
+            turnoLabel.setText(jugadorActivo + "(" + bandoActivo + ")");
         }
 
-     
-    
-    
-        System.out.println("Num fichas jugables " + iniciar.getNumFichas());
-    }else{
-        JOptionPane.showMessageDialog(null, "Turno de "+bandoActivo);
-        turnoLabel.setText(jugadorActivo + "(" + bandoActivo + ")");
-    }
-        
         refreshTextArea();
-    
 
     }
 
@@ -287,10 +278,10 @@ public class TableroPantallaStratego extends javax.swing.JFrame {
 
     private void cargarJuego() {
         cargarTablero();
-        if(seleccionDeModo.modoClasico){
-        if (iniciar != null) {
-            iniciar.actualizarVisibilidadPorTurno();
-        }
+        if (seleccionDeModo.modoClasico) {
+            if (iniciar != null) {
+                iniciar.actualizarVisibilidadPorTurno();
+            }
         }
         refreshTextArea();
 
@@ -444,7 +435,7 @@ public class TableroPantallaStratego extends javax.swing.JFrame {
         int confirm = JOptionPane.showConfirmDialog(null, "¿Seguro desea rendirse?", "ADVERTENCIA", JOptionPane.YES_NO_OPTION);
 
         if (confirm == JOptionPane.YES_OPTION) {
-            
+
             String jugadorPerdedor = getTurnoActual();
             String jugadorGanador;
             String bandoGanador;
@@ -456,51 +447,51 @@ public class TableroPantallaStratego extends javax.swing.JFrame {
                 if (jugador1Bando) {
                     bandoGanador = "Villanos";
                     bandoPerdedor = "Heroes";
-                    if(seleccionDeModo.modoClasico){
-                    jugabilidadTablero.sumVictorias(1);
+                    if (seleccionDeModo.modoClasico) {
+                        jugabilidadTablero.sumVictorias(1);
                     }
                 } else {
                     bandoGanador = "Heroes";
                     bandoPerdedor = "Villanos";
-                     if(seleccionDeModo.modoClasico){
-                    jugabilidadTablero.sumVictorias(0);
-                     }
+                    if (seleccionDeModo.modoClasico) {
+                        jugabilidadTablero.sumVictorias(0);
+                    }
                 }
             } else {
                 jugadorGanador = jugador1;
                 if (jugador1Bando) {
                     bandoGanador = "Heroes";
                     bandoPerdedor = "Villanos";
-                     if(seleccionDeModo.modoClasico){
-                    jugabilidadTablero.sumVictorias(0);
-                     }
+                    if (seleccionDeModo.modoClasico) {
+                        jugabilidadTablero.sumVictorias(0);
+                    }
                 } else {
                     bandoGanador = "Villanos";
                     bandoPerdedor = "Heroes";
-                     if(seleccionDeModo.modoClasico){
-                    jugabilidadTablero.sumVictorias(1);
-                     }
+                    if (seleccionDeModo.modoClasico) {
+                        jugabilidadTablero.sumVictorias(1);
+                    }
                 }
             }
 
             LocalDateTime fecha = LocalDateTime.now();
-            
-            String resultado = jugadorGanador + " usando los " + bandoGanador + " ha ganado ya que " 
+
+            String resultado = jugadorGanador + " usando los " + bandoGanador + " ha ganado ya que "
                     + jugadorPerdedor + " usando " + bandoPerdedor + " se ha retirado del juego." + "RENDICION - " + fecha;
-            
+
             JOptionPane.showMessageDialog(null, resultado);
-           if(seleccionDeModo.modoClasico){
-            if (jugadorGanador.equals(jugador1)) {
-                gestion.getJugador1().sumarPuntaje();
-                gestion.getJugador1().sumarLogeo(resultado);
-                gestion.getJugador2().sumarLogeo(resultado);
-            } else {
-                gestion.getJugador2().sumarPuntaje();
-                gestion.getJugador1().sumarLogeo(resultado);
-                gestion.getJugador2().sumarLogeo(resultado);
+            if (seleccionDeModo.modoClasico) {
+                if (jugadorGanador.equals(jugador1)) {
+                    gestion.getJugador1().sumarPuntaje();
+                    gestion.getJugador1().sumarLogeo(resultado);
+                    gestion.getJugador2().sumarLogeo(resultado);
+                } else {
+                    gestion.getJugador2().sumarPuntaje();
+                    gestion.getJugador1().sumarLogeo(resultado);
+                    gestion.getJugador2().sumarLogeo(resultado);
+                }
+
             }
-            
-           }
             salir();
         }
     }//GEN-LAST:event_rendirseButtonActionPerformed

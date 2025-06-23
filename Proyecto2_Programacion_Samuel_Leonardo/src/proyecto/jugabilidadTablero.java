@@ -21,6 +21,7 @@ public class jugabilidadTablero {
     private int ganador = -1; // -0 empate  (1- ganador jugador 1) (2- ganador jugador 2)
     private static int victoriasHeroe;
     private static int victoriasVillanos;
+    public static boolean finished = false;
     private seleccionDeModo selecModo;
     private casillas[][] tablero;
     private Tablero tableroJug;
@@ -285,7 +286,6 @@ public class jugabilidadTablero {
 
                 casillas casillaActual = tablero[filaActual][columnaActual];
 
-         
                 if (esCasillaBloqueada(casillaActual)) {
                     break;
                 }
@@ -385,7 +385,7 @@ public class jugabilidadTablero {
         int rangoAtacante = atacante.getRango();
         int rangoDefensor = defensor.getRango();
         String mensaje;
-       
+
         if (rangoAtacante == 1 && rangoDefensor == 10) {
             mensaje = atacante.getNombrePersonaje() + " Rango(" + atacante.getRango() + ") vs " + defensor.getNombrePersonaje() + " Rango(" + defensor.getRango() + ")\n"
                     + "Vencedor: " + atacante.getNombrePersonaje() + " Rango(" + atacante.getRango() + ")";
@@ -416,25 +416,26 @@ public class jugabilidadTablero {
             getEliminados(atacante);
             Tablero.restarNumFichas(1);
         } else if (rangoAtacante > rangoDefensor) {
-             if (rangoDefensor == -1) {
-                 String jugadorGanador = getGanador(atacante);
-                 String jugadorPerdedor = getPerdedor(jugadorGanador);
+            if (rangoDefensor == -1) {
+                String jugadorGanador = getGanador(atacante);
+                String jugadorPerdedor = getPerdedor(jugadorGanador);
                 if (atacante.isEsHeroe()) {
-                    JOptionPane.showMessageDialog(null, jugadorGanador+" usando los HEROES ha SALVADO LA TIERRA! Venciendo a "+jugadorPerdedor);
-                    if(seleccionDeModo.modoClasico){
+                    if (seleccionDeModo.modoClasico) {
                         victoriasHeroe++;
-                    ganador = 1;
+                        ganador = 1;
                     }
+
                 } else {
-               JOptionPane.showMessageDialog(null, jugadorGanador+" usando los VILLANOS ha CAPTURADO LA TIERRA! Venciendo a "+jugadorPerdedor);
-               if(seleccionDeModo.modoClasico){
-                   victoriasVillanos++;
-               ganador = 2;}
+                    if (seleccionDeModo.modoClasico) {
+                        victoriasVillanos++;
+                        ganador = 2;
+                    }
                 }
-               juego.dispose();
-               menuPrincipal1 menu = new menuPrincipal1();
-               menu.setVisible(true);
-                
+
+                finished = true;
+
+                return;
+
             }
             mensaje = atacante.getNombrePersonaje() + " Rango(" + atacante.getRango() + ") vs " + defensor.getNombrePersonaje() + " Rango(" + defensor.getRango() + ")\n"
                     + "Vencedor: " + atacante.getNombrePersonaje() + " Rango(" + atacante.getRango() + ")";
@@ -460,58 +461,59 @@ public class jugabilidadTablero {
             getEliminados(defensor);
             Tablero.restarNumFichas(2);
         }
-       
+
     }
-    
-    public static int getNumVictorias(int bando){
-        switch(bando){
+
+    public static int getNumVictorias(int bando) {
+        switch (bando) {
             case 0: // Heroes
                 return victoriasHeroe;
-               
+
             case 1: // villanos
                 return victoriasVillanos;
-                
+
         }
         return 0;
     }
-    
-    public static void sumVictorias(int bando){
-       switch(bando){
+
+    public static void sumVictorias(int bando) {
+        switch (bando) {
             case 0: // Heroes
                 victoriasHeroe++;
                 break;
             case 1: // villanos
                 victoriasVillanos++;
-                break;      
+                break;
         }
     }
-    
-    
-    private String getGanador(Fichas atacante){
-        if(atacante.isEsHeroe() && Tablero.bando){
+
+    private String getGanador(Fichas atacante) {
+        if (atacante.isEsHeroe() && Tablero.bando) {
             return juego.getJugador1();
-        }else if(!atacante.isEsHeroe() && !Tablero.bando){
+        } else if (!atacante.isEsHeroe() && !Tablero.bando) {
             return juego.getJugador2();
-        }else if(atacante.isEsHeroe() && !Tablero.bando){
+        } else if (atacante.isEsHeroe() && !Tablero.bando) {
             return juego.getJugador2();
-        }else{
-            return juego.getJugador1();
-        }
-    }
-    private String getPerdedor(String jugadorGanador){
-        if(jugadorGanador.equals(juego.getJugador1())){
-            return juego.getJugador2();
-            
-        }else{
+        } else {
             return juego.getJugador1();
         }
     }
-    
-    public void getEliminados(Fichas personajeEliminado){
-        if(juego!=null){
-           juego.personajesEliminados(personajeEliminado);
+
+    private String getPerdedor(String jugadorGanador) {
+        if (jugadorGanador.equals(juego.getJugador1())) {
+            return juego.getJugador2();
+
+        } else {
+            return juego.getJugador1();
         }
     }
+
+    public void getEliminados(Fichas personajeEliminado) {
+        if (juego != null) {
+            juego.personajesEliminados(personajeEliminado);
+        }
+    }
+
     public void setGanador(int num) {
         ganador = num;
     }
