@@ -425,6 +425,7 @@ public class jugabilidadTablero {
                         ganador = 1;
                     }else{
                       JOptionPane.showMessageDialog(null, "HAN GANADO LOS HEROES");
+                      JOptionPane.showMessageDialog(null, "Al ser el modo tutorial, no se ganan puntos ni se guarda el registro!");
                     }
 
                 } else {
@@ -433,6 +434,7 @@ public class jugabilidadTablero {
                         ganador = 2;
                     }else{
                          JOptionPane.showMessageDialog(null, "HAN GANADO LOS VILLANOS");
+                         JOptionPane.showMessageDialog(null, "Al ser el modo tutorial, no se ganan puntos ni se guarda el registro!");
                     }
                     
                 }
