@@ -413,6 +413,7 @@ public class jugabilidadTablero {
                     + "Vencedor: " + defensor.getNombrePersonaje();
             JOptionPane.showMessageDialog(null, mensaje, "COMBATE", JOptionPane.INFORMATION_MESSAGE);
             casillaAtacante.quitarPersonaje();
+            casillaDefensor.quitarPersonaje();
             getEliminados(atacante);
             Tablero.restarNumFichas(1);
         } else if (rangoAtacante > rangoDefensor) {
