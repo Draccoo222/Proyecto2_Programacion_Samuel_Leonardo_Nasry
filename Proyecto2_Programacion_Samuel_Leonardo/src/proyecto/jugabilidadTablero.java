@@ -21,7 +21,7 @@ public class jugabilidadTablero {
     private int ganador = -1; // -0 empate  (1- ganador jugador 1) (2- ganador jugador 2)
     private static int victoriasHeroe;
     private static int victoriasVillanos;
-
+    private seleccionDeModo selecModo;
     private casillas[][] tablero;
     private Tablero tableroJug;
 
@@ -421,10 +421,15 @@ public class jugabilidadTablero {
                  String jugadorPerdedor = getPerdedor(jugadorGanador);
                 if (atacante.isEsHeroe()) {
                     JOptionPane.showMessageDialog(null, jugadorGanador+" usando los HEROES ha SALVADO LA TIERRA! Venciendo a "+jugadorPerdedor);
+                    if(seleccionDeModo.modoClasico){
+                        victoriasHeroe++;
                     ganador = 1;
+                    }
                 } else {
                JOptionPane.showMessageDialog(null, jugadorGanador+" usando los VILLANOS ha CAPTURADO LA TIERRA! Venciendo a "+jugadorPerdedor);
-               ganador = 2;
+               if(seleccionDeModo.modoClasico){
+                   victoriasVillanos++;
+               ganador = 2;}
                 }
                juego.dispose();
                menuPrincipal1 menu = new menuPrincipal1();
@@ -435,17 +440,6 @@ public class jugabilidadTablero {
                     + "Vencedor: " + atacante.getNombrePersonaje() + " Rango(" + atacante.getRango() + ")";
             JOptionPane.showMessageDialog(null, mensaje, "COMBATE", JOptionPane.INFORMATION_MESSAGE);
             casillaDefensor.asignarPersonaje(atacante);
-            if (rangoDefensor == -1) {
-                if (casillaAtacante.getPersonaje().isEsHeroe()) {
-
-                    victoriasHeroe++;
-                    ganador = 1;
-                } else {
-                    
-                    victoriasVillanos++;
-                    ganador = 2;
-                }
-            }
             casillaAtacante.quitarPersonaje();
             getEliminados(defensor);
             Tablero.restarNumFichas(1);

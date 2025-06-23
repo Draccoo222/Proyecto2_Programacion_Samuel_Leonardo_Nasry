@@ -42,6 +42,7 @@ public class TableroPantallaStratego extends javax.swing.JFrame {
         String jugadorActivo = getTurnoActual();
         String bandoActivo = bandoTurnoActual();
         turnoLabel.setText(jugadorActivo + "(" + bandoActivo + ")");
+        if(seleccionDeModo.modoClasico){
         partidasTotales++;
         
         
@@ -52,7 +53,7 @@ public class TableroPantallaStratego extends javax.swing.JFrame {
             gestion.getJugador1().sumPartidasVillano();
             gestion.getJugador2().sumPartidasHeroe();
         }
-
+        }
     }
 
     
@@ -112,7 +113,7 @@ public class TableroPantallaStratego extends javax.swing.JFrame {
         String bandoActivo = bandoTurnoActual();
         
        
-    
+    if(seleccionDeModo.modoClasico){
 
         if (iniciar != null) {
             iniciar.actualizarVisibilidadPorTurno();
@@ -184,8 +185,12 @@ public class TableroPantallaStratego extends javax.swing.JFrame {
     
     
         System.out.println("Num fichas jugables " + iniciar.getNumFichas());
+    }else{
+        turnoLabel.setText(jugadorActivo + "(" + bandoActivo + ")");
+    }
+        
         refreshTextArea();
-
+    
 
     }
 
@@ -281,8 +286,10 @@ public class TableroPantallaStratego extends javax.swing.JFrame {
 
     private void cargarJuego() {
         cargarTablero();
+        if(seleccionDeModo.modoClasico){
         if (iniciar != null) {
             iniciar.actualizarVisibilidadPorTurno();
+        }
         }
         refreshTextArea();
 
@@ -436,6 +443,7 @@ public class TableroPantallaStratego extends javax.swing.JFrame {
         int confirm = JOptionPane.showConfirmDialog(null, "¿Seguro desea rendirse?", "ADVERTENCIA", JOptionPane.YES_NO_OPTION);
 
         if (confirm == JOptionPane.YES_OPTION) {
+            
             String jugadorPerdedor = getTurnoActual();
             String jugadorGanador;
             String bandoGanador;
@@ -447,32 +455,40 @@ public class TableroPantallaStratego extends javax.swing.JFrame {
                 if (jugador1Bando) {
                     bandoGanador = "Villanos";
                     bandoPerdedor = "Heroes";
+                    if(seleccionDeModo.modoClasico){
                     jugabilidadTablero.sumVictorias(1);
+                    }
                 } else {
                     bandoGanador = "Heroes";
                     bandoPerdedor = "Villanos";
+                     if(seleccionDeModo.modoClasico){
                     jugabilidadTablero.sumVictorias(0);
+                     }
                 }
             } else {
                 jugadorGanador = jugador1;
                 if (jugador1Bando) {
                     bandoGanador = "Heroes";
                     bandoPerdedor = "Villanos";
+                     if(seleccionDeModo.modoClasico){
                     jugabilidadTablero.sumVictorias(0);
+                     }
                 } else {
                     bandoGanador = "Villanos";
                     bandoPerdedor = "Heroes";
+                     if(seleccionDeModo.modoClasico){
                     jugabilidadTablero.sumVictorias(1);
+                     }
                 }
             }
 
             LocalDateTime fecha = LocalDateTime.now();
             
             String resultado = jugadorGanador + " usando los " + bandoGanador + " ha ganado ya que " 
-                    + jugadorPerdedor + " usando " + bandoPerdedor + " se ha retirado del juego." + "RENDICION -" + fecha;
+                    + jugadorPerdedor + " usando " + bandoPerdedor + " se ha retirado del juego." + "RENDICION - " + fecha;
             
             JOptionPane.showMessageDialog(null, resultado);
-
+           if(seleccionDeModo.modoClasico){
             if (jugadorGanador.equals(jugador1)) {
                 gestion.getJugador1().sumarPuntaje();
                 gestion.getJugador1().sumarLogeo(resultado);
@@ -482,7 +498,8 @@ public class TableroPantallaStratego extends javax.swing.JFrame {
                 gestion.getJugador1().sumarLogeo(resultado);
                 gestion.getJugador2().sumarLogeo(resultado);
             }
-
+            
+           }
             salir();
         }
     }//GEN-LAST:event_rendirseButtonActionPerformed

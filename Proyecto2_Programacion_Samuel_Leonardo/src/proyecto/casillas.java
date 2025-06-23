@@ -71,10 +71,12 @@ public class casillas extends JButton {
         // Mostrar la imagen del personaje en el botón
         if (personaje != null) {
             // Si el personaje es visible, mostrar su imagen real
+            if(seleccionDeModo.modoClasico){
             if (Tablero.bando && personaje.isEsHeroe()) {
                 this.setIcon(personaje.getIconoPersonaje());
 
             }
+            
             if (Tablero.bando && !personaje.isEsHeroe()) {
                 ocultarPersonaje();
             }
@@ -83,6 +85,9 @@ public class casillas extends JButton {
             }
             if (!Tablero.bando && personaje.isEsHeroe()) {
                 ocultarPersonaje();
+            }
+            }else{
+                this.setIcon(personaje.getIconoPersonaje());
             }
         }
     }

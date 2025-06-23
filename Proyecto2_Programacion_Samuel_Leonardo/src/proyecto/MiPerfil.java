@@ -73,11 +73,9 @@ public class MiPerfil extends javax.swing.JFrame {
         panelPadre.setPreferredSize(new java.awt.Dimension(800, 500));
 
         puntosLabel.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
-        puntosLabel.setForeground(new java.awt.Color(0, 0, 0));
         puntosLabel.setText("Puntos:");
 
         nombreLabel.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
-        nombreLabel.setForeground(new java.awt.Color(0, 0, 0));
         nombreLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         nombreLabel.setText("Nombre");
 
@@ -124,23 +122,18 @@ public class MiPerfil extends javax.swing.JFrame {
         });
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("jLabel2");
 
         puntosLabel1.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
-        puntosLabel1.setForeground(new java.awt.Color(0, 0, 0));
         puntosLabel1.setText("Partidas Heroe");
 
         puntosLabel2.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
-        puntosLabel2.setForeground(new java.awt.Color(0, 0, 0));
         puntosLabel2.setText("Partidas Villano");
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setText("jLabel2");
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
         jLabel4.setText("jLabel2");
 
         jTextArea1.setColumns(20);
@@ -182,14 +175,14 @@ public class MiPerfil extends javax.swing.JFrame {
                         .addGap(14, 14, 14))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelPadreLayout.createSequentialGroup()
                         .addComponent(nombreLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(101, 101, 101))))
+                        .addGap(104, 104, 104))))
         );
         panelPadreLayout.setVerticalGroup(
             panelPadreLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelPadreLayout.createSequentialGroup()
-                .addGap(68, 68, 68)
+                .addGap(83, 83, 83)
                 .addComponent(nombreLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(47, 47, 47)
+                .addGap(32, 32, 32)
                 .addGroup(panelPadreLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(puntosLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -203,7 +196,6 @@ public class MiPerfil extends javax.swing.JFrame {
                     .addGroup(panelPadreLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(puntosLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(regresarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)

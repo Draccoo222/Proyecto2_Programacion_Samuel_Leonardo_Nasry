@@ -101,7 +101,6 @@ public class Tablero extends JPanel {
         formacionCondicionada(heroesTemp, 6, 9, true);
         formacionCondicionada(villanosTemp, 0, 3, false);
 
-        
     }
 
     private void mezclarArray(int posiciones[][], int cant) {
@@ -116,7 +115,6 @@ public class Tablero extends JPanel {
             posiciones[j][1] = col;
         }
     }
-   
 
     private void formacionCondicionada(Fichas personajes[], int filaIn, int filaFin, boolean isHeroe) {
         Fichas tierra = null;
@@ -124,17 +122,17 @@ public class Tablero extends JPanel {
         Fichas piezasRango2[] = new Fichas[8];
         Fichas restoPersonajes[] = new Fichas[26];
         int contBombs = 0, contRango2 = 0, contRestantes = 0;
-       for (Fichas fichaa: personajes) {
-        if (fichaa.getRango() == -1) { // Tierra
-            tierra = fichaa;
-        } else if (fichaa.getRango() == 0) { // Bombas
-            bombs[contBombs++] = fichaa;
-        } else if (fichaa.getRango() == 2) { // Rango 2
-            piezasRango2[contRango2++] = fichaa;
-        } else if (fichaa.getRango() > 0) { // Otros personajes jugables
-            restoPersonajes[contRestantes++] = fichaa;
+        for (Fichas fichaa : personajes) {
+            if (fichaa.getRango() == -1) { // Tierra
+                tierra = fichaa;
+            } else if (fichaa.getRango() == 0) { // Bombas
+                bombs[contBombs++] = fichaa;
+            } else if (fichaa.getRango() == 2) { // Rango 2
+                piezasRango2[contRango2++] = fichaa;
+            } else if (fichaa.getRango() > 0) { // Otros personajes jugables
+                restoPersonajes[contRestantes++] = fichaa;
+            }
         }
-    }
         int filaUlt = isHeroe ? filaFin : filaIn;
         int colTierra = 1 + random.nextInt(columna - 2);
         casilla[filaUlt][colTierra].asignarPersonaje(tierra);
@@ -289,15 +287,16 @@ public class Tablero extends JPanel {
         }
     }
 
-    private void mezclarPosiciones(Fichas array[], int cant){
-        for(int i = cant -1; i>0;i--){
-            int j = random.nextInt(i+1);
+    private void mezclarPosiciones(Fichas array[], int cant) {
+        for (int i = cant - 1; i > 0; i--) {
+            int j = random.nextInt(i + 1);
             Fichas arregloTemporal = array[i];
             array[i] = array[j];
             array[j] = arregloTemporal;
-           
+
         }
     }
+
     public static int getNumFichas() {
         return numFichasJugables;
     }
@@ -306,7 +305,7 @@ public class Tablero extends JPanel {
         numFichasJugables -= num;
     }
 
-    // Método para asignar personajes específicos (para testing)
+
     public void asignarPersonajeEspecifico(int fila, int columna, Fichas personaje) {
         if (fila >= 0 && fila < this.fila && columna >= 0 && columna < this.columna) {
             casilla[fila][columna].asignarPersonaje(personaje);
@@ -319,10 +318,12 @@ public class Tablero extends JPanel {
                 if (casilla[i][j].tienePersonaje()) {
                     Fichas personaje = casilla[i][j].getPersonaje();
                     // Si es el turno de los héroes y la ficha es héroe, o viceversa
-                    if (personaje.isEsHeroe() == Tablero.bando) {
-                        casilla[i][j].revelarPersonaje();
-                    } else {
-                        casilla[i][j].ocultarPersonaje();
+                    if (seleccionDeModo.modoClasico) {
+                        if (personaje.isEsHeroe() == Tablero.bando) {
+                            casilla[i][j].revelarPersonaje();
+                        } else {
+                            casilla[i][j].ocultarPersonaje();
+                        }
                     }
                 }
             }
@@ -337,10 +338,12 @@ public class Tablero extends JPanel {
                     Fichas personaje = casilla[i][j].getPersonaje();
 
                     // Revelar fichas del bando actual, ocultar las del contrario
-                    if (personaje.isEsHeroe() == Tablero.bando) {
-                        casilla[i][j].revelarPersonaje();
-                    } else {
-                        casilla[i][j].ocultarPersonaje();
+                    if (seleccionDeModo.modoClasico) {
+                        if (personaje.isEsHeroe() == Tablero.bando) {
+                            casilla[i][j].revelarPersonaje();
+                        } else {
+                            casilla[i][j].ocultarPersonaje();
+                        }
                     }
                 }
             }

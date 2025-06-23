@@ -292,7 +292,7 @@ public class menuPrincipal1 extends javax.swing.JFrame {
 
     private void strategoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_strategoButtonActionPerformed
        if(gestion.getCantidad()>1){
-            seleccionDeModo selec = new seleccionDeModo();
+            seleccionPlayer selec = new seleccionPlayer();
             selec.setVisible(true);
             this.dispose();
        }else{
@@ -308,7 +308,9 @@ public class menuPrincipal1 extends javax.swing.JFrame {
     }//GEN-LAST:event_universoButtonActionPerformed
 
     private void configButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_configButtonActionPerformed
-        // TODO add your handling code here:
+        this.dispose();
+        seleccionDeModo selec = new seleccionDeModo();
+        selec.setVisible(true);
        
     }//GEN-LAST:event_configButtonActionPerformed
 

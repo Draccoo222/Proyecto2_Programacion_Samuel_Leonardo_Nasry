@@ -115,8 +115,8 @@ public class seleccionPlayer extends javax.swing.JFrame {
 
     private void regresarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_regresarButtonActionPerformed
         this.dispose();
-        seleccionDeModo selec = new seleccionDeModo();
-        selec.setVisible(true);
+        menuPrincipal1 menu = new menuPrincipal1();
+        menu.setVisible(true);
     }//GEN-LAST:event_regresarButtonActionPerformed
 
     private void iniciarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_iniciarButtonActionPerformed

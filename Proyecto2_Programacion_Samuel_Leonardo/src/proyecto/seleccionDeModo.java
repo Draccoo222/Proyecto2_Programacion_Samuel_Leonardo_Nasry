@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package proyecto;
-
+import javax.swing.*;
 /**
  *
  * @author hnleo
@@ -13,8 +13,14 @@ public class seleccionDeModo extends javax.swing.JFrame {
     /**
      * Creates new form seleccionDeModo
      */
+    public static boolean modoClasico = false;
     public seleccionDeModo() {
         initComponents();
+        if(!modoClasico){
+            iniciarButton.setText("Activar");
+        }else{
+            iniciarButton.setText("Desactivar");
+        }
     }
 
     /**
@@ -28,8 +34,7 @@ public class seleccionDeModo extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         regresarButton = new javax.swing.JButton();
-        nuevaButton = new javax.swing.JButton();
-        tutorialButton = new javax.swing.JButton();
+        iniciarButton = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
@@ -39,46 +44,38 @@ public class seleccionDeModo extends javax.swing.JFrame {
 
         jPanel1.setLayout(null);
 
+        regresarButton.setBackground(new java.awt.Color(255, 0, 51));
         regresarButton.setFont(new java.awt.Font("Arial Black", 1, 12)); // NOI18N
-        regresarButton.setText("REGRESAR");
-        regresarButton.setBorderPainted(false);
-        regresarButton.setContentAreaFilled(false);
+        regresarButton.setForeground(new java.awt.Color(255, 255, 255));
+        regresarButton.setText("Regresar");
+        regresarButton.setAlignmentY(0.0F);
+        regresarButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255), 3));
         regresarButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        regresarButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         regresarButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 regresarButtonActionPerformed(evt);
             }
         });
         jPanel1.add(regresarButton);
-        regresarButton.setBounds(190, 280, 120, 50);
+        regresarButton.setBounds(400, 360, 81, 24);
 
-        nuevaButton.setFont(new java.awt.Font("Arial Black", 1, 10)); // NOI18N
-        nuevaButton.setText("NUEVA PARTIDA");
-        nuevaButton.setBorderPainted(false);
-        nuevaButton.setContentAreaFilled(false);
-        nuevaButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        nuevaButton.addActionListener(new java.awt.event.ActionListener() {
+        iniciarButton.setBackground(new java.awt.Color(255, 0, 51));
+        iniciarButton.setFont(new java.awt.Font("Arial Black", 1, 12)); // NOI18N
+        iniciarButton.setForeground(new java.awt.Color(255, 255, 255));
+        iniciarButton.setAlignmentY(0.0F);
+        iniciarButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255), 3));
+        iniciarButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        iniciarButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        iniciarButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                nuevaButtonActionPerformed(evt);
+                iniciarButtonActionPerformed(evt);
             }
         });
-        jPanel1.add(nuevaButton);
-        nuevaButton.setBounds(180, 220, 140, 40);
+        jPanel1.add(iniciarButton);
+        iniciarButton.setBounds(200, 210, 100, 30);
 
-        tutorialButton.setFont(new java.awt.Font("Arial Black", 1, 14)); // NOI18N
-        tutorialButton.setText("TUTORIAL");
-        tutorialButton.setBorderPainted(false);
-        tutorialButton.setContentAreaFilled(false);
-        tutorialButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        tutorialButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tutorialButtonActionPerformed(evt);
-            }
-        });
-        jPanel1.add(tutorialButton);
-        tutorialButton.setBounds(190, 150, 120, 50);
-
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/modoFondo.png"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/modo.png"))); // NOI18N
         jPanel1.add(jLabel1);
         jLabel1.setBounds(0, 0, 500, 400);
 
@@ -86,32 +83,36 @@ public class seleccionDeModo extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 500, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void iniciarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_iniciarButtonActionPerformed
+       if(!modoClasico){
+           JOptionPane.showMessageDialog(null, "Modo Clásico Activado.");
+           iniciarButton.setText("DESACTIVAR");
+           modoClasico = true;
+          
+       }else{
+           JOptionPane.showMessageDialog(null,"Modo Clásico Desactivado, pasando a Modo Tutorial.");
+           iniciarButton.setText("ACTIVAR");
+           modoClasico = false;
+      
+       }
+    }//GEN-LAST:event_iniciarButtonActionPerformed
+
     private void regresarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_regresarButtonActionPerformed
-     this.dispose();
-     menuPrincipal1 menu = new menuPrincipal1();
-     menu.setVisible(true);
-    }//GEN-LAST:event_regresarButtonActionPerformed
-
-    private void tutorialButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tutorialButtonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tutorialButtonActionPerformed
-
-    private void nuevaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nuevaButtonActionPerformed
         this.dispose();
-        seleccionPlayer selec = new seleccionPlayer();
-        selec.setVisible(true);
-    }//GEN-LAST:event_nuevaButtonActionPerformed
+        menuPrincipal1 menu = new menuPrincipal1();
+        menu.setVisible(true);
+    }//GEN-LAST:event_regresarButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -149,10 +150,9 @@ public class seleccionDeModo extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton iniciarButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JButton nuevaButton;
     private javax.swing.JButton regresarButton;
-    private javax.swing.JButton tutorialButton;
     // End of variables declaration//GEN-END:variables
 }
