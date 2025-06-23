@@ -195,7 +195,7 @@ public class TableroPantallaStratego extends javax.swing.JFrame {
 
     }
 
-    private String getTurnoActual() {
+    public String getTurnoActual() {
         if (Tablero.bando) {
             if (jugador1Bando) {
                 return jugador1;
@@ -211,7 +211,7 @@ public class TableroPantallaStratego extends javax.swing.JFrame {
         }
     }
 
-    private String bandoTurnoActual() {
+    public String bandoTurnoActual() {
         if (Tablero.bando) {
             return "Heroes";
         } else {
