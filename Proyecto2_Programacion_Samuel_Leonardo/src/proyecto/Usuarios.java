@@ -23,7 +23,6 @@ public class Usuarios{
         puntaje = 0;
         partidasHeroe = 0;
         partidasVillano = 0;
-       
     }
     
     
@@ -48,6 +47,16 @@ public class Usuarios{
     public void sumPartidasVillano(){
         partidasVillano+= 1;
     }
+
+    public int getPartidasHeroe() {
+        return partidasHeroe;
+    }
+
+    public int getPartidasVillano() {
+        return partidasVillano;
+    }
+    
+    
     
     
     public String getName(){

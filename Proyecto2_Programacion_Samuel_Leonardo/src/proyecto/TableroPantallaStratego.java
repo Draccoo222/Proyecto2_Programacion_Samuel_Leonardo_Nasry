@@ -22,7 +22,11 @@ public class TableroPantallaStratego extends javax.swing.JFrame {
     private GestionUsuario gestion;
     private String heroesElim[] = new String[40];
     private String villanosElim[] = new String[40];
-    private int contH = 0, contV = 0;
+
+    private int contH=0, contV=0;
+    private static int partidasTotales;
+  
+
 
     public TableroPantallaStratego() {
         initComponents();
@@ -38,10 +42,28 @@ public class TableroPantallaStratego extends javax.swing.JFrame {
         String jugadorActivo = getTurnoActual();
         String bandoActivo = bandoTurnoActual();
         turnoLabel.setText(jugadorActivo + "(" + bandoActivo + ")");
+        partidasTotales++;
+        
+        if(getBandoJugador1().contains("Heroes")){
+            gestion.getJugador1().sumPartidasHeroe();
+            gestion.getJugador2().sumPartidasVillano();
+        }else{
+            gestion.getJugador1().sumPartidasVillano();
+            gestion.getJugador2().sumPartidasHeroe();
+        }
 
     }
 
+    
+    public static int getNumPartidas(){
+        return partidasTotales++;
+    }
+    
+    
+   
+
     private void salir() {
+
         this.dispose();
         menuPrincipal1 me = new menuPrincipal1();
         me.setVisible(true);
@@ -120,8 +142,13 @@ public class TableroPantallaStratego extends javax.swing.JFrame {
                 turnoLabel.setText(jugadorActivo + "(" + bandoActivo + ")");
                 break;
         }
+
+     
+    
+    
         System.out.println("Num fichas jugables " + iniciar.getNumFichas());
         refreshTextArea();
+
 
     }
 
@@ -383,18 +410,22 @@ public class TableroPantallaStratego extends javax.swing.JFrame {
                 if (jugador1Bando) {
                     bandoGanador = "Villanos";
                     bandoPerdedor = "Heroes";
+                    jugabilidadTablero.sumVictorias(1);
                 } else {
                     bandoGanador = "Heroes";
                     bandoPerdedor = "Villanos";
+                    jugabilidadTablero.sumVictorias(0);
                 }
             } else {
                 jugadorGanador = jugador1;
                 if (jugador1Bando) {
                     bandoGanador = "Heroes";
                     bandoPerdedor = "Villanos";
+                    jugabilidadTablero.sumVictorias(0);
                 } else {
                     bandoGanador = "Villanos";
                     bandoPerdedor = "Heroes";
+                    jugabilidadTablero.sumVictorias(1);
                 }
             }
 

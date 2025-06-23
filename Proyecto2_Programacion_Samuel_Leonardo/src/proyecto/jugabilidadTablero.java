@@ -19,6 +19,8 @@ public class jugabilidadTablero {
     private boolean esperarSegundoClic = false;
     private TableroPantallaStratego juego;
     private int ganador = -1; // -0 empate  (1- ganador jugador 1) (2- ganador jugador 2)
+    private static int victoriasHeroe;
+    private static int victoriasVillanos;
 
     private casillas[][] tablero;
     private Tablero tableroJug;
@@ -433,7 +435,17 @@ public class jugabilidadTablero {
                     + "Vencedor: " + atacante.getNombrePersonaje() + " Rango(" + atacante.getRango() + ")";
             JOptionPane.showMessageDialog(null, mensaje, "COMBATE", JOptionPane.INFORMATION_MESSAGE);
             casillaDefensor.asignarPersonaje(atacante);
-           
+            if (rangoDefensor == -1) {
+                if (casillaAtacante.getPersonaje().isEsHeroe()) {
+                    JOptionPane.showMessageDialog(null, "LOS HEROES HAN GANADO LA PARTIDA");
+                    victoriasHeroe++;
+                    ganador = 1;
+                } else {
+                    JOptionPane.showMessageDialog(null, "LOS VILLANOS HAN GANADO LA PARTIDA");
+                    victoriasVillanos++;
+                    ganador = 2;
+                }
+            }
             casillaAtacante.quitarPersonaje();
             getEliminados(defensor);
             Tablero.restarNumFichas(1);
@@ -456,6 +468,30 @@ public class jugabilidadTablero {
         }
        
     }
+    
+    public static int getNumVictorias(int bando){
+        switch(bando){
+            case 0: // Heroes
+                return victoriasHeroe;
+               
+            case 1: // villanos
+                return victoriasVillanos;
+                
+        }
+        return 0;
+    }
+    
+    public static void sumVictorias(int bando){
+       switch(bando){
+            case 0: // Heroes
+                victoriasHeroe++;
+                break;
+            case 1: // villanos
+                victoriasVillanos++;
+                break;      
+        }
+    }
+    
     
     private String getGanador(Fichas atacante){
         if(atacante.isEsHeroe() && Tablero.bando){
