@@ -186,6 +186,7 @@ public class TableroPantallaStratego extends javax.swing.JFrame {
     
         System.out.println("Num fichas jugables " + iniciar.getNumFichas());
     }else{
+        JOptionPane.showMessageDialog(null, "Turno de "+bandoActivo);
         turnoLabel.setText(jugadorActivo + "(" + bandoActivo + ")");
     }
         
