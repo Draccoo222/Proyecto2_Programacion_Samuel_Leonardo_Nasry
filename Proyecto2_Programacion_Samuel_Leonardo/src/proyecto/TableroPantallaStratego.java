@@ -6,7 +6,7 @@ package proyecto;
 
 import java.awt.*;
 import javax.swing.*;
-
+import java.time.LocalDateTime;
 /**
  *
  * @author hnleo
@@ -44,7 +44,8 @@ public class TableroPantallaStratego extends javax.swing.JFrame {
         turnoLabel.setText(jugadorActivo + "(" + bandoActivo + ")");
         partidasTotales++;
         
-        if(getBandoJugador1().contains("Heroes")){
+        
+        if(jugador1Bando){
             gestion.getJugador1().sumPartidasHeroe();
             gestion.getJugador2().sumPartidasVillano();
         }else{
@@ -56,7 +57,7 @@ public class TableroPantallaStratego extends javax.swing.JFrame {
 
     
     public static int getNumPartidas(){
-        return partidasTotales++;
+        return partidasTotales;
     }
     
     
@@ -109,6 +110,9 @@ public class TableroPantallaStratego extends javax.swing.JFrame {
         // DESPUÉS obtener la información del nuevo turno
         String jugadorActivo = getTurnoActual();
         String bandoActivo = bandoTurnoActual();
+        
+       
+    
 
         if (iniciar != null) {
             iniciar.actualizarVisibilidadPorTurno();
@@ -117,20 +121,59 @@ public class TableroPantallaStratego extends javax.swing.JFrame {
         if (iniciar.getNumFichas() == 0) {
             iniciar.getJugabilidad().setGanador(0);
         }
+        
+            String jugadorPerdedor = getTurnoActual();
+            String jugadorGanador;
+            String bandoGanador;
+            String bandoPerdedor;
+
+                if (jugadorPerdedor.equals(jugador1)) {
+                    jugadorGanador = jugador2;
+
+                    if (jugador1Bando) {
+                        bandoGanador = "Villanos";
+                        bandoPerdedor = "Heroes";
+                    } else {
+                        bandoGanador = "Heroes";
+                        bandoPerdedor = "Villanos";
+                    }
+                } else {
+                    jugadorGanador = jugador1;
+                    if (jugador1Bando) {
+                        bandoGanador = "Heroes";
+                        bandoPerdedor = "Villanos";
+                    } else {
+                        bandoGanador = "Villanos";
+                        bandoPerdedor = "Heroes";
+                    }
+                }
+                
+               LocalDateTime fecha = LocalDateTime.now();
+                
+               String tierra = (bandoGanador.equals("Heroe")) ? "Salvado la tierra!" : "Capturado la tierra!";
+               String resultado = jugadorGanador + " usando los " + bandoGanador + " ha " + tierra + " Venciendo a "
+                       + jugadorPerdedor + "- " + fecha ;
+               
+               
+               
+               
 
         switch (iniciar.getJugabilidad().getGanador()) {
             case 1:
-
                 gestion.getJugador1().sumarPuntaje();
-
-                break;
+                JOptionPane.showMessageDialog(null, resultado);
+                gestion.getJugador1().sumarLogeo(resultado);
+                gestion.getJugador2().sumarLogeo(resultado);
+                salir();
+                break; 
             case 2:
-
                 gestion.getJugador2().sumarPuntaje();
-
+                JOptionPane.showMessageDialog(null, resultado);
+                gestion.getJugador1().sumarLogeo(resultado);
+                gestion.getJugador2().sumarLogeo(resultado);
+                salir();
                 break;
             case 0:
-
                 break;
             default:
                 turnoLabel.setText(jugadorActivo + "(" + bandoActivo + ")");
@@ -146,7 +189,7 @@ public class TableroPantallaStratego extends javax.swing.JFrame {
 
     }
 
-    public String getTurnoActual() {
+    private String getTurnoActual() {
         if (Tablero.bando) {
             if (jugador1Bando) {
                 return jugador1;
@@ -170,7 +213,7 @@ public class TableroPantallaStratego extends javax.swing.JFrame {
         }
     }
 
-    public String getBandoJugador1() {
+    private String getBandoJugador1() {
         return jugador1 + bandoTurnoActual();
     }
 
@@ -262,7 +305,7 @@ public class TableroPantallaStratego extends javax.swing.JFrame {
         turnoLabel = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         areaEliminados = new javax.swing.JTextArea();
-        jButton1 = new javax.swing.JButton();
+        rendirseButton = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         panelTablero = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
@@ -326,13 +369,18 @@ public class TableroPantallaStratego extends javax.swing.JFrame {
         panelEliminaciones.add(jScrollPane1);
         jScrollPane1.setBounds(20, 100, 160, 380);
 
-        jButton1.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 24)); // NOI18N
-        jButton1.setText("RENDIRTE");
-        jButton1.setBorderPainted(false);
-        jButton1.setContentAreaFilled(false);
-        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        panelEliminaciones.add(jButton1);
-        jButton1.setBounds(10, 620, 180, 60);
+        rendirseButton.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 24)); // NOI18N
+        rendirseButton.setText("RENDIRTE");
+        rendirseButton.setBorderPainted(false);
+        rendirseButton.setContentAreaFilled(false);
+        rendirseButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        rendirseButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rendirseButtonActionPerformed(evt);
+            }
+        });
+        panelEliminaciones.add(rendirseButton);
+        rendirseButton.setBounds(10, 620, 180, 60);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/ELIMINADOS.png"))); // NOI18N
         panelEliminaciones.add(jLabel1);
@@ -418,12 +466,21 @@ public class TableroPantallaStratego extends javax.swing.JFrame {
                 }
             }
 
-            JOptionPane.showMessageDialog(null, jugadorGanador + " usando los " + bandoGanador + " ha ganado ya que " + jugadorPerdedor + " usando " + bandoPerdedor + " se ha retirado del juego.", "RENDICION", JOptionPane.INFORMATION_MESSAGE);
+            LocalDateTime fecha = LocalDateTime.now();
+            
+            String resultado = jugadorGanador + " usando los " + bandoGanador + " ha ganado ya que " 
+                    + jugadorPerdedor + " usando " + bandoPerdedor + " se ha retirado del juego." + "RENDICION -" + fecha;
+            
+            JOptionPane.showMessageDialog(null, resultado);
 
             if (jugadorGanador.equals(jugador1)) {
                 gestion.getJugador1().sumarPuntaje();
+                gestion.getJugador1().sumarLogeo(resultado);
+                gestion.getJugador2().sumarLogeo(resultado);
             } else {
                 gestion.getJugador2().sumarPuntaje();
+                gestion.getJugador1().sumarLogeo(resultado);
+                gestion.getJugador2().sumarLogeo(resultado);
             }
 
             salir();
@@ -468,7 +525,6 @@ public class TableroPantallaStratego extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextArea areaEliminados;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
@@ -476,6 +532,7 @@ public class TableroPantallaStratego extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel panelEliminaciones;
     private javax.swing.JPanel panelTablero;
+    private javax.swing.JButton rendirseButton;
     private javax.swing.JLabel turnoLabel;
     // End of variables declaration//GEN-END:variables
 }
