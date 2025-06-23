@@ -135,6 +135,7 @@ public class MiPerfil extends javax.swing.JFrame {
         panelPadre.add(jLabel4);
         jLabel4.setBounds(240, 160, 30, 50);
 
+        jTextArea1.setEditable(false);
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
         jScrollPane1.setViewportView(jTextArea1);

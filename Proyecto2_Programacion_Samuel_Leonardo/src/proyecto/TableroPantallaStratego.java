@@ -7,6 +7,7 @@ package proyecto;
 import java.awt.*;
 import javax.swing.*;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 /**
  *
@@ -152,6 +153,7 @@ public class TableroPantallaStratego extends javax.swing.JFrame {
                 case 1:
                     gestion.getJugador1().sumarPuntaje();
                     JOptionPane.showMessageDialog(null, resultado);
+                   
                     gestion.getJugador1().sumarLogeo(resultado);
                     gestion.getJugador2().sumarLogeo(resultado);
                     salir();
@@ -361,6 +363,7 @@ public class TableroPantallaStratego extends javax.swing.JFrame {
         jScrollPane1.setBorder(null);
         jScrollPane1.setOpaque(false);
 
+        areaEliminados.setEditable(false);
         areaEliminados.setBackground(new java.awt.Color(218, 191, 144));
         areaEliminados.setColumns(20);
         areaEliminados.setFont(new java.awt.Font("Arial Black", 1, 13)); // NOI18N
@@ -481,9 +484,10 @@ public class TableroPantallaStratego extends javax.swing.JFrame {
             }
 
             LocalDateTime fecha = LocalDateTime.now();
-
+            DateTimeFormatter fechaForm = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+            String fechaFormateada = fecha.format(fechaForm);
             String resultado = jugadorGanador + " usando los " + bandoGanador + " ha ganado ya que "
-                    + jugadorPerdedor + " usando " + bandoPerdedor + " se ha retirado del juego." + "RENDICION - " + fecha;
+                    + jugadorPerdedor + " usando " + bandoPerdedor + " se ha retirado del juego." + " - " + fechaFormateada;
 
             JOptionPane.showMessageDialog(null, resultado);
             if (seleccionDeModo.modoClasico) {
