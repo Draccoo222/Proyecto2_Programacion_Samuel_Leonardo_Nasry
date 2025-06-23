@@ -40,13 +40,11 @@ public class IniciarSesion extends javax.swing.JFrame {
 
         crearUsuario1 = new proyecto.crearUsuario();
         panelFondin = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
         nomUsuario = new javax.swing.JTextField();
         passWord = new javax.swing.JPasswordField();
         iniciarSesion = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
         salir = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(800, 500));
@@ -56,101 +54,61 @@ public class IniciarSesion extends javax.swing.JFrame {
         panelFondin.setMaximumSize(new java.awt.Dimension(800, 500));
         panelFondin.setMinimumSize(new java.awt.Dimension(800, 500));
         panelFondin.setPreferredSize(new java.awt.Dimension(800, 500));
-
-        jLabel1.setFont(new java.awt.Font("Bahnschrift", 1, 48)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/iniciosesionLogo.png"))); // NOI18N
-        jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        panelFondin.setLayout(null);
 
         nomUsuario.setFont(new java.awt.Font("Arial Black", 1, 14)); // NOI18N
+        nomUsuario.setBorder(null);
         nomUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 nomUsuarioActionPerformed(evt);
             }
         });
+        panelFondin.add(nomUsuario);
+        nomUsuario.setBounds(370, 180, 230, 20);
 
         passWord.setFont(new java.awt.Font("Arial Black", 1, 14)); // NOI18N
+        passWord.setBorder(null);
         passWord.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 passWordActionPerformed(evt);
             }
         });
+        panelFondin.add(passWord);
+        passWord.setBounds(370, 260, 230, 20);
 
         iniciarSesion.setBackground(new java.awt.Color(255, 0, 51));
         iniciarSesion.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
         iniciarSesion.setForeground(new java.awt.Color(255, 255, 255));
-        iniciarSesion.setText("INICIAR");
         iniciarSesion.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255), 3));
+        iniciarSesion.setBorderPainted(false);
+        iniciarSesion.setContentAreaFilled(false);
+        iniciarSesion.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         iniciarSesion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 iniciarSesionActionPerformed(evt);
             }
         });
-
-        jLabel2.setFont(new java.awt.Font("Arial Black", 0, 18)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("USUARIO:");
-
-        jLabel3.setFont(new java.awt.Font("Arial Black", 0, 18)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("CONTRASEÑA:");
+        panelFondin.add(iniciarSesion);
+        iniciarSesion.setBounds(220, 330, 170, 90);
 
         salir.setBackground(new java.awt.Color(255, 0, 51));
         salir.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
         salir.setForeground(new java.awt.Color(255, 255, 255));
-        salir.setText("SALIR");
         salir.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255), 3));
+        salir.setBorderPainted(false);
+        salir.setContentAreaFilled(false);
+        salir.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         salir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 salirActionPerformed(evt);
             }
         });
+        panelFondin.add(salir);
+        salir.setBounds(420, 330, 170, 90);
 
-        javax.swing.GroupLayout panelFondinLayout = new javax.swing.GroupLayout(panelFondin);
-        panelFondin.setLayout(panelFondinLayout);
-        panelFondinLayout.setHorizontalGroup(
-            panelFondinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelFondinLayout.createSequentialGroup()
-                .addGap(0, 189, Short.MAX_VALUE)
-                .addGroup(panelFondinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelFondinLayout.createSequentialGroup()
-                        .addComponent(iniciarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(salir, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(231, 231, 231))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelFondinLayout.createSequentialGroup()
-                        .addGroup(panelFondinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 372, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(panelFondinLayout.createSequentialGroup()
-                                .addGroup(panelFondinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel2))
-                                .addGap(18, 18, 18)
-                                .addGroup(panelFondinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(passWord, javax.swing.GroupLayout.DEFAULT_SIZE, 248, Short.MAX_VALUE)
-                                    .addComponent(nomUsuario))))
-                        .addGap(195, 195, 195))))
-        );
-        panelFondinLayout.setVerticalGroup(
-            panelFondinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelFondinLayout.createSequentialGroup()
-                .addGap(27, 27, 27)
-                .addComponent(jLabel1)
-                .addGap(75, 75, 75)
-                .addGroup(panelFondinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(nomUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
-                .addGap(47, 47, 47)
-                .addGroup(panelFondinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(passWord, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
-                .addGap(72, 72, 72)
-                .addGroup(panelFondinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(iniciarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(salir, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(129, Short.MAX_VALUE))
-        );
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/INICIOSESION.png"))); // NOI18N
+        panelFondin.add(jLabel4);
+        jLabel4.setBounds(0, 0, 800, 500);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -238,9 +196,7 @@ public class IniciarSesion extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private proyecto.crearUsuario crearUsuario1;
     private javax.swing.JButton iniciarSesion;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JTextField nomUsuario;
     private javax.swing.JPanel panelFondin;
     private javax.swing.JPasswordField passWord;

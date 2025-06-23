@@ -45,9 +45,7 @@ public class crearUsuario extends javax.swing.JFrame {
         contra = new javax.swing.JTextField();
         salir = new javax.swing.JButton();
         crearUsuario = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -56,39 +54,50 @@ public class crearUsuario extends javax.swing.JFrame {
         setPreferredSize(new java.awt.Dimension(800, 500));
 
         panelFondin.setPreferredSize(new java.awt.Dimension(800, 500));
+        panelFondin.setLayout(null);
 
         nombreU.setFont(new java.awt.Font("Arial Black", 1, 14)); // NOI18N
         nombreU.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        nombreU.setBorder(null);
         nombreU.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 nombreUActionPerformed(evt);
             }
         });
+        panelFondin.add(nombreU);
+        nombreU.setBounds(370, 180, 230, 20);
 
         contra.setFont(new java.awt.Font("Arial Black", 1, 14)); // NOI18N
+        contra.setBorder(null);
         contra.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 contraActionPerformed(evt);
             }
         });
+        panelFondin.add(contra);
+        contra.setBounds(370, 257, 230, 20);
 
         salir.setBackground(new java.awt.Color(255, 0, 51));
         salir.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
         salir.setForeground(new java.awt.Color(255, 255, 255));
-        salir.setText("SALIR");
         salir.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255), 3));
+        salir.setBorderPainted(false);
+        salir.setContentAreaFilled(false);
         salir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 salirActionPerformed(evt);
             }
         });
+        panelFondin.add(salir);
+        salir.setBounds(420, 330, 170, 80);
 
         crearUsuario.setBackground(new java.awt.Color(255, 0, 51));
         crearUsuario.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
         crearUsuario.setForeground(new java.awt.Color(255, 255, 255));
-        crearUsuario.setText("CREAR");
         crearUsuario.setAlignmentY(0.0F);
         crearUsuario.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255), 3));
+        crearUsuario.setBorderPainted(false);
+        crearUsuario.setContentAreaFilled(false);
         crearUsuario.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         crearUsuario.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         crearUsuario.addActionListener(new java.awt.event.ActionListener() {
@@ -96,64 +105,12 @@ public class crearUsuario extends javax.swing.JFrame {
                 crearUsuarioActionPerformed(evt);
             }
         });
+        panelFondin.add(crearUsuario);
+        crearUsuario.setBounds(220, 330, 170, 80);
 
-        jLabel1.setFont(new java.awt.Font("Impact", 0, 36)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/registrarusuariologo.png"))); // NOI18N
-
-        jLabel2.setFont(new java.awt.Font("Arial Black", 0, 18)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("CONTRASEÑA:");
-
-        jLabel3.setFont(new java.awt.Font("Arial Black", 0, 18)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("USUARIO:");
-
-        javax.swing.GroupLayout panelFondinLayout = new javax.swing.GroupLayout(panelFondin);
-        panelFondin.setLayout(panelFondinLayout);
-        panelFondinLayout.setHorizontalGroup(
-            panelFondinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelFondinLayout.createSequentialGroup()
-                .addContainerGap(173, Short.MAX_VALUE)
-                .addGroup(panelFondinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelFondinLayout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 471, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(162, 162, 162))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelFondinLayout.createSequentialGroup()
-                        .addGroup(panelFondinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3))
-                        .addGap(18, 18, 18)
-                        .addGroup(panelFondinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(nombreU, javax.swing.GroupLayout.DEFAULT_SIZE, 238, Short.MAX_VALUE)
-                            .addComponent(contra))
-                        .addGap(202, 202, 202))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelFondinLayout.createSequentialGroup()
-                        .addComponent(crearUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(31, 31, 31)
-                        .addComponent(salir, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(260, 260, 260))))
-        );
-        panelFondinLayout.setVerticalGroup(
-            panelFondinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelFondinLayout.createSequentialGroup()
-                .addGap(31, 31, 31)
-                .addComponent(jLabel1)
-                .addGap(63, 63, 63)
-                .addGroup(panelFondinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(nombreU, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
-                .addGap(68, 68, 68)
-                .addGroup(panelFondinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(contra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 93, Short.MAX_VALUE)
-                .addGroup(panelFondinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(crearUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(salir, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(96, 96, 96))
-        );
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/REGISTRO.png"))); // NOI18N
+        panelFondin.add(jLabel4);
+        jLabel4.setBounds(0, 0, 810, 500);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -255,9 +212,7 @@ public class crearUsuario extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField contra;
     private javax.swing.JButton crearUsuario;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JTextField nombreU;
     private javax.swing.JPanel panelFondin;
     private javax.swing.JButton salir;
