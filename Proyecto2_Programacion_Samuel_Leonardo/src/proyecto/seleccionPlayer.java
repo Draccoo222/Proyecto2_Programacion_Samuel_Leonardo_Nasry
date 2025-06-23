@@ -33,28 +33,22 @@ public class seleccionPlayer extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
         regresarButton = new javax.swing.JButton();
         iniciarButton = new javax.swing.JButton();
         nombre1Label = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
         player2Text = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        setMaximumSize(new java.awt.Dimension(500, 200));
         setMinimumSize(new java.awt.Dimension(500, 200));
         setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 204));
         jPanel1.setMaximumSize(new java.awt.Dimension(500, 200));
         jPanel1.setMinimumSize(new java.awt.Dimension(500, 200));
-
-        jLabel1.setFont(new java.awt.Font("Arial Black", 1, 14)); // NOI18N
-        jLabel1.setText("Player 1:");
-
-        jLabel2.setFont(new java.awt.Font("Arial Black", 1, 14)); // NOI18N
-        jLabel2.setText("Player 2:");
+        jPanel1.setLayout(null);
 
         regresarButton.setBackground(new java.awt.Color(255, 0, 51));
         regresarButton.setFont(new java.awt.Font("Arial Black", 1, 12)); // NOI18N
@@ -69,6 +63,8 @@ public class seleccionPlayer extends javax.swing.JFrame {
                 regresarButtonActionPerformed(evt);
             }
         });
+        jPanel1.add(regresarButton);
+        regresarButton.setBounds(410, 170, 81, 24);
 
         iniciarButton.setBackground(new java.awt.Color(255, 0, 51));
         iniciarButton.setFont(new java.awt.Font("Arial Black", 1, 12)); // NOI18N
@@ -83,59 +79,24 @@ public class seleccionPlayer extends javax.swing.JFrame {
                 iniciarButtonActionPerformed(evt);
             }
         });
+        jPanel1.add(iniciarButton);
+        iniciarButton.setBounds(210, 150, 80, 30);
 
         nombre1Label.setFont(new java.awt.Font("Arial Black", 1, 14)); // NOI18N
         nombre1Label.setText("nombreJugador1");
-
-        jLabel4.setFont(new java.awt.Font("Arial Black", 1, 20)); // NOI18N
-        jLabel4.setText("SELECCION DE JUGADOR");
+        jPanel1.add(nombre1Label);
+        nombre1Label.setBounds(40, 120, 150, 20);
 
         player2Text.setFont(new java.awt.Font("Arial Black", 1, 14)); // NOI18N
+        player2Text.setBorder(null);
+        player2Text.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        player2Text.setOpaque(true);
+        jPanel1.add(player2Text);
+        player2Text.setBounds(310, 120, 150, 21);
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(202, 202, 202)
-                .addComponent(iniciarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(16, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(nombre1Label, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(35, 35, 35)
-                                .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(player2Text, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(28, 28, 28))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(regresarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addComponent(jLabel4)
-                .addGap(36, 36, 36)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(nombre1Label)
-                    .addComponent(jLabel2)
-                    .addComponent(player2Text, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(iniciarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
-                .addComponent(regresarButton)
-                .addContainerGap())
-        );
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/selectJugador.png"))); // NOI18N
+        jPanel1.add(jLabel3);
+        jLabel3.setBounds(0, 0, 500, 200);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -154,6 +115,8 @@ public class seleccionPlayer extends javax.swing.JFrame {
 
     private void regresarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_regresarButtonActionPerformed
         this.dispose();
+        seleccionDeModo selec = new seleccionDeModo();
+        selec.setVisible(true);
     }//GEN-LAST:event_regresarButtonActionPerformed
 
     private void iniciarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_iniciarButtonActionPerformed
@@ -213,9 +176,7 @@ public class seleccionPlayer extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton iniciarButton;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel nombre1Label;
     private javax.swing.JTextField player2Text;

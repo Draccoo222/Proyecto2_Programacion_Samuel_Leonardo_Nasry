@@ -292,7 +292,7 @@ public class menuPrincipal1 extends javax.swing.JFrame {
 
     private void strategoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_strategoButtonActionPerformed
        if(gestion.getCantidad()>1){
-            seleccionPlayer selec = new seleccionPlayer();
+            seleccionDeModo selec = new seleccionDeModo();
             selec.setVisible(true);
             this.dispose();
        }else{
