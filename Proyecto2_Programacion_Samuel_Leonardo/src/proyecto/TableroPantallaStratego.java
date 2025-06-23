@@ -94,11 +94,9 @@ public class TableroPantallaStratego extends javax.swing.JFrame {
         if (seleccion == 0) {
             Tablero.bando = true;
             jugador1Bando = true;
-            JOptionPane.showMessageDialog(null, jugador1 + " es Heroes\n" + jugador2 + " es Villanos");
         } else if (seleccion == 1) {
             jugador1Bando = false;
             Tablero.bando = true;
-            JOptionPane.showMessageDialog(null, jugador1 + " es Villanos\n" + jugador2 + " es Heroes");
 
         } else {
             jugador1Bando = true;
@@ -135,10 +133,6 @@ public class TableroPantallaStratego extends javax.swing.JFrame {
 
                 break;
             default:
-                /* JOptionPane.showMessageDialog(null, 
-                "Turno de: " + jugadorActivo + " (" + bandoActivo + ")", 
-                "Cambio de Turno", 
-                JOptionPane.INFORMATION_MESSAGE);*/
                 turnoLabel.setText(jugadorActivo + "(" + bandoActivo + ")");
                 break;
         }
