@@ -144,10 +144,11 @@ public class TableroPantallaStratego extends javax.swing.JFrame {
             }
 
             LocalDateTime fecha = LocalDateTime.now();
-
+            DateTimeFormatter fechaForm = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+            String fechaFormateada = fecha.format(fechaForm);
             String tierra = (bandoGanador.equals("Heroe")) ? "Salvado la tierra!" : "Capturado la tierra!";
             String resultado = jugadorGanador + " usando los " + bandoGanador + " ha " + tierra + " Venciendo a "
-                    + jugadorPerdedor + "- " + fecha;
+                    + jugadorPerdedor + "- " + fechaFormateada;
 
             switch (iniciar.getJugabilidad().getGanador()) {
                 case 1:
