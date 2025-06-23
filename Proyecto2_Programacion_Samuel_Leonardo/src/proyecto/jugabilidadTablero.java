@@ -15,6 +15,7 @@ import java.awt.event.ActionEvent;
 public class jugabilidadTablero {
 
     private casillas primeraCasillaSelecc = null;
+    private GestionUsuario gestion;
     private boolean esperarSegundoClic = false;
     private TableroPantallaStratego juego;
     private int ganador = -1; // -0 empate  (1- ganador jugador 1) (2- ganador jugador 2)
@@ -413,19 +414,26 @@ public class jugabilidadTablero {
             getEliminados(atacante);
             Tablero.restarNumFichas(1);
         } else if (rangoAtacante > rangoDefensor) {
+             if (rangoDefensor == -1) {
+                 String jugadorGanador = getGanador(atacante);
+                 String jugadorPerdedor = getPerdedor(jugadorGanador);
+                if (atacante.isEsHeroe()) {
+                    JOptionPane.showMessageDialog(null, jugadorGanador+" usando los HEROES ha SALVADO LA TIERRA! Venciendo a "+jugadorPerdedor);
+                    ganador = 1;
+                } else {
+               JOptionPane.showMessageDialog(null, jugadorGanador+" usando los VILLANOS ha CAPTURADO LA TIERRA! Venciendo a "+jugadorPerdedor);
+               ganador = 2;
+                }
+               juego.dispose();
+               menuPrincipal1 menu = new menuPrincipal1();
+               menu.setVisible(true);
+                
+            }
             mensaje = atacante.getNombrePersonaje() + " Rango(" + atacante.getRango() + ") vs " + defensor.getNombrePersonaje() + " Rango(" + defensor.getRango() + ")\n"
                     + "Vencedor: " + atacante.getNombrePersonaje() + " Rango(" + atacante.getRango() + ")";
             JOptionPane.showMessageDialog(null, mensaje, "COMBATE", JOptionPane.INFORMATION_MESSAGE);
             casillaDefensor.asignarPersonaje(atacante);
-            if (rangoDefensor == -1) {
-                if (casillaAtacante.getPersonaje().isEsHeroe()) {
-                    JOptionPane.showMessageDialog(null, "LOS HEROES HAN GANADO LA PARTIDA");
-                    ganador = 1;
-                } else {
-                    JOptionPane.showMessageDialog(null, "LOS VILLANOS HAN GANADO LA PARTIDA");
-                    ganador = 2;
-                }
-            }
+           
             casillaAtacante.quitarPersonaje();
             getEliminados(defensor);
             Tablero.restarNumFichas(1);
@@ -447,6 +455,26 @@ public class jugabilidadTablero {
             Tablero.restarNumFichas(2);
         }
        
+    }
+    
+    private String getGanador(Fichas atacante){
+        if(atacante.isEsHeroe() && Tablero.bando){
+            return juego.getJugador1();
+        }else if(!atacante.isEsHeroe() && !Tablero.bando){
+            return juego.getJugador2();
+        }else if(atacante.isEsHeroe() && !Tablero.bando){
+            return juego.getJugador2();
+        }else{
+            return juego.getJugador1();
+        }
+    }
+    private String getPerdedor(String jugadorGanador){
+        if(jugadorGanador.equals(juego.getJugador1())){
+            return juego.getJugador2();
+            
+        }else{
+            return juego.getJugador1();
+        }
     }
     
     public void getEliminados(Fichas personajeEliminado){
