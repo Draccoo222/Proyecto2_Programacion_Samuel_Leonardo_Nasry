@@ -98,6 +98,7 @@ public class menuPrincipal1 extends javax.swing.JFrame {
         register.setText("REGISTRAR");
         register.setActionCommand("registrarse");
         register.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255), 3));
+        register.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         register.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 registerActionPerformed(evt);
@@ -108,6 +109,7 @@ public class menuPrincipal1 extends javax.swing.JFrame {
         Login.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
         Login.setText("INICIAR SESION");
         Login.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255), 3));
+        Login.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         Login.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 LoginActionPerformed(evt);
@@ -121,6 +123,7 @@ public class menuPrincipal1 extends javax.swing.JFrame {
         salir.setText("SALIR");
         salir.setActionCommand("salir");
         salir.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255), 3));
+        salir.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         salir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 salirActionPerformed(evt);
@@ -133,6 +136,7 @@ public class menuPrincipal1 extends javax.swing.JFrame {
         strategoButton.setForeground(new java.awt.Color(255, 255, 255));
         strategoButton.setText("STRATEGO");
         strategoButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255), 3));
+        strategoButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         strategoButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 strategoButtonActionPerformed(evt);
@@ -144,6 +148,7 @@ public class menuPrincipal1 extends javax.swing.JFrame {
         cerrarSesion.setForeground(new java.awt.Color(255, 255, 255));
         cerrarSesion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/cerrar-sesion.png"))); // NOI18N
         cerrarSesion.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255), 3));
+        cerrarSesion.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         cerrarSesion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cerrarSesionActionPerformed(evt);
@@ -155,6 +160,7 @@ public class menuPrincipal1 extends javax.swing.JFrame {
         configButton.setForeground(new java.awt.Color(255, 255, 255));
         configButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/engranaje.png"))); // NOI18N
         configButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255), 3));
+        configButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         configButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 configButtonActionPerformed(evt);
@@ -166,6 +172,7 @@ public class menuPrincipal1 extends javax.swing.JFrame {
         perfilButton.setForeground(new java.awt.Color(255, 255, 255));
         perfilButton.setText("MI PERFIL");
         perfilButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255), 3));
+        perfilButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         perfilButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 perfilButtonActionPerformed(evt);
@@ -177,6 +184,7 @@ public class menuPrincipal1 extends javax.swing.JFrame {
         universoButton.setForeground(new java.awt.Color(255, 255, 255));
         universoButton.setText("UNIVERSO MARVEL");
         universoButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255), 3));
+        universoButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         universoButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 universoButtonActionPerformed(evt);
@@ -245,8 +253,7 @@ public class menuPrincipal1 extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void salirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salirActionPerformed
-        // TODO add your handling code here:
-        this.dispose();
+        System.exit(0);
     }//GEN-LAST:event_salirActionPerformed
 
     private void LoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginActionPerformed
