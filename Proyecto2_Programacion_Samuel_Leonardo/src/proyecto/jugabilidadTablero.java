@@ -423,13 +423,18 @@ public class jugabilidadTablero {
                     if (seleccionDeModo.modoClasico) {
                         victoriasHeroe++;
                         ganador = 1;
+                    }else{
+                      JOptionPane.showMessageDialog(null, "HAN GANADO LOS HEROES");
                     }
 
                 } else {
                     if (seleccionDeModo.modoClasico) {
                         victoriasVillanos++;
                         ganador = 2;
+                    }else{
+                         JOptionPane.showMessageDialog(null, "HAN GANADO LOS VILLANOS");
                     }
+                    
                 }
 
                 finished = true;

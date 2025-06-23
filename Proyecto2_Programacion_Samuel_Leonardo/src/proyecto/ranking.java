@@ -40,10 +40,6 @@ public class ranking extends javax.swing.JFrame {
         jTable1.setFillsViewportHeight(true);
         jTable1.getTableHeader().setBackground(Color.darkGray);
         jTable1.getTableHeader().setForeground(Color.WHITE);
-        jTable1.setColumnSelectionAllowed(false);
-        jTable1.setRowSelectionAllowed(true);
-        jTable1.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-    
     }
 
 
@@ -84,6 +80,7 @@ public class ranking extends javax.swing.JFrame {
                 "Posicion", "Nombre", "Puntaje"
             }
         ));
+        jTable1.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(jTable1);
 
         jLabel1.setFont(new java.awt.Font("Arial Black", 1, 30)); // NOI18N
@@ -151,8 +148,19 @@ public class ranking extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
-        modelo.setRowCount(0); // limpia la tabla
+        DefaultTableModel modelo = new DefaultTableModel(
+                new Object[][] {},
+                new String[] {"#", "Nombre", "Puntaje"}
+        ){
+            @Override
+            public boolean isCellEditable(int row, int column){
+                return false;
+            }
+        };
+           
+        jTable1.setModel(modelo);
+
+        modelo.setRowCount(0);
         int cont = 0;
         
         Usuarios[] usuarios = gestion.getJugadores();
@@ -170,6 +178,8 @@ public class ranking extends javax.swing.JFrame {
                 modelo.addRow(fila);
             }
         }
+
+        
     }//GEN-LAST:event_formWindowOpened
 
     private void regresarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_regresarButtonActionPerformed

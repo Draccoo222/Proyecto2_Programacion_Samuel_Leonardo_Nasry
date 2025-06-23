@@ -161,9 +161,15 @@ public class TableroPantallaStratego extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(null, resultado);
                     gestion.getJugador1().sumarLogeo(resultado);
                     gestion.getJugador2().sumarLogeo(resultado);
-                   salir();
+                    salir();
                     break;
                 case 0:
+                    resultado = jugadorGanador + " usando los " + bandoGanador + " ha " + "empatado con "
+                    + jugadorPerdedor + "- " + fecha;
+                    JOptionPane.showMessageDialog(null, resultado);
+                    gestion.getJugador1().sumarLogeo(resultado);
+                    gestion.getJugador2().sumarLogeo(resultado);
+                    salir();
                     break;
                 default:
                     turnoLabel.setText(jugadorActivo + "(" + bandoActivo + ")");
