@@ -172,7 +172,7 @@ public class universoMenu extends javax.swing.JFrame {
 
     private void batallasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_batallasActionPerformed
         // TODO add your handling code here:
-        batallas bt = new batallas();
+        batallas1 bt = new batallas1();
         bt.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_batallasActionPerformed
