@@ -123,12 +123,12 @@ public class MiPerfil extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
         jLabel2.setText("jLabel2");
         panelPadre.add(jLabel2);
-        jLabel2.setBounds(410, 224, 30, 40);
+        jLabel2.setBounds(420, 290, 30, 30);
 
         jLabel3.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
         jLabel3.setText("jLabel2");
         panelPadre.add(jLabel3);
-        jLabel3.setBounds(420, 284, 41, 40);
+        jLabel3.setBounds(410, 230, 41, 30);
 
         jLabel4.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
         jLabel4.setText("jLabel2");
